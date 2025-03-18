@@ -1,6 +1,6 @@
 # Exploration of bird data in USGS analysis
 # ER Zylstra
-# 17 March 2025
+# 18 March 2025
 
 library(dplyr)
 library(stringr)
@@ -15,6 +15,14 @@ library(cowplot)
 
 df <- read.csv("data/birds_mammals_phenophases_locations.csv") %>%
   select(-kingdom)
+
+# Remove spring peeper (amphibian) from dataframe
+df <- df %>%
+  filter(!grepl("peeper", common_name))
+
+# Correct spelling for catbird
+df <- df %>%
+  mutate(common_name = str_replace(common_name, "grey catbird", "gray catbird"))
 
 # Which phenophases are included?
 count(df, phenophase_description)
@@ -39,12 +47,37 @@ spp <- df %>%
             .groups = "keep") %>%
   data.frame()
 count(spp, group)
-# 71 bird spp, 15 mammal spp
+# 70 bird spp, 15 mammal spp
 
 # Exploring eBird products ----------------------------------------------------#
 
 ebird_spp <- ebirdst_runs %>% data.frame()
 str(ebird_spp)
+
+# From https://science.ebird.org/en/status-and-trends/faq#seasons:
+
+# Resident (i.e., non-migratory) species are identified by having TRUE in the 
+# is_resident column of ebirdst_runs, and these species are assessed across the 
+# whole year rather than seasonally. 
+
+# The seasonal dates define the weeks that fall within each season. Breeding and 
+# non-breeding season dates are defined for each species as the weeks during 
+# those seasons when the species’ population does not move. For this reason, 
+# these seasons are also described as stationary periods. Migration periods are 
+# defined as the periods of movement between the stationary non-breeding and 
+# breeding seasons. Note that for many species these migratory periods include 
+# not only movement from breeding grounds to non-breeding grounds, but also 
+# post-breeding dispersal, molt migration, and other movements.
+
+# A rating of 0 implies this season failed review and model results should not 
+# be used at all for this period. Ratings of 1-3 correspond to a gradient of 
+# more to less extrapolation and/or omission, and we often use a traffic light 
+# analogy when referring to them:
+# 1: low quality, extensive extrapolation and/or omission, but at least some 
+# regions have estimates that are accurate; can be used with caution in certain 
+# regions.
+# 2: medium quality, some extrapolation and/or omission; use with caution.
+# 3: high quality, very little or no extrapolation and/or omission.
 
 # Using AMGO as an example
 
@@ -109,3 +142,25 @@ ranges <- left_join(ext_ranges, select(data.frame(amgo_locs_v), -common_name),
   data.frame()
 ranges
 
+# Extract range information for all bird species ------------------------------#
+
+# Vector of NPN bird species, all lowercase
+birds <- spp %>%
+  filter(group == "Bird") %>%
+  select(common_name, n_php, n_sites, n_series) %>%
+  mutate(common_name = str_to_lower(common_name)) %>%
+  mutate(ebird = ifelse(common_name %in% str_to_lower(ebird_spp$common_name), 1, 0))
+
+# Check that all birds in NPN dataset have ebird range maps
+filter(birds, ebird == 0)
+
+# Attach ebird info to NPN bird list
+ebirds <- ebird_spp %>%
+  mutate(common_name = str_to_lower(common_name)) %>%
+  select(-contains("trends"), -rsquared, -beta0, -scientific_name)
+birds <- birds %>%
+  left_join(ebirds, by = "common_name")
+
+
+
+  
