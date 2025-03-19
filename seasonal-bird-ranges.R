@@ -1,9 +1,10 @@
 # Exploration of bird data in USGS analysis
 # ER Zylstra
-# 18 March 2025
+# 19 March 2025
 
 library(dplyr)
 library(stringr)
+library(lubridate)
 library(rnpn) # Will need to check version
 library(ebirdst)
 library(terra)
@@ -24,11 +25,33 @@ df <- df %>%
 df <- df %>%
   mutate(common_name = str_replace(common_name, "grey catbird", "gray catbird"))
 
+# Exclude mammals
+df_birds <- df %>%
+  filter(group == "Bird")
+
 # Which phenophases are included?
-count(df, phenophase_description)
+count(df_birds, phenophase_description) %>% arrange(desc(n))
+  # Live individuals       
+  # Calls or song (birds)
+  # Individuals at a feeding station
+  # Fruit/seed consumption
+  # Singing individuals (birds)
+  # Insect consumption
+  # Flower visitation
+  # Nest building (birds)
+
+# Live individuals & Individuals at a feeding station just indicate PRESENCE, so
+# we should probably exclude series for resident species or migratory species
+# that are supposed to be present at that location at the beginning of the year
+
+# Calls or song, Singing individuals, and Nest builing indicate a BEHAVIOR, so
+# it seems like all series are worth including
+
+# Not sure about the other phenophases: Fruit/seed consumption, 
+# Insect consumption, and Flower visitation
 
 # Summary of species-php combinations
-spp_ph <- df %>%
+spp_ph <- df_birds %>%
   group_by(common_name, phenophase_description) %>%
   summarize(n_sites = n_distinct(site_id),
             min_length = min(n),
@@ -37,7 +60,7 @@ spp_ph <- df %>%
   data.frame()
 
 # Summary by species
-spp <- df %>%
+spp <- df_birds %>%
   group_by(group, common_name) %>%
   summarize(n_php = n_distinct(phenophase_description),
             n_sites = n_distinct(site_id),
@@ -79,77 +102,25 @@ str(ebird_spp)
 # 2: medium quality, some extrapolation and/or omission; use with caution.
 # 3: high quality, very little or no extrapolation and/or omission.
 
-# Using AMGO as an example
-
-filter(ebird_spp, str_detect(str_to_lower(common_name), "american goldfinch"))
 # Want to extract date ranges for each season (species specific) ###############
 
-# There are 9-km or 27-km resolution maps, and smoothed/raw maps
-ebirdst_download_status(species = "amegfi",
-                        path = ebirdst_data_dir(), # Default. Might want to change
-                        download_abundance = FALSE,
-                        download_ranges = TRUE,
-                        dry_run = FALSE,
-                        pattern = "raw_9km",  # Only download raw to save space?
-                        show_progress = TRUE)
+# Extract range information for all non-resident species ----------------------#
 
-amgo_range <- load_ranges(species = "amegfi", 
-                          resolution = "9km", 
-                          smoothed = FALSE,
-                          path = ebirdst_data_dir())
-amgo_range <- vect(amgo_range)
+# Don't need to do anything for resident species, as they're year-round in
+# locations where they're present
 
-plot_b <- ggplot(data = subset(amgo_range, amgo_range$season == "breeding")) +
-  geom_spatvector(aes(fill = season), fill = "#F8766D", show.legend = FALSE) +
-  labs(title = element_text("Breeding"))
-plot_nb <- ggplot(data = subset(amgo_range, amgo_range$season == "nonbreeding")) +
-  geom_spatvector(aes(fill = season), fill = "#abd9e9", show.legend = FALSE) +
-  labs(title = element_text("Nonbreeding"))
-plot_m1 <- ggplot(data = subset(amgo_range, amgo_range$season == "prebreeding_migration")) +
-  geom_spatvector(aes(fill = season), fill = "#ffffbf", show.legend = FALSE) +
-  labs(title = element_text("Pre-breeding migration"))
-plot_m2 <- ggplot(data = subset(amgo_range, amgo_range$season == "postbreeding_migration")) +
-  geom_spatvector(aes(fill = season), fill = "#abdda4", show.legend = FALSE) +
-  labs(title = element_text("Post-breeding migration"))
+# Logical indicating whether to display maps with seaonal ranges with NPN
+# locations overlaid
+map <- FALSE
 
-# Extract locations with AMGO observations
-amgo_locs <- df %>%
-  filter(common_name == "American goldfinch") %>%
-  select(-group, -phenophase_description, -n) %>%
-  distinct()
-amgo_locs$loc <- as.numeric(rownames(amgo_locs))
-
-# Add locations to maps
-amgo_locs_v <- vect(amgo_locs, geom = c("longitude", "latitude"), 
-                    crs = "epsg:4326", keepgeom = TRUE)
-plot_b <- plot_b + geom_spatvector(data = amgo_locs_v)
-plot_nb <- plot_nb + geom_spatvector(data = amgo_locs_v)
-plot_m1 <- plot_m1 + geom_spatvector(data = amgo_locs_v)
-plot_m2 <- plot_m2 + geom_spatvector(data = amgo_locs_v)
-
-plot_grid(plot_m1, plot_b, plot_m2, plot_nb, nrow = 2)
-
-# For each location, extract seasons bird is present
-ext_ranges <- terra::extract(amgo_range, amgo_locs_v)
-ranges <- left_join(ext_ranges, select(data.frame(amgo_locs_v), -common_name),
-                    by = c("id.y" = "loc")) %>%
-  group_by(species_code, common_name, site_id, latitude, longitude) %>%
-  summarize(b = ifelse("breeding" %in% season, 1, 0),
-            nb = ifelse("nonbreeding" %in% season, 1, 0),
-            m1 = ifelse("prebreeding_migration" %in% season, 1, 0),
-            m2 = ifelse("postbreeding_migration" %in% season, 1, 0),
-            .groups = "keep") %>%
-  data.frame()
-ranges
-
-# Extract range information for all bird species ------------------------------#
-
-# Vector of NPN bird species, all lowercase
+# Dataframe with NPN bird species
 birds <- spp %>%
   filter(group == "Bird") %>%
   select(common_name, n_php, n_sites, n_series) %>%
-  mutate(common_name = str_to_lower(common_name)) %>%
-  mutate(ebird = ifelse(common_name %in% str_to_lower(ebird_spp$common_name), 1, 0))
+  # Make common names all lowercase to match up easily with eBird common_names
+  mutate(common_name_l = str_to_lower(common_name)) %>%
+  mutate(ebird = ifelse(common_name_l %in% str_to_lower(ebird_spp$common_name), 
+                        1, 0))
 
 # Check that all birds in NPN dataset have ebird range maps
 filter(birds, ebird == 0)
@@ -159,8 +130,184 @@ ebirds <- ebird_spp %>%
   mutate(common_name = str_to_lower(common_name)) %>%
   select(-contains("trends"), -rsquared, -beta0, -scientific_name)
 birds <- birds %>%
-  left_join(ebirds, by = "common_name")
+  left_join(ebirds, by = c("common_name_l" = "common_name"))
 
+# Download range maps for non-resident NPN bird species
+# For now, just going to download high-resolution raw maps. Won't download or
+# overwrite file unless we set force = TRUE.
+  # for (spp6 in birds$species_code[birds$is_resident == FALSE]) {
+  #   ebirdst_download_status(species = spp6,
+  #                           path = ebirdst_data_dir(), # Default. Might want to change
+  #                           download_abundance = FALSE,
+  #                           download_ranges = TRUE,
+  #                           dry_run = FALSE,
+  #                           pattern = "raw_9km",  # Only download raw to save space?
+  #                           show_progress = TRUE)
+  # }
 
-
+# Loop through species and extract range information
+for (i in 1:nrow(birds)) {
   
+  cn <- birds$common_name[i]
+  code <- birds$species_code[i]
+  
+  # Extract locations and convert to SpatVector
+  locs <- df_birds %>% 
+    filter(common_name == cn) %>%
+    select(-group, -phenophase_description, -n) %>%
+    distinct()
+  
+  # If species is migratory, extract information about seasonal ranges
+  if (birds$is_resident[i] == FALSE) {
+  
+    # Convert NPN locations to SpatVector
+    locs$loc <- as.numeric(rownames(locs))
+    locs <- vect(locs, geom = c("longitude", "latitude"), 
+                 crs = "epsg:4326", keepgeom = TRUE)
+
+    # Load species range
+    range <- load_ranges(species = code, 
+                         resolution = "9km", 
+                         smoothed = FALSE,
+                         path = ebirdst_data_dir())
+    range <- vect(range)
+    
+    if (map) {
+      plot_b <- ggplot(data = subset(range, range$season == "breeding")) +
+        geom_spatvector(aes(fill = season), fill = "#F8766D", show.legend = FALSE) +
+        geom_spatvector(data = locs) +
+        labs(title = element_text(paste0(cn, ": Breeding")))
+      plot_nb <- ggplot(data = subset(range, range$season == "nonbreeding")) +
+        geom_spatvector(aes(fill = season), fill = "#abd9e9", show.legend = FALSE) +
+        geom_spatvector(data = locs) +
+        labs(title = element_text(paste0(cn, ": Nonbreeding")))
+      plot_m1 <- ggplot(data = subset(range, range$season == "prebreeding_migration")) +
+        geom_spatvector(aes(fill = season), fill = "#ffffbf", show.legend = FALSE) +
+        geom_spatvector(data = locs) +
+        labs(title = element_text(paste0(cn, ": Pre-breeding migration")))
+      plot_m2 <- ggplot(data = subset(range, range$season == "postbreeding_migration")) +
+        geom_spatvector(aes(fill = season), fill = "#abdda4", show.legend = FALSE) +
+        geom_spatvector(data = locs) +
+        labs(title = element_text(paste0(cn, ": Post-breeding migration")))
+      print(plot_grid(plot_m1, plot_b, plot_m2, plot_nb, nrow = 2))
+    }
+    
+    # For each location, extract seasons bird is present
+    ext_ranges <- terra::extract(range, locs)
+    ranges <- left_join(select(ext_ranges, - common_name), 
+                        data.frame(locs),
+                        by = c("id.y" = "loc")) %>%
+      group_by(species_code, common_name, site_id, latitude, longitude) %>%
+      summarize(b = ifelse("breeding" %in% season, 1, 0),
+                nb = ifelse("nonbreeding" %in% season, 1, 0),
+                m1 = ifelse("prebreeding_migration" %in% season, 1, 0),
+                m2 = ifelse("postbreeding_migration" %in% season, 1, 0),
+                .groups = "keep") %>%
+      mutate(resident = FALSE) %>%
+      data.frame()
+  
+  } else {
+    ranges <- cbind(species_code = code, locs) %>%
+      mutate(b = 1,
+             nb = 1,
+             m1 = 1,
+             m2 = 1,
+             resident = TRUE)
+  }
+  
+  # Merge info for all species
+  if (i == 1) {
+    spp_ranges <- ranges
+  } else {
+    spp_ranges <- rbind(spp_ranges, ranges)
+  }
+  message("Appended range information for ", cn)
+}
+
+# For each migratory species, identify season that encompasses start of calendar 
+# year (Jan 1), 
+  # Could also do this for water or summer year, but not doing now...
+  # oct1_doy <- yday(as.Date("2022-10-01"))
+  # jul1_doy <- yday(as.Date("2022-07-01"))
+
+mig_birds_nb <- birds %>%
+  filter(is_resident == FALSE) %>%
+  select(common_name, contains("nonbreeding")) %>%
+  mutate(season = "nb")
+colnames(mig_birds_nb) <- str_remove_all(colnames(mig_birds_nb),
+                                         "nonbreeding_")
+mig_birds_m1 <- birds %>%
+  filter(is_resident == FALSE) %>%
+  select(common_name, contains("prebreeding_migration")) %>%
+  mutate(season = "m1")
+colnames(mig_birds_m1) <- str_remove_all(colnames(mig_birds_m1),
+                                         "prebreeding_migration_") 
+mig_birds_b <- birds %>%
+  filter(is_resident == FALSE) %>%
+  select(common_name, breeding_quality, breeding_start, breeding_end) %>%
+  mutate(season = "b")
+colnames(mig_birds_b) <- str_remove_all(colnames(mig_birds_b), "breeding_")
+mig_birds_m2 <- birds %>%
+  filter(is_resident == FALSE) %>%
+  select(common_name, contains("postbreeding_migration")) %>%
+  mutate(season = "m2")
+colnames(mig_birds_m2) <- str_remove_all(colnames(mig_birds_m2),
+                                         "postbreeding_migration_") 
+  
+mig_birds <- rbind(mig_birds_nb, mig_birds_m1, mig_birds_b, mig_birds_m2) %>%
+  filter(!is.na(start)) %>%
+  mutate(doy1 = yday(start),
+         doy2 = yday(end)) %>%
+  # When season overlaps Jan 1, make start date negative
+  mutate(doy1 = ifelse(doy1 > doy2, -1 *(366 - doy1), doy1))
+
+# Duplicate season that overlaps Jan 1 with start = doy and end = 365 + doy
+mig_birds_add <- mig_birds %>%
+  filter(doy1 < 0) %>%
+  rename(doy1_old = doy1,
+         doy2_old = doy2) %>%
+  mutate(doy1 = yday(start),
+         doy2 = 365 + yday(end)) %>%
+  select(-c(doy1_old, doy2_old))
+
+# Find which season overlaps Jan 1
+mig_birds <- rbind(mig_birds, mig_birds_add) %>%
+  rowwise() %>%
+  mutate(jan1 = ifelse(1 %in% doy1:doy2, 1, 0)) %>%
+  ungroup() %>%
+  data.frame()
+mig_birdspp <- mig_birds %>%
+  group_by(common_name) %>%
+  summarize(jan1 = season[jan1 == 1]) %>%
+  data.frame()
+
+# Add season to spp_ranges dataframe
+spp_ranges <- spp_ranges %>%
+  left_join(mig_birdspp, by = "common_name")
+
+# For each species and location, indicate whether species is supposed to be 
+# present on Jan 1
+spp_ranges$present_jan1 <- NA
+for (i in 1:nrow(spp_ranges)) {
+  if (spp_ranges$resident[i] == TRUE) {
+    spp_ranges$present_jan1[i] <- 1
+  } else {
+    season <- spp_ranges$jan1[i]
+    spp_ranges$present_jan1[i] <- ifelse(spp_ranges[i, season] == 1, 1, 0)
+  }
+}
+
+# Append information about presence of species on Jan 1 to original dataframe
+# (with a row for each series = species-site-phenophase)
+df_birds <- df_birds %>%
+  left_join(select(spp_ranges, common_name, site_id, 
+                   resident, jan1, present_jan1), 
+            by = c("common_name", "site_id"))
+
+count(df_birds, resident, present_jan1)
+# 135 series with resident species (always present)
+# 268 series with migratory species that were likely present as of Jan 1
+# 113 series with migratory species that were likely absent as of Jan 1
+
+# NEXT STEP:
+# make suggestions for include/exclude that take phenophase into account
