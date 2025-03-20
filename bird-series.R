@@ -18,7 +18,7 @@ df <- read.csv("data/birds_mammals_phenophases_locations.csv") %>%
 
 # Remove spring peeper (amphibian) from dataframe
 df <- df %>%
-  filter(!grepl("peeper", common_name))
+  filter(!str_detect(common_name, "peeper"))
 
 # Correct classification of titmice (birds, but listed as mammals)
 df <- df %>%
