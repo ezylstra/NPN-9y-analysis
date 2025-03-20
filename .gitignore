@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# eBird ranges
+ebird-ranges*
+!ebird-ranges/.gitkeep
