@@ -1,6 +1,6 @@
 # Exploration of bird data in USGS analysis
 # ER Zylstra
-# 19 March 2025
+# 20 March 2025
 
 library(dplyr)
 library(stringr)
@@ -29,36 +29,6 @@ df <- df %>%
 df_birds <- df %>%
   filter(group == "Bird")
 
-# Which phenophases are included?
-count(df_birds, phenophase_description) %>% arrange(desc(n))
-  # Live individuals       
-  # Calls or song (birds)
-  # Individuals at a feeding station
-  # Fruit/seed consumption
-  # Singing individuals (birds)
-  # Insect consumption
-  # Flower visitation
-  # Nest building (birds)
-
-# Live individuals & Individuals at a feeding station just indicate PRESENCE, so
-# we should probably exclude series for resident species or migratory species
-# that are supposed to be present at that location at the beginning of the year
-
-# Calls or song, Singing individuals, and Nest builing indicate a BEHAVIOR, so
-# it seems like all series are worth including
-
-# Not sure about the other phenophases: Fruit/seed consumption, 
-# Insect consumption, and Flower visitation
-
-# Summary of species-php combinations
-spp_ph <- df_birds %>%
-  group_by(common_name, phenophase_description) %>%
-  summarize(n_sites = n_distinct(site_id),
-            min_length = min(n),
-            max_length = max(n),
-            .groups = "keep") %>%
-  data.frame()
-
 # Summary by species
 spp <- df_birds %>%
   group_by(group, common_name) %>%
@@ -73,6 +43,7 @@ count(spp, group)
 # 70 bird spp, 15 mammal spp
 
 # Exploring eBird products ----------------------------------------------------#
+# (Note: needed to get eBird key before downloading any products)
 
 ebird_spp <- ebirdst_runs %>% data.frame()
 str(ebird_spp)
@@ -101,8 +72,6 @@ str(ebird_spp)
 # regions.
 # 2: medium quality, some extrapolation and/or omission; use with caution.
 # 3: high quality, very little or no extrapolation and/or omission.
-
-# Want to extract date ranges for each season (species specific) ###############
 
 # Extract range information for all non-resident species ----------------------#
 
@@ -173,23 +142,28 @@ for (i in 1:nrow(birds)) {
     range <- vect(range)
     
     if (map) {
-      plot_b <- ggplot(data = subset(range, range$season == "breeding")) +
-        geom_spatvector(aes(fill = season), fill = "#F8766D", show.legend = FALSE) +
+      p_b <- ggplot(data = subset(range, range$season == "breeding")) +
+        geom_spatvector(aes(fill = season), 
+                        fill = "#F8766D", show.legend = FALSE) +
         geom_spatvector(data = locs) +
         labs(title = element_text(paste0(cn, ": Breeding")))
-      plot_nb <- ggplot(data = subset(range, range$season == "nonbreeding")) +
-        geom_spatvector(aes(fill = season), fill = "#abd9e9", show.legend = FALSE) +
+      p_nb <- ggplot(data = subset(range, range$season == "nonbreeding")) +
+        geom_spatvector(aes(fill = season), 
+                        fill = "#abd9e9", show.legend = FALSE) +
         geom_spatvector(data = locs) +
         labs(title = element_text(paste0(cn, ": Nonbreeding")))
-      plot_m1 <- ggplot(data = subset(range, range$season == "prebreeding_migration")) +
-        geom_spatvector(aes(fill = season), fill = "#ffffbf", show.legend = FALSE) +
+      p_m1 <- ggplot(data = subset(range, range$season == "prebreeding_migration")) +
+        geom_spatvector(aes(fill = season), 
+                        fill = "#ffffbf", show.legend = FALSE) +
         geom_spatvector(data = locs) +
         labs(title = element_text(paste0(cn, ": Pre-breeding migration")))
-      plot_m2 <- ggplot(data = subset(range, range$season == "postbreeding_migration")) +
-        geom_spatvector(aes(fill = season), fill = "#abdda4", show.legend = FALSE) +
+      p_m2 <- ggplot(data = subset(range, range$season == "postbreeding_migration")) +
+        geom_spatvector(aes(fill = season), 
+                        fill = "#abdda4", show.legend = FALSE) +
         geom_spatvector(data = locs) +
         labs(title = element_text(paste0(cn, ": Post-breeding migration")))
-      print(plot_grid(plot_m1, plot_b, plot_m2, plot_nb, nrow = 2))
+      
+      print(plot_grid(p_m1, p_b, p_m2, p_nb, nrow = 2))
     }
     
     # For each location, extract seasons bird is present
@@ -298,16 +272,209 @@ for (i in 1:nrow(spp_ranges)) {
 }
 
 # Append information about presence of species on Jan 1 to original dataframe
-# (with a row for each series = species-site-phenophase)
+# (row for each observation series = species-site-phenophase)
 df_birds <- df_birds %>%
   left_join(select(spp_ranges, common_name, site_id, 
                    resident, jan1, present_jan1), 
             by = c("common_name", "site_id"))
 
-count(df_birds, resident, present_jan1)
-# 135 series with resident species (always present)
-# 268 series with migratory species that were likely present as of Jan 1
-# 113 series with migratory species that were likely absent as of Jan 1
+# Categorizing series by phenophase type --------------------------------------#
 
-# NEXT STEP:
-# make suggestions for include/exclude that take phenophase into account
+count(df_birds, phenophase_description) %>% arrange(desc(n))
+# Live individuals       
+# Calls or song (birds)
+# Individuals at a feeding station
+# Fruit/seed consumption
+# Singing individuals (birds)
+# Insect consumption
+# Flower visitation
+# Nest building (birds)
+
+# Live individuals & Individuals at a feeding station indicate PRESENCE, so
+# we should probably exclude series for resident species and for migratory 
+# species that are supposed to be present at that location at the beginning of 
+# the year
+
+# Calls or song, Singing individuals, and Nest building indicate a BEHAVIOR, so
+# it seems like all series are worth including
+
+# Not sure about the other phenophases, which are related to FEEDING: 
+# Fruit/seed consumption, Insect consumption, and Flower visitation
+
+# Add phenophase_type label (making these explicit for easy changes)
+df_birds <- df_birds %>%
+  mutate(phenophase_type = case_when(
+    phenophase_description == "Live individuals" ~ "presence",
+    phenophase_description == "Individuals at a feeding station" ~ "presence",
+    phenophase_description == "Calls or song (birds)" ~ "behavior",
+    phenophase_description == "Singing individuals (birds)" ~ "behavior",
+    phenophase_description == "Nest building (birds)" ~ "behavior",
+    phenophase_description == "Fruit/seed consumption" ~ "feeding",
+    phenophase_description == "Insect consumption" ~ "feeding",
+    phenophase_description == "Flower visitation" ~ "feeding",
+    .default = NA
+  ))
+
+# Suggestions for including/excluding series in analyses ----------------------#
+
+# If phenophase is a behavior: include
+# If phenophase indicates presence: include migratory species that should not be
+  # at that location at the start of the year
+# If phenophase indicates feeding: include migratory species that should not be
+  # at that location at the start of the year ****Not as sure about this one****
+
+df_birds <- df_birds %>%
+  mutate(include = case_when(
+    phenophase_type == "behavior" ~ 1,
+    present_jan1 == 0 ~ 1,
+    .default = 0
+  ))
+
+# Check rules
+count(df_birds, resident, present_jan1, phenophase_type, include) %>%
+  arrange(desc(resident), desc(include))
+
+# Create table with just series that should be included based on location and
+# phenophase type
+include <- filter(df_birds, include == 1)
+
+# Looking for series with redundant information -------------------------------#
+
+# Vocalizing series for same species and site:
+  vocal <- include %>%
+    filter(phenophase_description %in% c("Calls or song (birds)",
+                                         "Singing individuals (birds)")) %>%
+    group_by(common_name, site_id) %>%
+    summarize(calls = ifelse("Calls or song (birds)" %in% phenophase_description, 1, 0),
+              indivs = ifelse("Singing individuals (birds)" %in% phenophase_description, 1, 0),
+              .groups = "keep") %>%
+    data.frame()
+  count(vocal, calls, indivs)
+  # Only 1 species-site where there's a singing individual series and not a calls series
+  # 39 species-sites where there are both series
+  # 94 species-sites where there's only a calls series
+
+# For now, keep only one vocalizing series per species-site
+vocal_dups <- vocal %>%
+  filter(calls == 1 & indivs == 1) %>%
+  select(common_name, site_id) %>%
+  mutate(phenophase_description = "Singing individuals (birds)",
+         remove = 1)
+include <- include %>%
+  left_join(vocal_dups, 
+            by = c("common_name", "site_id", "phenophase_description")) %>%
+  filter(is.na(remove)) %>%
+  select(-remove)
+
+# Any species-sites with multiple feeding series?
+  feeding <- include %>%
+    filter(phenophase_type == "feeding") %>%
+    group_by(common_name, site_id) %>%
+    summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
+              fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
+              insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
+              .groups = "keep") %>%
+    data.frame()
+  count(feeding, flower, fruit, insect)
+  # Most species-sites have just one feeding series
+  # 2 species-sites with fruit/seed and insect
+  # 1 species-site with flower and insect
+
+# For now, keep only one feeding series per species-site
+feeding_dups <- feeding %>%
+  filter(flower + fruit + insect > 1) %>%
+  select(common_name, site_id) %>%
+  mutate(phenophase_description = "Insect consumption",
+         remove = 1)
+include <- include %>%
+  left_join(feeding_dups, 
+            by = c("common_name", "site_id", "phenophase_description")) %>%
+  filter(is.na(remove)) %>%
+  select(-remove)
+
+# Indications of species presence at the same site:
+  presence <- include %>%
+    filter(phenophase_description %in% c("Live individuals",
+                                         "Individuals at a feeding station")) %>%
+    group_by(common_name, site_id) %>%
+    summarize(live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
+              station = ifelse("Individuals at a feeding station" %in% phenophase_description, 1, 0),
+              .groups = "keep") %>%
+    data.frame()
+  count(presence, live, station)
+  # No species-sites where there is a feeding station series but no live individual series
+  # 10 species-sites where there are both series
+  # 32 species-sites where there's only a live individuals series (no feeding station)
+
+# For now, keep only one series indicating presence per species-site
+# Can just remove all individuals at feeding station series, since they are 
+# always accompanied by a live individuals series
+include <- include %>%
+  filter(phenophase_description != "Individuals at a feeding station")
+
+# Feeding and presence series at the same site?
+  feedingpresence <- include %>%
+    filter(phenophase_type == "feeding" | phenophase_description == "Live individuals") %>%
+    group_by(common_name, site_id) %>%
+    summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
+              fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
+              insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
+              live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
+              .groups = "keep") %>%
+    data.frame()  
+  count(feedingpresence, live, flower, fruit, insect)
+  # All species-sites with feeding series also have live individuals series
+  # Probably want to see the observations in series to see if information is
+  # redundant before excluding any series
+
+# Summarizing series that are left --------------------------------------------#
+
+# Add new column to full list of bird series that indicates whether a series 
+# should be included after considering location, phenophase type, and redundancies
+include <- include %>%
+  rename(include2 = include)
+df_birds <- df_birds %>%
+  left_join(select(include, common_name, site_id, phenophase_description, include2),
+            by = c("common_name", "site_id", "phenophase_description")) %>%
+  mutate(include2 = replace_na(include2, replace = 0))
+  
+# Total series in/out
+count(df_birds, include2)
+# Include 192 series
+# Exclude 324 series
+
+# Summarize by species
+spp_include <- include %>%
+  group_by(common_name, resident) %>%
+  summarize(n_series = n(),
+            n_sites = n_distinct(site_id),
+            n_php_types = n_distinct(phenophase_type),
+            n_php = n_distinct(phenophase_description),
+            .groups = "keep") %>%
+  data.frame()
+summary(spp_include)
+# 61 species (13 residents, 48 migratory)
+# 1-11 sites per spp (mean = 2.5)
+# 1-3 phenophase types per spp (mean = 1.5)
+# 1-4 phenophases per spp (mean = 1.5)
+
+# Summarize by phenophase type
+include %>%
+  group_by(phenophase_type) %>%
+  summarize(n_php = n_distinct(phenophase_description),
+            n_series = n(),
+            n_spp = n_distinct(common_name),
+            n_sites = n_distinct(site_id)) %>%
+  data.frame()
+
+# Summarize by phenophase
+include %>%
+  group_by(phenophase_type, phenophase_description) %>%
+  summarize(n_series = n(),
+            n_spp = n_distinct(common_name),
+            n_sites = n_distinct(site_id),
+            .groups = "keep") %>%
+  data.frame()
+# More than two-thirds (134/192) are vocalizing series
+# 42 series with species indicating species presence
+# Only 9 feeding series (and they may be redundant with presence series)
