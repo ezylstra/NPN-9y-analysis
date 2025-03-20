@@ -5,7 +5,6 @@
 library(dplyr)
 library(stringr)
 library(lubridate)
-library(rnpn) # Will need to check version
 library(ebirdst)
 library(terra)
 library(tidyterra)
@@ -20,6 +19,10 @@ df <- read.csv("data/birds_mammals_phenophases_locations.csv") %>%
 # Remove spring peeper (amphibian) from dataframe
 df <- df %>%
   filter(!grepl("peeper", common_name))
+
+# Correct classification of titmice (birds, but listed as mammals)
+df <- df %>%
+  mutate(group = ifelse(str_detect(common_name, "titmouse"), "Bird", group))
 
 # Correct spelling for catbird
 df <- df %>%
@@ -40,13 +43,13 @@ spp <- df_birds %>%
             .groups = "keep") %>%
   data.frame()
 count(spp, group)
-# 70 bird spp, 15 mammal spp
+# 72 bird spp
 
 # Exploring eBird products ----------------------------------------------------#
 # (Note: needed to get eBird key before downloading any products)
 
 ebird_spp <- ebirdst_runs %>% data.frame()
-str(ebird_spp)
+# str(ebird_spp)
 
 # From https://science.ebird.org/en/status-and-trends/faq#seasons:
 
@@ -200,7 +203,7 @@ for (i in 1:nrow(birds)) {
 
 # For each migratory species, identify season that encompasses start of calendar 
 # year (Jan 1), 
-  # Could also do this for water or summer year, but not doing now...
+  # Could also do this for water or summer year, but not doing so now...
   # oct1_doy <- yday(as.Date("2022-10-01"))
   # jul1_doy <- yday(as.Date("2022-07-01"))
 
@@ -334,8 +337,8 @@ df_birds <- df_birds %>%
 count(df_birds, resident, present_jan1, phenophase_type, include) %>%
   arrange(desc(resident), desc(include))
 
-# Create table with just series that should be included based on location and
-# phenophase type
+# Create dataframe with just series that should be included based on location
+# and phenophase type
 include <- filter(df_birds, include == 1)
 
 # Looking for series with redundant information -------------------------------#
@@ -352,7 +355,7 @@ include <- filter(df_birds, include == 1)
   count(vocal, calls, indivs)
   # Only 1 species-site where there's a singing individual series and not a calls series
   # 39 species-sites where there are both series
-  # 94 species-sites where there's only a calls series
+  # 96 species-sites where there's only a calls series
 
 # For now, keep only one vocalizing series per species-site
 vocal_dups <- vocal %>%
@@ -440,8 +443,8 @@ df_birds <- df_birds %>%
   
 # Total series in/out
 count(df_birds, include2)
-# Include 192 series
-# Exclude 324 series
+# Include 194 series
+# Exclude 328 series
 
 # Summarize by species
 spp_include <- include %>%
@@ -453,9 +456,9 @@ spp_include <- include %>%
             .groups = "keep") %>%
   data.frame()
 summary(spp_include)
-# 61 species (13 residents, 48 migratory)
+# 63 species (15 residents, 48 migratory)
 # 1-11 sites per spp (mean = 2.5)
-# 1-3 phenophase types per spp (mean = 1.5)
+# 1-3 phenophase types per spp (mean = 1.4)
 # 1-4 phenophases per spp (mean = 1.5)
 
 # Summarize by phenophase type
@@ -475,6 +478,7 @@ include %>%
             n_sites = n_distinct(site_id),
             .groups = "keep") %>%
   data.frame()
-# More than two-thirds (134/192) are vocalizing series
+# More than two-thirds (136/194) are vocalizing series
 # 42 series with species indicating species presence
 # Only 9 feeding series (and they may be redundant with presence series)
+# 7 nest-building series
