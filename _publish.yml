@@ -1,0 +1,4 @@
+- source: bird-series.qmd
+  quarto-pub:
+    - id: ff4b7917-00f6-4a3c-9055-57c479d84da1
+      url: 'https://erinzylstra.quarto.pub/exploration-of-bird-data-for-usgs-analysis'
