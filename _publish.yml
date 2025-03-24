@@ -2,3 +2,7 @@
   quarto-pub:
     - id: ff4b7917-00f6-4a3c-9055-57c479d84da1
       url: 'https://erinzylstra.quarto.pub/exploration-of-bird-data-for-usgs-analysis'
+- source: mammal-series.qmd
+  quarto-pub:
+    - id: 7a0cc4b1-2baf-4286-9773-a54225a1f37f
+      url: 'https://erinzylstra.quarto.pub/exploration-of-mammal-data-for-usgs-analysis'
