@@ -5,11 +5,7 @@
 library(rnpn)
 library(dplyr)
 library(stringr)
-library(lubridate)
-library(terra)
-library(tidyterra)
-library(ggplot2)
-library(cowplot)
+library(tidyr)
 
 # Species-phenophase-location combinations used in analysis -------------------#
 
@@ -53,7 +49,7 @@ df_mammals %>%
   # Mammals of North America - Peterson Field Guide 2006 edition
   # Animal Diversity Web (University of Michigan; animaldiversity.org)
 
-# Write species, with site locations to file:
+# Write species-site combinations to file:
 mammals_file <- "data/mammal_species.csv"
 if (!file.exists(mammals_file)) {
   spp_sites <- df_mammals %>%
@@ -68,7 +64,8 @@ if (!file.exists(mammals_file)) {
   write.csv(spp_sites, mammals_file, row.names = FALSE)
 }
 
-# Loading csv, where I compiled information for each species (and site, where needed):
+# Created a new csv with information about seasonal activity for each species-
+# site combination. Load file:
 mammal_traits <- read.csv("data/mammal_species_traits.csv")
 
 # Append information about hiberation/winter torpor

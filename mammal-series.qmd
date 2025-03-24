@@ -1,0 +1,256 @@
+---
+title: "Exploration of mammal data for USGS analysis"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: "Erin Zylstra"
+execute: 
+  error: false
+  warning: false
+  message: false
+format: 
+  html:
+    code-fold: true
+    fig-cap-location: top
+    page-layout: full
+editor: visual
+---
+
+```{r}
+#| echo: false
+
+library(rnpn)
+library(dplyr)
+library(stringr)
+library(tidyr)
+```
+
+## Overview
+
+This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to "series" of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of mammals and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) is needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may active year-round, and thus, observations of live individuals are expected to vary seasonally) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site).
+
+Information about series of mammal observations with at least nine years of data that could potentially be included in analyses come from an internal file created by Janet Prev`r knitr::asis_output("\U00E9")`y (birds_mammals_phenophases_locations.csv). The first few rows of the file look like the following, where "n" is the number of years in each series:
+
+```{r load-data}
+#| code-fold: true
+
+df <- read.csv("data/birds_mammals_phenophases_locations.csv") %>%
+  select(-kingdom)
+
+knitr::kable(head(df %>% filter(group == "Mammal") %>% select(-group)), 
+             align = c("l", "l", "c", "c", "c", "c"))
+```
+
+#### Modifications to data file
+
+Before evaluating the series, we needed a little clean up to remove bird species, remove one amphibian (spring peeper), classify oak titmouse and tufted titmouse as birds and not mammals, and remove any series for the "Dead individuals" phenophase.
+
+```{r}
+#| code-fold: true
+
+# Remove spring peeper (amphibian) from dataframe
+df <- df %>%
+  filter(!str_detect(common_name, "peeper"))
+
+# Correct classification of titmice (birds, but listed as mammals)
+df <- df %>%
+  mutate(group = ifelse(str_detect(common_name, "titmouse"), "Bird", group))
+
+# Remove "Dead individuals" phenophase
+df <- df %>%
+  filter(phenophase_description != "Dead individuals")
+
+# Exclude birds
+df_mammals <- df %>%
+  filter(group == "Mammal")
+
+# Summarize by species
+spp <- df_mammals %>%
+  group_by(common_name) %>%
+  summarize(n_series = n(),
+            n_phenophases = n_distinct(phenophase_description),
+            n_sites = n_distinct(site_id)) %>%
+  arrange(desc(n_series), desc(n_sites)) %>%
+  data.frame()
+```
+
+## Taking seasonal activity patterns into account:
+
+In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, nut gathering) was observed for a given species at a particular site. If a species is active year-round, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. In these instances, the first date a phenophase was observed probably tells us more about when observers visited the site than about species ecology. We consulted outside sources to determine whether a species was likely to be active year-round, or whether it was likely to inactive at the beginning of the year (because it was in hibernation or entered torpor). We extracted information about seasonal activity from the Peterson Field Guide to the Mammals of North America (2006 edition) and from species accounts on the University of Michigan's Animal Diversity Web [animaldiversity.org](http://animaldiversity.org), and noted whether each species at each site was likely to be active or inactive at the beginning of the year ("Active on Jan 1" variable in the table excerpt below):
+
+```{r active-jan1}
+#| code-fold: true
+
+# Write species-site combinations to file:
+mammals_file <- "data/mammal_species.csv"
+if (!file.exists(mammals_file)) {
+  spp_sites <- df_mammals %>%
+    select(common_name, site_id, latitude, longitude) %>%
+    distinct() %>%
+    arrange(common_name, site_id)
+  npn_spp <- npn_species() %>%
+    filter(common_name %in% unique(spp_sites$common_name)) %>%
+    data.frame()
+  spp_sites <- spp_sites %>%
+    left_join(select(npn_spp, common_name, genus, species), by = "common_name")
+  write.csv(spp_sites, mammals_file, row.names = FALSE)
+}
+
+# Created a new csv with information about seasonal activity for each species-
+# site combination. Load file:
+mammal_traits <- read.csv("data/mammal_species_traits.csv")
+
+# Append information about hiberation/winter torpor
+df_mammals <- df_mammals %>%
+  left_join(select(mammal_traits, common_name, site_id, seasonally_inactive),
+            by = c("common_name", "site_id")) %>%
+  mutate(active_jan1 = ifelse(seasonally_inactive == "no", 1, 0))
+
+knitr::kable(x = select(df_mammals, common_name, site_id, latitude, longitude, active_jan1)[1:6,],
+             row.names = FALSE, 
+             align = c("l", "c", "c", "c", "c", "c"),
+             col.names = c("Species", "Site ID", "Latitude", "Longitude", "Active on Jan 1"))
+```
+
+## Taking phenophase "type" into account:
+
+We classified phenophases into four "types": phenophases that indicate whether mature individuals of that species were detected by observers (activity), phenophases that indicated whether young/immature individuals of that species were detected by observers (young), phenophases that describe a behavior, usually associated with breeding or mating (behavior), and phenophases that describe feeding activities (feeding).
+
+Understanding when species exhibit behaviors associated with breeding or mating and how the timing of these phenophases may shift over time or in response to climate is of interest, regardless of whether the species is active year-round or not. Thus, it seems reasonable to include all behavior-type phenophases in analyses. Similarly, it would make sense to include all feeding phenophases that relate to seasonal resources (e.g., nuts, fruits, seeds) in analyses. Finally, few mammals in North America breed year-round. Exploring potential trends in the time at which young animals are first observed has the potential to provide important insights about species reproductive phenology.
+
+In contrast, we are probably only interested in evaluating changes in the first date a species is observed if the species is likely to be inactive at the beginning of the year. So for the "Live individuals" phenophase, we may want to exclude series for species that are likely active at that site on January 1st. Deciding whether to include or exclude series for the more-general "Feeding" phenophase is less clear. However, it seems likely when observers detect an individual, they are likely to see it feeding on something given that mammals have high metabolisms and the food resouce isn't specified. For that reason, it may be worth excluding "Feeding" series for species that are active year-round.
+
+```{r phenophase-type}
+#| code-fold: true
+
+# Add phenophase_type label (making these explicit for easy changes)
+df_mammals <- df_mammals %>%
+  mutate(phenophase_type = case_when(
+    phenophase_description == "Live individuals" ~ "activity",
+    phenophase_description == "Young individuals" ~ "young",
+    phenophase_description == "Male combat (horn/antler)" ~ "behavior",
+    phenophase_description == "Males vocalizing" ~ "behavior",
+    phenophase_description == "Feeding" ~ "feeding",
+    phenophase_description == "Fruit/seed consumption" ~ "feeding",
+    phenophase_description == "Nut gathering" ~ "feeding",
+    .default = NA
+  ))
+
+phpt <- df_mammals %>%
+  count(phenophase_description, phenophase_type) %>%
+  mutate(rule_word = case_when(
+    phenophase_type == "activity" ~ "Include if inactive on 1 Jan",
+    phenophase_description == "Feeding" ~ "Include if inactive on 1 Jan",
+    .default = "Include"
+  )) %>%
+  arrange(factor(phenophase_type, 
+                 levels = c("young", "active", "feeding", "behavior")))
+
+df_mammals <- df_mammals %>%
+  mutate(include = case_when(
+    phenophase_type %in% c("behavior", "young") ~ 1,
+    phenophase_description %in% c("Fruit/seed consumption", "Nut gathering") ~ 1,
+    active_jan1 == 0 ~ 1,
+    .default = 0
+  ))
+include <- filter(df_mammals, include == 1)
+
+knitr::kable(x = phpt,
+             col.names = c("Phenophase", "Phenophase type", "No. data series", "Include/Exclude"),
+             align = c("l", 'l', "c", "l"))
+```
+
+\
+If we use the suggested rules outlined in the table above, we would exclude `r sum(df_mammals$include == 0)` series, leaving `r sum(df_mammals$include == 1)` series still in consideration.
+
+## Removing data series with redundant information:
+
+For some species, there may be instances where a positive observation of one phenophase is usually or always associated with a positive observation of another phenophase. In particular, every time an observer reported seeing an individual feeding (without specifying the food resource), they also reported that they observed live individuals on the same day. Including data series for both of these phenophases for the same species at the same site is likely to be redundant, and thus, one of the data series should probably be excluded from analyses.
+
+```{r activity-count}
+#| code-fold: true
+
+activity <- include %>%
+  filter(phenophase_description %in% c("Feeding", "Live individuals")) %>%
+  group_by(common_name, site_id) %>%
+  summarize(live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
+            feeding = ifelse("Feeding" %in% phenophase_description, 1, 0),
+            .groups = "keep") %>%
+  data.frame()
+
+activity_count <- count(activity, live, feeding)
+# No species-sites where there is a feeding series but no live individual series
+
+# Remove all "Feeding" series since they're always accompanied by 
+# "Live individuals" series
+include <- include %>%
+  filter(phenophase_description != "Feeding")
+```
+
+There were a total of `r activity_count$n[activity_count$feeding == 1]` "Feeding" series for species at sites where they were not active year-round. All of these series had an accompanying "Live individuals" series which probably contains the same, or very similar, information about species phenology.
+
+## Summary of remaining data series
+
+```{r summary}
+#| code-fold: true
+
+# Create "include2" variable to indicate whether a series should be included in 
+# analyses after accounting for all factors
+include <- include %>%
+  rename(include2 = include)
+df_mammals <- df_mammals %>%
+  left_join(select(include, common_name, site_id, phenophase_description, include2),
+            by = c("common_name", "site_id", "phenophase_description")) %>%
+  mutate(include2 = replace_na(include2, replace = 0))
+
+# Summarize by species
+spp_include <- include %>%
+  group_by(common_name, seasonally_inactive) %>%
+  summarize(n_series = n(),
+            n_sites = n_distinct(site_id),
+            n_php_types = n_distinct(phenophase_type),
+            n_php = n_distinct(phenophase_description),
+            .groups = "keep") %>%
+  mutate(winter = ifelse(seasonally_inactive == "no", "active", seasonally_inactive)) %>%
+  data.frame() %>%
+  select(-seasonally_inactive) %>%
+  relocate(winter, .after = "common_name") %>%
+  arrange(common_name, .locale = "en") %>%
+  data.frame()
+
+# Summarize by phenophase
+php_include <- include %>%
+  group_by(phenophase_type, phenophase_description) %>%
+  summarize(n_series = n(),
+            n_spp = n_distinct(common_name),
+            n_sites = n_distinct(site_id),
+            .groups = "keep") %>%
+  arrange(factor(phenophase_type, 
+                 levels = c("young", "active", "feeding", "behavior")), 
+          desc(n_series)) %>%
+  data.frame()
+```
+
+After considering seasonal activity patterns, phenophase type, and potential redundancies, there are fewer data series that provide unique information to assess changes in phenology. If we adopted all the suggested filters described above, we would retain only `r sum(df_mammals$include2)` of the `r nrow(df_mammals)` potential series. The remaining series represent `r nrow(spp_include)` species, (`r sum(spp_include$winter == "active")` of which are active year round), `r n_distinct(include$site_id)` sites, and `r nrow(php_include)` phenophases.
+
+```{r}
+#| label: spp-include
+#| tbl-cap: Summary of remaining data series, by species.
+#| echo: false
+
+knitr::kable(spp_include,
+             col.names = c("Species", "Winter", "No. data series", "No. sites", 
+                           "No. phenophase types", "No. phenophases"),
+             align = c("l", "c", "c", "c", "c", "c")) 
+```
+
+```{r}
+#| label: php-include
+#| tbl-cap: Summary of remaining data series, by phenophase
+#| echo: false
+
+knitr::kable(php_include,
+             col.names = c("Phenophase type", "Phenophase", "No. data series", "No. species", "No. sites"),
+             align = c("l", "l", "c", "c", "c")) 
+```
+
+\
+Of the remaining phenophases, there seems to be a distinction between the "Live individuals" phenophase, that indicates when species that are inactive for part of the year first become active in the spring, and all the others that indicate when reproductive- or feeding-related activities/phases commence. Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in spring activity separately from other phenophases (although low sample sizes may prevent this separation).
