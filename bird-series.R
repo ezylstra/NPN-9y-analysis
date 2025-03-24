@@ -293,23 +293,12 @@ count(df_birds, phenophase_description) %>% arrange(desc(n))
 # Flower visitation
 # Nest building (birds)
 
-# Live individuals & Individuals at a feeding station indicate PRESENCE, so
-# we should probably exclude series for resident species and for migratory 
-# species that are supposed to be present at that location at the beginning of 
-# the year
-
-# Calls or song, Singing individuals, and Nest building indicate a BEHAVIOR, so
-# it seems like all series are worth including
-
-# Not sure about the other phenophases, which are related to FEEDING: 
-# Fruit/seed consumption, Insect consumption, and Flower visitation
-
 # Add phenophase_type label (making these explicit for easy changes)
 df_birds <- df_birds %>%
   mutate(phenophase_type = case_when(
     phenophase_description == "Live individuals" ~ "presence",
     phenophase_description == "Individuals at a feeding station" ~ "presence",
-    phenophase_description == "Calls or song (birds)" ~ "behavior",
+    phenophase_description == "Calls or song (birds)" ~ "presence",
     phenophase_description == "Singing individuals (birds)" ~ "behavior",
     phenophase_description == "Nest building (birds)" ~ "behavior",
     phenophase_description == "Fruit/seed consumption" ~ "feeding",
@@ -318,133 +307,76 @@ df_birds <- df_birds %>%
     .default = NA
   ))
 
+phpt <- df_birds %>%
+  count(phenophase_description, phenophase_type) %>%
+  arrange(phenophase_type) %>%
+  mutate(rule_word = case_when(
+    phenophase_type == "presence" ~ "Include if absent on 1 Jan",
+    .default = "Include"
+  ))
+
+
+
 # Suggestions for including/excluding series in analyses ----------------------#
 
 # If phenophase is a behavior: include
+# If phenophase is related to feeding: include (see emails from Ellen)
 # If phenophase indicates presence: include migratory species that should not be
   # at that location at the start of the year
-# If phenophase indicates feeding: include migratory species that should not be
-  # at that location at the start of the year ****Not as sure about this one****
 
 df_birds <- df_birds %>%
   mutate(include = case_when(
-    phenophase_type == "behavior" ~ 1,
+    phenophase_type %in% c("behavior", "feeding") ~ 1,
     present_jan1 == 0 ~ 1,
     .default = 0
   ))
-
-# Check rules
-count(df_birds, resident, present_jan1, phenophase_type, include) %>%
-  arrange(desc(resident), desc(include))
-
-# Create dataframe with just series that should be included based on location
-# and phenophase type
 include <- filter(df_birds, include == 1)
 
 # Looking for series with redundant information -------------------------------#
 
-# Vocalizing series for same species and site:
-  vocal <- include %>%
-    filter(phenophase_description %in% c("Calls or song (birds)",
-                                         "Singing individuals (birds)")) %>%
-    group_by(common_name, site_id) %>%
-    summarize(calls = ifelse("Calls or song (birds)" %in% phenophase_description, 1, 0),
-              indivs = ifelse("Singing individuals (birds)" %in% phenophase_description, 1, 0),
-              .groups = "keep") %>%
-    data.frame()
-  count(vocal, calls, indivs)
-  # Only 1 species-site where there's a singing individual series and not a calls series
-  # 39 species-sites where there are both series
-  # 96 species-sites where there's only a calls series
-
-# For now, keep only one vocalizing series per species-site
-vocal_dups <- vocal %>%
-  filter(calls == 1 & indivs == 1) %>%
-  select(common_name, site_id) %>%
-  mutate(phenophase_description = "Singing individuals (birds)",
-         remove = 1)
-include <- include %>%
-  left_join(vocal_dups, 
-            by = c("common_name", "site_id", "phenophase_description")) %>%
-  filter(is.na(remove)) %>%
-  select(-remove)
-
-# Any species-sites with multiple feeding series?
-  feeding <- include %>%
-    filter(phenophase_type == "feeding") %>%
-    group_by(common_name, site_id) %>%
-    summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
-              fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
-              insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
-              .groups = "keep") %>%
-    data.frame()
-  count(feeding, flower, fruit, insect)
-  # Most species-sites have just one feeding series
-  # 2 species-sites with fruit/seed and insect
-  # 1 species-site with flower and insect
-
-# For now, keep only one feeding series per species-site
-feeding_dups <- feeding %>%
-  filter(flower + fruit + insect > 1) %>%
-  select(common_name, site_id) %>%
-  mutate(phenophase_description = "Insect consumption",
-         remove = 1)
-include <- include %>%
-  left_join(feeding_dups, 
-            by = c("common_name", "site_id", "phenophase_description")) %>%
-  filter(is.na(remove)) %>%
-  select(-remove)
-
 # Indications of species presence at the same site:
-  presence <- include %>%
-    filter(phenophase_description %in% c("Live individuals",
-                                         "Individuals at a feeding station")) %>%
-    group_by(common_name, site_id) %>%
-    summarize(live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
-              station = ifelse("Individuals at a feeding station" %in% phenophase_description, 1, 0),
-              .groups = "keep") %>%
-    data.frame()
-  count(presence, live, station)
-  # No species-sites where there is a feeding station series but no live individual series
-  # 10 species-sites where there are both series
-  # 32 species-sites where there's only a live individuals series (no feeding station)
+presence <- include %>%
+  filter(phenophase_type == "presence") %>%
+  group_by(common_name, site_id) %>%
+  summarize(live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
+            station = ifelse("Individuals at a feeding station" %in% phenophase_description, 1, 0),
+            calls = ifelse("Calls or song (birds)" %in% phenophase_description, 1, 0),
+            .groups = "keep") %>%
+  data.frame()
 
-# For now, keep only one series indicating presence per species-site
-# Can just remove all individuals at feeding station series, since they are 
-# always accompanied by a live individuals series
+presence_count <- count(presence, live, station, calls)
+# No species-sites where there is a feeding station series but no live individual series
+# 10 species-sites where there are both series
+# All combinations of live individuals and calls/song series
+
+# Remove all "Individuals at feeding station" series since they're always
+# accompanied by "Live individuals" series
 include <- include %>%
   filter(phenophase_description != "Individuals at a feeding station")
 
-# Feeding and presence series at the same site?
-  feedingpresence <- include %>%
-    filter(phenophase_type == "feeding" | phenophase_description == "Live individuals") %>%
-    group_by(common_name, site_id) %>%
-    summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
-              fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
-              insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
-              live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
-              .groups = "keep") %>%
-    data.frame()  
-  count(feedingpresence, live, flower, fruit, insect)
-  # All species-sites with feeding series also have live individuals series
-  # Probably want to see the observations in series to see if information is
-  # redundant before excluding any series
+# If a species-site combination has "Calls or song" and "Live individuals",
+# then remove the "Calls or song" series
+presence_dups <- presence %>%
+  filter(calls == 1 & live == 1) %>%
+  select(common_name, site_id) %>%
+  mutate(phenophase_description = "Calls or song (birds)",
+         remove = 1)
+include <- include %>%
+  left_join(presence_dups, 
+            by = c("common_name", "site_id", "phenophase_description")) %>%
+  filter(is.na(remove)) %>%
+  select(-remove)
 
 # Summarizing series that are left --------------------------------------------#
 
-# Add new column to full list of bird series that indicates whether a series 
-# should be included after considering location, phenophase type, and redundancies
+# Create "include2" variable to indicate whether a series should be included in 
+# analyses after accounting for all factors
 include <- include %>%
   rename(include2 = include)
 df_birds <- df_birds %>%
   left_join(select(include, common_name, site_id, phenophase_description, include2),
             by = c("common_name", "site_id", "phenophase_description")) %>%
   mutate(include2 = replace_na(include2, replace = 0))
-  
-# Total series in/out
-count(df_birds, include2)
-# Include 194 series
-# Exclude 328 series
 
 # Summarize by species
 spp_include <- include %>%
@@ -454,31 +386,16 @@ spp_include <- include %>%
             n_php_types = n_distinct(phenophase_type),
             n_php = n_distinct(phenophase_description),
             .groups = "keep") %>%
-  data.frame()
-summary(spp_include)
-# 63 species (15 residents, 48 migratory)
-# 1-11 sites per spp (mean = 2.5)
-# 1-3 phenophase types per spp (mean = 1.4)
-# 1-4 phenophases per spp (mean = 1.5)
-
-# Summarize by phenophase type
-include %>%
-  group_by(phenophase_type) %>%
-  summarize(n_php = n_distinct(phenophase_description),
-            n_series = n(),
-            n_spp = n_distinct(common_name),
-            n_sites = n_distinct(site_id)) %>%
+  arrange(common_name, .locale = "en") %>%
   data.frame()
 
 # Summarize by phenophase
-include %>%
+php_include <- include %>%
   group_by(phenophase_type, phenophase_description) %>%
   summarize(n_series = n(),
             n_spp = n_distinct(common_name),
             n_sites = n_distinct(site_id),
             .groups = "keep") %>%
+  arrange(factor(phenophase_type, levels = c("presence", "behavior", "feeding")), desc(n_series)) %>%
   data.frame()
-# More than two-thirds (136/194) are vocalizing series
-# 42 series with species indicating species presence
-# Only 9 feeding series (and they may be redundant with presence series)
-# 7 nest-building series
+

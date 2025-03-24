@@ -29,7 +29,7 @@ library(cowplot)
 
 ## Overview
 
-This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to "series" of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether all series (all combinations of species, sites, and phenophases) should be included in analyses or whether some of the series are best excluded from analyses. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the series is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different "types" of phenophaes or whether all phenophases could be grouped together.
+This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to "series" of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) is needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different "types" of phenophaes or whether all phenophases could be grouped together.
 
 Information about series of bird observations with at least nine years of data that could potentially be included in analyses come from an internal file created by Janet Prev`r knitr::asis_output("\U00E9")`y (birds_mammals_phenophases_locations.csv). The first few rows of the file look like the following, where "n" is the number of years in each series:
 
@@ -79,7 +79,7 @@ spp <- df_birds %>%
 
 ## Taking migratory status/seasonal ranges into account:
 
-In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, calls or song) was observed for a given species at a particular site. If a species does not migrate, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. For migratory species, we used seasonal range maps from [eBird](https://science.ebird.org/en/status-and-trends/range-maps) to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here's an example for ruby-throated hummingbirds::
+In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, nest building) was observed for a given species at a particular site. If a species is a year-round resident, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. In these instances, the first date a phenophase was observed probably tells us more about when observers visited the site than about species ecology. For migratory species, we used seasonal range maps from [eBird](https://science.ebird.org/en/status-and-trends/range-maps) to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here's an example for ruby-throated hummingbirds::
 
 ```{r ebird maps}
 #| code-fold: true
@@ -305,7 +305,9 @@ knitr::kable(x = select(df_birds, -c(group, phenophase_description, n, jan1))[60
 
 We classified phenophases into three "types": phenophases that indicate whether individuals of that species were detected by observers (presence), phenophases that describe a behavior, usually associated with breeding or mating (behavior), and phenophases that describe feeding activities (feeding).
 
-Understanding when species exhibit behaviors associated with breeding or mating and how the timing of these phenophases may shift over time or in response to climate is interesting, regardless of whether the species is migratory or not, and if migratory, when it would be expected to arrive at the site. Thus, it would sense to include all behavior-type phenophases in analyses. In contrast, we are probably only interested in evaluating changes in the first date a species is observed if the species is unlikely to be present at the beginning of the year. So for presence-related phenophases, we may want to exclude series for species that are likely present at that site on January 1st. For feeding-related phenophases, the decision to include or exclude a series is less clear. For now, we might choose to exclude feeding observations for species that are present and active on Jan 1st given that feeding behaviors are unlikely to have strong seasonal signals.
+Understanding when species exhibit behaviors associated with breeding or mating and how the timing of these phenophases may shift over time or in response to climate is of interest, regardless of whether the species is migratory or not. Thus, it seems reasonable to include all behavior-type phenophases in analyses. Similarly, many of the feeding phenophases relate to seasonal resources (e.g., flowers, insects), so it might also make sense to include all of these series in analyses, at least for now.
+
+In contrast, we are probably only interested in evaluating changes in the first date a species is observed if the species is unlikely to be present at the beginning of the year. So for presence-related phenophases, we may want to exclude series for species that are likely present at that site on January 1st. It is worth noting that we are classifying "Calls or song" as a presence-type phenophase, as observers were instructed to record a yes for this phenophase when they heard a species vocalize but did not see it. This phenophase is distinct from "Singing individuals", which is used to record observations of bird vocalizations associated with breeding, mating, or territorial behaviors.
 
 ```{r phenophase-type}
 #| code-fold: true
@@ -315,7 +317,7 @@ df_birds <- df_birds %>%
   mutate(phenophase_type = case_when(
     phenophase_description == "Live individuals" ~ "presence",
     phenophase_description == "Individuals at a feeding station" ~ "presence",
-    phenophase_description == "Calls or song (birds)" ~ "behavior",
+    phenophase_description == "Calls or song (birds)" ~ "presence",
     phenophase_description == "Singing individuals (birds)" ~ "behavior",
     phenophase_description == "Nest building (birds)" ~ "behavior",
     phenophase_description == "Fruit/seed consumption" ~ "feeding",
@@ -326,15 +328,15 @@ df_birds <- df_birds %>%
 
 phpt <- df_birds %>%
   count(phenophase_description, phenophase_type) %>%
-  arrange(factor(phenophase_type, levels = c("behavior", "presence", "feeding"))) %>%
+  arrange(phenophase_type) %>%
   mutate(rule_word = case_when(
-    phenophase_type == "behavior" ~ "Include",
-    .default = "Include if absent on 1 Jan"
+    phenophase_type == "presence" ~ "Include if absent on 1 Jan",
+    .default = "Include"
   ))
 
 df_birds <- df_birds %>%
   mutate(include = case_when(
-    phenophase_type == "behavior" ~ 1,
+    phenophase_type %in% c("behavior", "feeding") ~ 1,
     present_jan1 == 0 ~ 1,
     .default = 0
   ))
@@ -350,7 +352,7 @@ If we use the suggested rules outlined in the table above, we would exclude `r s
 
 ## Removing data series with redundant information:
 
-For some species, there may be instances where a positive observation of one phenophase is usually or always associated with a positive observation of another phenophase. For instance, if an observer reported that there were individuals at a feeding station, they likely also reported that they observed live individuals on the same day. Including data series for both of these phenophases for the same species at the same site is likely to be redundant, and thus, one of the data series should probably be excluded from analyses. That said, all series should be included if there are reasons to believe that information from related series are independent and provide unique insights into species phenology. See specific cases below:
+For some species, there may be instances where a positive observation of one phenophase is usually or always associated with a positive observation of another phenophase. For instance, if an observer reported that there were individuals at a feeding station, they likely also reported that they observed live individuals on the same day. Including data series for both of these phenophases for the same species at the same site is likely to be redundant, and thus, one of the data series should probably be excluded from analyses. That said, all series should be included if there are reasons to believe that information from related series are independent and provide unique insights into species phenology. For some species at particular sites, it may be necessary to evaluate whether the dates in one series are sufficiently different than dates in a related series.
 
 #### Species presence
 
@@ -358,104 +360,36 @@ For some species, there may be instances where a positive observation of one phe
 #| code-fold: true
 
 presence <- include %>%
-  filter(phenophase_description %in% c("Live individuals",
-                                       "Individuals at a feeding station")) %>%
+  filter(phenophase_type == "presence") %>%
   group_by(common_name, site_id) %>%
   summarize(live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
             station = ifelse("Individuals at a feeding station" %in% phenophase_description, 1, 0),
+            calls = ifelse("Calls or song (birds)" %in% phenophase_description, 1, 0),
             .groups = "keep") %>%
   data.frame()
 
-presence_count <- count(presence, live, station)
+presence_count <- count(presence, live, station, calls)
 
+# Remove all "Individuals at feeding station" series since they're always
+# accompanied by "Live individuals" series
 include <- include %>%
   filter(phenophase_description != "Individuals at a feeding station")
-```
 
-For every species-site combination that had a data series for "Individuals at a feeding station" (n = `r presence_count$n[presence_count$live == 1 & presence_count$station == 1]`), there was also a data series for "Live individuals". It seemed reasonable to exclude the `r presence_count$n[presence_count$live == 1 & presence_count$station == 1]` "Individuals at a feeding station" data series from analyses.
-
-#### Vocalizations
-
-```{r vocal-count}
-#| code-fold: true
-
-# Evaluating vocalizing series for same species and site:
-vocal <- include %>%
-  filter(phenophase_description %in% c("Calls or song (birds)",
-                                       "Singing individuals (birds)")) %>%
-  group_by(common_name, site_id) %>%
-  summarize(calls = ifelse("Calls or song (birds)" %in% phenophase_description, 1, 0),
-            indivs = ifelse("Singing individuals (birds)" %in% phenophase_description, 1, 0),
-            .groups = "keep") %>%
-  data.frame()
-
-vocal_count <- count(vocal, calls, indivs)
-
-# For now, keep only one vocalizing series per species-site
-vocal_dups <- vocal %>%
-  filter(calls == 1 & indivs == 1) %>%
+# If a species-site combination has "Calls or song" and "Live individuals",
+# then remove the "Calls or song" series
+presence_dups <- presence %>%
+  filter(calls == 1 & live == 1) %>%
   select(common_name, site_id) %>%
-  mutate(phenophase_description = "Singing individuals (birds)",
+  mutate(phenophase_description = "Calls or song (birds)",
          remove = 1)
 include <- include %>%
-  left_join(vocal_dups, 
+  left_join(presence_dups, 
             by = c("common_name", "site_id", "phenophase_description")) %>%
   filter(is.na(remove)) %>%
   select(-remove)
 ```
 
-There were `r vocal_count$n[vocal_count$calls == 1 & vocal_count$indivs == 1]` species-site combinations that each had "Calls or song (birds)" and "Singing individuals (birds)" series. We excluded "Singing individuals" series when both were available for the same species at the same site.
-
-#### Feeding
-
-```{r feed-count}
-#| code-fold: true
-
-feeding <- include %>%
-  filter(phenophase_type == "feeding") %>%
-  group_by(common_name, site_id) %>%
-  summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
-            fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
-            insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
-            .groups = "keep") %>%
-  data.frame()
-
-feeding_count <- count(feeding, flower, fruit, insect)
-
-# For now, keep only one feeding series per species-site
-feeding_dups <- feeding %>%
-  filter(flower + fruit + insect > 1) %>%
-  select(common_name, site_id) %>%
-  mutate(phenophase_description = "Insect consumption",
-         remove = 1)
-include <- include %>%
-  left_join(feeding_dups, 
-            by = c("common_name", "site_id", "phenophase_description")) %>%
-  filter(is.na(remove)) %>%
-  select(-remove)
-```
-
-There were `r sum(feeding_count$n[rowSums(feeding_count[, 1:3]) > 1])` species-site combinations that each have two feeding-related data series ("Flower visitation" or "Fruit/seed consumption" with "Insection consumption"). We excluded "Insect consumption" series when there was more than one feeding data series for a species and site.
-
-```{r feedingpresence-count}
-#| code-fold: true
-
-feedingpresence <- include %>%
-  filter(phenophase_type == "feeding" | phenophase_description == "Live individuals") %>%
-  group_by(common_name, site_id) %>%
-  summarize(flower = ifelse("Flower visitation" %in% phenophase_description, 1, 0),
-            fruit = ifelse("Fruit/seed consumption" %in% phenophase_description, 1, 0),
-            insect = ifelse("Insect consumption" %in% phenophase_description, 1, 0),
-            live = ifelse("Live individuals" %in% phenophase_description, 1, 0),
-            .groups = "keep") %>%
-  data.frame()  
-
-feedingpresence_count <- count(feedingpresence, live, flower, fruit, insect)
-```
-
-#### Feeding and presence observation redundancies?
-
-It might also be worth exploring whether data series associated with feeding are providing independent information from "Live individuals" data series given that species-site combinations that had a feeding data series always had a "Live observations" data series. For now, we assumed they do provide unique information and did not exclude any data series.
+For every species-site combination that had a data series for "Individuals at a feeding station" (n = `r sum(presence_count$n[presence_count$station == 1])`), there was also a data series for "Live individuals". It seems reasonable to exclude the `r sum(presence_count$n[presence_count$station == 1])` "Individuals at a feeding station" data series from analyses. There were also `r sum(presence_count$n[presence_count$calls == 1 & presence_count$live == 1])` species-site combinations that had both "Live individuals" and "Calls or song" series. Here, we might suggest removing the "Calls or song" series since it is likely to provide the same, or very similar, information to that contained in the "Live individuals" series.
 
 ## Summary of remaining data series
 
@@ -492,7 +426,7 @@ php_include <- include %>%
   data.frame()
 ```
 
-After considering location, migratory status, phenophase type, and potential redundancies, there are fewer data series available to assess changes in phenology. Of `r nrow(df_birds)` series with bird data, we retained only `r sum(df_birds$include2)` series that provide unique information about species phenology. The remaining series represent `r nrow(spp_include)` species, (`r sum(spp_include$resident == FALSE)` of which are migratory, `r sum(spp_include$resident == TRUE)` are residents), `r n_distinct(include$site_id)` sites, and `r nrow(php_include)` phenophases. (Note: if feeding series do not provide information beyond that contained in "Live individual" series from the same species and site, then we are left with just `r sum(df_birds$include2[df_birds$phenophase_type != "feeding"])` series)
+After considering location, migratory status, phenophase type, and potential redundancies, there are fewer data series that provide unique information to assess changes in phenology. If we adopted all the suggested filters described above, we would retain only `r sum(df_birds$include2)` of the `r nrow(df_birds)` potential series. The remaining series represent `r nrow(spp_include)` species, (`r sum(spp_include$resident == FALSE)` of which are migratory, `r sum(spp_include$resident == TRUE)` are residents), `r n_distinct(include$site_id)` sites, and `r nrow(php_include)` phenophases.
 
 ```{r}
 #| label: spp-include
@@ -516,4 +450,4 @@ knitr::kable(php_include,
 ```
 
 \
-Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence \[and maybe feeding?\] phenophases) and those that indicate when mating or breeding activities commence (behavior phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in each of these groups separately.
+Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.

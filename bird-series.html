@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Erin Zylstra">
-<meta name="dcterms.date" content="2025-03-21">
+<meta name="dcterms.date" content="2025-03-24">
 
 <title>Exploration of bird data for USGS analysis</title>
 <style>
@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 21, 2025</p>
+      <p class="date">March 24, 2025</p>
     </div>
   </div>
   
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to “series” of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether all series (all combinations of species, sites, and phenophases) should be included in analyses or whether some of the series are best excluded from analyses. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the series is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different “types” of phenophaes or whether all phenophases could be grouped together.</p>
+<p>This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to “series” of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) is needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different “types” of phenophaes or whether all phenophases could be grouped together.</p>
 <p>Information about series of bird observations with at least nine years of data that could potentially be included in analyses come from an internal file created by Janet Prevéy (birds_mammals_phenophases_locations.csv). The first few rows of the file look like the following, where “n” is the number of years in each series:</p>
 <div class="cell">
 <details class="code-fold">
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="taking-migratory-statusseasonal-ranges-into-account" class="level2">
 <h2 class="anchored" data-anchor-id="taking-migratory-statusseasonal-ranges-into-account">Taking migratory status/seasonal ranges into account:</h2>
-<p>In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, calls or song) was observed for a given species at a particular site. If a species does not migrate, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. For migratory species, we used seasonal range maps from <a href="https://science.ebird.org/en/status-and-trends/range-maps">eBird</a> to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here’s an example for ruby-throated hummingbirds::</p>
+<p>In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, nest building) was observed for a given species at a particular site. If a species is a year-round resident, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. In these instances, the first date a phenophase was observed probably tells us more about when observers visited the site than about species ecology. For migratory species, we used seasonal range maps from <a href="https://science.ebird.org/en/status-and-trends/range-maps">eBird</a> to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here’s an example for ruby-throated hummingbirds::</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -530,7 +530,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="taking-phenophase-type-into-account" class="level2">
 <h2 class="anchored" data-anchor-id="taking-phenophase-type-into-account">Taking phenophase “type” into account:</h2>
 <p>We classified phenophases into three “types”: phenophases that indicate whether individuals of that species were detected by observers (presence), phenophases that describe a behavior, usually associated with breeding or mating (behavior), and phenophases that describe feeding activities (feeding).</p>
-<p>Understanding when species exhibit behaviors associated with breeding or mating and how the timing of these phenophases may shift over time or in response to climate is interesting, regardless of whether the species is migratory or not, and if migratory, when it would be expected to arrive at the site. Thus, it would sense to include all behavior-type phenophases in analyses. In contrast, we are probably only interested in evaluating changes in the first date a species is observed if the species is unlikely to be present at the beginning of the year. So for presence-related phenophases, we may want to exclude series for species that are likely present at that site on January 1st. For feeding-related phenophases, the decision to include or exclude a series is less clear. For now, we might choose to exclude feeding observations for species that are present and active on Jan 1st given that feeding behaviors are unlikely to have strong seasonal signals.</p>
+<p>Understanding when species exhibit behaviors associated with breeding or mating and how the timing of these phenophases may shift over time or in response to climate is of interest, regardless of whether the species is migratory or not. Thus, it seems reasonable to include all behavior-type phenophases in analyses. Similarly, many of the feeding phenophases relate to seasonal resources (e.g., flowers, insects), so it might also make sense to include all of these series in analyses, at least for now.</p>
+<p>In contrast, we are probably only interested in evaluating changes in the first date a species is observed if the species is unlikely to be present at the beginning of the year. So for presence-related phenophases, we may want to exclude series for species that are likely present at that site on January 1st. It is worth noting that we are classifying “Calls or song” as a presence-type phenophase, as observers were instructed to record a yes for this phenophase when they heard a species vocalize but did not see it. This phenophase is distinct from “Singing individuals”, which is used to record observations of bird vocalizations associated with breeding, mating, or territorial behaviors.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -539,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phenophase_type =</span> <span class="fu">case_when</span>(</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Live individuals"</span> <span class="sc">~</span> <span class="st">"presence"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Individuals at a feeding station"</span> <span class="sc">~</span> <span class="st">"presence"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Calls or song (birds)"</span> <span class="sc">~</span> <span class="st">"behavior"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Calls or song (birds)"</span> <span class="sc">~</span> <span class="st">"presence"</span>,</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Singing individuals (birds)"</span> <span class="sc">~</span> <span class="st">"behavior"</span>,</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Nest building (birds)"</span> <span class="sc">~</span> <span class="st">"behavior"</span>,</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    phenophase_description <span class="sc">==</span> <span class="st">"Fruit/seed consumption"</span> <span class="sc">~</span> <span class="st">"feeding"</span>,</span>
@@ -550,15 +551,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>phpt <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(phenophase_description, phenophase_type) <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">factor</span>(phenophase_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"behavior"</span>, <span class="st">"presence"</span>, <span class="st">"feeding"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(phenophase_type) <span class="sc">%&gt;%</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rule_word =</span> <span class="fu">case_when</span>(</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    phenophase_type <span class="sc">==</span> <span class="st">"behavior"</span> <span class="sc">~</span> <span class="st">"Include"</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">"Include if absent on 1 Jan"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    phenophase_type <span class="sc">==</span> <span class="st">"presence"</span> <span class="sc">~</span> <span class="st">"Include if absent on 1 Jan"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">"Include"</span></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>df_birds <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span></span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">include =</span> <span class="fu">case_when</span>(</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    phenophase_type <span class="sc">==</span> <span class="st">"behavior"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    phenophase_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"behavior"</span>, <span class="st">"feeding"</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    present_jan1 <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="dv">0</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  ))</span>
@@ -586,51 +587,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Calls or song (birds)</td>
-<td style="text-align: left;">behavior</td>
-<td style="text-align: center;">135</td>
-<td style="text-align: left;">Include</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Nest building (birds)</td>
 <td style="text-align: left;">behavior</td>
 <td style="text-align: center;">7</td>
 <td style="text-align: left;">Include</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Singing individuals (birds)</td>
 <td style="text-align: left;">behavior</td>
 <td style="text-align: center;">40</td>
 <td style="text-align: left;">Include</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">Flower visitation</td>
+<td style="text-align: left;">feeding</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: left;">Include</td>
+</tr>
 <tr class="even">
+<td style="text-align: left;">Fruit/seed consumption</td>
+<td style="text-align: left;">feeding</td>
+<td style="text-align: center;">46</td>
+<td style="text-align: left;">Include</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Insect consumption</td>
+<td style="text-align: left;">feeding</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: left;">Include</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Calls or song (birds)</td>
+<td style="text-align: left;">presence</td>
+<td style="text-align: center;">135</td>
+<td style="text-align: left;">Include if absent on 1 Jan</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Individuals at a feeding station</td>
 <td style="text-align: left;">presence</td>
 <td style="text-align: center;">67</td>
 <td style="text-align: left;">Include if absent on 1 Jan</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Live individuals</td>
 <td style="text-align: left;">presence</td>
 <td style="text-align: center;">193</td>
-<td style="text-align: left;">Include if absent on 1 Jan</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Flower visitation</td>
-<td style="text-align: left;">feeding</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: left;">Include if absent on 1 Jan</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fruit/seed consumption</td>
-<td style="text-align: left;">feeding</td>
-<td style="text-align: center;">46</td>
-<td style="text-align: left;">Include if absent on 1 Jan</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Insect consumption</td>
-<td style="text-align: left;">feeding</td>
-<td style="text-align: center;">23</td>
 <td style="text-align: left;">Include if absent on 1 Jan</td>
 </tr>
 </tbody>
@@ -638,115 +639,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><br>
-If we use the suggested rules outlined in the table above, we would exclude 276 series, leaving 246 series still in consideration.</p>
+If we use the suggested rules outlined in the table above, we would exclude 309 series, leaving 213 series still in consideration.</p>
 </section>
 <section id="removing-data-series-with-redundant-information" class="level2">
 <h2 class="anchored" data-anchor-id="removing-data-series-with-redundant-information">Removing data series with redundant information:</h2>
-<p>For some species, there may be instances where a positive observation of one phenophase is usually or always associated with a positive observation of another phenophase. For instance, if an observer reported that there were individuals at a feeding station, they likely also reported that they observed live individuals on the same day. Including data series for both of these phenophases for the same species at the same site is likely to be redundant, and thus, one of the data series should probably be excluded from analyses. That said, all series should be included if there are reasons to believe that information from related series are independent and provide unique insights into species phenology. See specific cases below:</p>
+<p>For some species, there may be instances where a positive observation of one phenophase is usually or always associated with a positive observation of another phenophase. For instance, if an observer reported that there were individuals at a feeding station, they likely also reported that they observed live individuals on the same day. Including data series for both of these phenophases for the same species at the same site is likely to be redundant, and thus, one of the data series should probably be excluded from analyses. That said, all series should be included if there are reasons to believe that information from related series are independent and provide unique insights into species phenology. For some species at particular sites, it may be necessary to evaluate whether the dates in one series are sufficiently different than dates in a related series.</p>
 <section id="species-presence" class="level4">
 <h4 class="anchored" data-anchor-id="species-presence">Species presence</h4>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>presence <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_description <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Live individuals"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Individuals at a feeding station"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">live =</span> <span class="fu">ifelse</span>(<span class="st">"Live individuals"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">station =</span> <span class="fu">ifelse</span>(<span class="st">"Individuals at a feeding station"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_type <span class="sc">==</span> <span class="st">"presence"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">live =</span> <span class="fu">ifelse</span>(<span class="st">"Live individuals"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">station =</span> <span class="fu">ifelse</span>(<span class="st">"Individuals at a feeding station"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">calls =</span> <span class="fu">ifelse</span>(<span class="st">"Calls or song (birds)"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>presence_count <span class="ot">&lt;-</span> <span class="fu">count</span>(presence, live, station)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>presence_count <span class="ot">&lt;-</span> <span class="fu">count</span>(presence, live, station, calls)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_description <span class="sc">!=</span> <span class="st">"Individuals at a feeding station"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all "Individuals at feeding station" series since they're always</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># accompanied by "Live individuals" series</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_description <span class="sc">!=</span> <span class="st">"Individuals at a feeding station"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># If a species-site combination has "Calls or song" and "Live individuals",</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># then remove the "Calls or song" series</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>presence_dups <span class="ot">&lt;-</span> presence <span class="sc">%&gt;%</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(calls <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> live <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phenophase_description =</span> <span class="st">"Calls or song (birds)"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove =</span> <span class="dv">1</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(presence_dups, </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name"</span>, <span class="st">"site_id"</span>, <span class="st">"phenophase_description"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(remove)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>remove)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>For every species-site combination that had a data series for “Individuals at a feeding station” (n = 10), there was also a data series for “Live individuals”. It seemed reasonable to exclude the 10 “Individuals at a feeding station” data series from analyses.</p>
-</section>
-<section id="vocalizations" class="level4">
-<h4 class="anchored" data-anchor-id="vocalizations">Vocalizations</h4>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluating vocalizing series for same species and site:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vocal <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_description <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Calls or song (birds)"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Singing individuals (birds)"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">calls =</span> <span class="fu">ifelse</span>(<span class="st">"Calls or song (birds)"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">indivs =</span> <span class="fu">ifelse</span>(<span class="st">"Singing individuals (birds)"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>vocal_count <span class="ot">&lt;-</span> <span class="fu">count</span>(vocal, calls, indivs)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># For now, keep only one vocalizing series per species-site</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>vocal_dups <span class="ot">&lt;-</span> vocal <span class="sc">%&gt;%</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(calls <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> indivs <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phenophase_description =</span> <span class="st">"Singing individuals (birds)"</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove =</span> <span class="dv">1</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(vocal_dups, </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name"</span>, <span class="st">"site_id"</span>, <span class="st">"phenophase_description"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(remove)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>remove)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>There were 39 species-site combinations that each had “Calls or song (birds)” and “Singing individuals (birds)” series. We excluded “Singing individuals” series when both were available for the same species at the same site.</p>
-</section>
-<section id="feeding" class="level4">
-<h4 class="anchored" data-anchor-id="feeding">Feeding</h4>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>feeding <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_type <span class="sc">==</span> <span class="st">"feeding"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">flower =</span> <span class="fu">ifelse</span>(<span class="st">"Flower visitation"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">fruit =</span> <span class="fu">ifelse</span>(<span class="st">"Fruit/seed consumption"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">insect =</span> <span class="fu">ifelse</span>(<span class="st">"Insect consumption"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>feeding_count <span class="ot">&lt;-</span> <span class="fu">count</span>(feeding, flower, fruit, insect)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># For now, keep only one feeding series per species-site</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>feeding_dups <span class="ot">&lt;-</span> feeding <span class="sc">%&gt;%</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flower <span class="sc">+</span> fruit <span class="sc">+</span> insect <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">phenophase_description =</span> <span class="st">"Insect consumption"</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">remove =</span> <span class="dv">1</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(feeding_dups, </span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name"</span>, <span class="st">"site_id"</span>, <span class="st">"phenophase_description"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(remove)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>remove)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>There were 3 species-site combinations that each have two feeding-related data series (“Flower visitation” or “Fruit/seed consumption” with “Insection consumption”). We excluded “Insect consumption” series when there was more than one feeding data series for a species and site.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>feedingpresence <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_type <span class="sc">==</span> <span class="st">"feeding"</span> <span class="sc">|</span> phenophase_description <span class="sc">==</span> <span class="st">"Live individuals"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, site_id) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">flower =</span> <span class="fu">ifelse</span>(<span class="st">"Flower visitation"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">fruit =</span> <span class="fu">ifelse</span>(<span class="st">"Fruit/seed consumption"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">insect =</span> <span class="fu">ifelse</span>(<span class="st">"Insect consumption"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">live =</span> <span class="fu">ifelse</span>(<span class="st">"Live individuals"</span> <span class="sc">%in%</span> phenophase_description, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()  </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>feedingpresence_count <span class="ot">&lt;-</span> <span class="fu">count</span>(feedingpresence, live, flower, fruit, insect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="feeding-and-presence-observation-redundancies" class="level4">
-<h4 class="anchored" data-anchor-id="feeding-and-presence-observation-redundancies">Feeding and presence observation redundancies?</h4>
-<p>It might also be worth exploring whether data series associated with feeding are providing independent information from “Live individuals” data series given that species-site combinations that had a feeding data series always had a “Live observations” data series. For now, we assumed they do provide unique information and did not exclude any data series.</p>
+<p>For every species-site combination that had a data series for “Individuals at a feeding station” (n = 10), there was also a data series for “Live individuals”. It seems reasonable to exclude the 10 “Individuals at a feeding station” data series from analyses. There were also 22 species-site combinations that had both “Live individuals” and “Calls or song” series. Here, we might suggest removing the “Calls or song” series since it is likely to provide the same, or very similar, information to that contained in the “Live individuals” series.</p>
 </section>
 </section>
 <section id="summary-of-remaining-data-series" class="level2">
@@ -754,37 +687,37 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create "include2" variable to indicate whether a series should be included in analyses after </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># accounting for all factors</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">include2 =</span> include)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>df_birds <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">select</span>(include, common_name, site_id, phenophase_description, include2),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name"</span>, <span class="st">"site_id"</span>, <span class="st">"phenophase_description"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">include2 =</span> <span class="fu">replace_na</span>(include2, <span class="at">replace =</span> <span class="dv">0</span>))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize by species</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>spp_include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, resident) <span class="sc">%&gt;%</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_series =</span> <span class="fu">n</span>(),</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_sites =</span> <span class="fu">n_distinct</span>(site_id),</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_php_types =</span> <span class="fu">n_distinct</span>(phenophase_type),</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_php =</span> <span class="fu">n_distinct</span>(phenophase_description),</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(common_name, <span class="at">.locale =</span> <span class="st">"en"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>php_include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(phenophase_type, phenophase_description) <span class="sc">%&gt;%</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_series =</span> <span class="fu">n</span>(),</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_spp =</span> <span class="fu">n_distinct</span>(common_name),</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_sites =</span> <span class="fu">n_distinct</span>(site_id),</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">factor</span>(phenophase_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"presence"</span>, <span class="st">"behavior"</span>, <span class="st">"feeding"</span>)), <span class="fu">desc</span>(n_series)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create "include2" variable to indicate whether a series should be included in analyses after </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># accounting for all factors</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">include2 =</span> include)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_birds <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">select</span>(include, common_name, site_id, phenophase_description, include2),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name"</span>, <span class="st">"site_id"</span>, <span class="st">"phenophase_description"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">include2 =</span> <span class="fu">replace_na</span>(include2, <span class="at">replace =</span> <span class="dv">0</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize by species</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>spp_include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(common_name, resident) <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_series =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_sites =</span> <span class="fu">n_distinct</span>(site_id),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_php_types =</span> <span class="fu">n_distinct</span>(phenophase_type),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_php =</span> <span class="fu">n_distinct</span>(phenophase_description),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(common_name, <span class="at">.locale =</span> <span class="st">"en"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>php_include <span class="ot">&lt;-</span> include <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(phenophase_type, phenophase_description) <span class="sc">%&gt;%</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_series =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_spp =</span> <span class="fu">n_distinct</span>(common_name),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_sites =</span> <span class="fu">n_distinct</span>(site_id),</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">factor</span>(phenophase_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"presence"</span>, <span class="st">"behavior"</span>, <span class="st">"feeding"</span>)), <span class="fu">desc</span>(n_series)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>After considering location, migratory status, phenophase type, and potential redundancies, there are fewer data series available to assess changes in phenology. Of 522 series with bird data, we retained only 194 series that provide unique information about species phenology. The remaining series represent 63 species, (48 of which are migratory, 15 are residents), 38 sites, and 7 phenophases. (Note: if feeding series do not provide information beyond that contained in “Live individual” series from the same species and site, then we are left with just 185 series)</p>
+<p>After considering location, migratory status, phenophase type, and potential redundancies, there are fewer data series that provide unique information to assess changes in phenology. If we adopted all the suggested filters described above, we would retain only 181 of the 522 potential series. The remaining series represent 52 species, (41 of which are migratory, 11 are residents), 38 sites, and 7 phenophases.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -811,28 +744,20 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <tr class="odd">
 <td style="text-align: left;">acorn woodpecker</td>
 <td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">6</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">American crow</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">American goldfinch</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">American redstart</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">1</td>
@@ -840,15 +765,15 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">American robin</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">18</td>
-<td style="text-align: center;">11</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">10</td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">American woodcock</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">1</td>
@@ -856,23 +781,23 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Anna’s hummingbird</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Baltimore oriole</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">barn swallow</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">4</td>
@@ -880,32 +805,8 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">black phoebe</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">black-capped chickadee</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">black-chinned hummingbird</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">black-throated green warbler</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">3</td>
@@ -913,22 +814,46 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">black-capped chickadee</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">black-chinned hummingbird</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">black-throated green warbler</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">blue jay</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">6</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">broad-tailed hummingbird</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
 <td style="text-align: center;">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">broad-winged hawk</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">1</td>
@@ -936,17 +861,9 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">brown-headed cowbird</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">California scrub-jay</td>
-<td style="text-align: center;">TRUE</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
@@ -961,44 +878,28 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">California towhee</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Carolina chickadee</td>
 <td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Carolina wren</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">4</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">cedar waxwing</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: left;">Carolina wren</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">chimney swift</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">cliff swallow</td>
@@ -1011,18 +912,18 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <tr class="even">
 <td style="text-align: left;">common loon</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">5</td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">common nighthawk</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">common yellowthroat</td>
@@ -1035,34 +936,34 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <tr class="odd">
 <td style="text-align: left;">curve-billed thrasher</td>
 <td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">dark-eyed junco</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">downy woodpecker</td>
 <td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">eastern bluebird</td>
 <td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">eastern phoebe</td>
@@ -1073,23 +974,7 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">European starling</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">gray catbird</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">great blue heron</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
@@ -1099,18 +984,18 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <tr class="odd">
 <td style="text-align: left;">hooded warbler</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">house sparrow</td>
 <td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">house wren</td>
@@ -1123,9 +1008,9 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <tr class="even">
 <td style="text-align: left;">killdeer</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3</td>
 <td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
@@ -1137,38 +1022,30 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">mallard</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">mourning dove</td>
 <td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">northern cardinal</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">10</td>
 <td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">northern mockingbird</td>
+<td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">northern cardinal</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">northern mockingbird</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">northern parula</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">1</td>
@@ -1176,7 +1053,7 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">oak titmouse</td>
 <td style="text-align: center;">TRUE</td>
 <td style="text-align: center;">1</td>
@@ -1184,47 +1061,47 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">osprey</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">red-eyed vireo</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">red-winged blackbird</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">4</td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">red-winged blackbird</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ruby-crowned kinglet</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ruby-throated hummingbird</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">ruby-throated hummingbird</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">rufous hummingbird</td>
 <td style="text-align: center;">FALSE</td>
 <td style="text-align: center;">2</td>
@@ -1232,53 +1109,29 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">sandhill crane</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">song sparrow</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">spotted sandpiper</td>
+<td style="text-align: left;">song sparrow</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">tree swallow</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">tufted titmouse</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">verdin</td>
-<td style="text-align: center;">TRUE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">western bluebird</td>
@@ -1289,14 +1142,6 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">3</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">white-throated sparrow</td>
-<td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">wrentit</td>
 <td style="text-align: center;">TRUE</td>
 <td style="text-align: center;">1</td>
@@ -1304,11 +1149,11 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">yellow-rumped warbler</td>
 <td style="text-align: center;">FALSE</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">1</td>
 </tr>
@@ -1345,53 +1190,53 @@ If we use the suggested rules outlined in the table above, we would exclude 276 
 <td style="text-align: center;">20</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">behavior</td>
+<td style="text-align: left;">presence</td>
 <td style="text-align: left;">Calls or song (birds)</td>
-<td style="text-align: center;">135</td>
-<td style="text-align: center;">58</td>
-<td style="text-align: center;">36</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">behavior</td>
+<td style="text-align: left;">Singing individuals (birds)</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">18</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">behavior</td>
 <td style="text-align: left;">Nest building (birds)</td>
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">6</td>
 <td style="text-align: center;">4</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">feeding</td>
+<td style="text-align: left;">Fruit/seed consumption</td>
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;">behavior</td>
-<td style="text-align: left;">Singing individuals (birds)</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: left;">feeding</td>
+<td style="text-align: left;">Insect consumption</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">13</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">feeding</td>
 <td style="text-align: left;">Flower visitation</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">6</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">feeding</td>
-<td style="text-align: left;">Fruit/seed consumption</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">feeding</td>
-<td style="text-align: left;">Insect consumption</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">10</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p><br>
-Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence [and maybe feeding?] phenophases) and those that indicate when mating or breeding activities commence (behavior phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in each of these groups separately.</p>
+Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.</p>
 </section>
 
 </main>
