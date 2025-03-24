@@ -1,0 +1,28 @@
+common_name,site_id,latitude,longitude,genus,species,seasonally_inactive,source,notes
+California ground squirrel,6082,34.031742,-118.812462,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
+California ground squirrel,6091,34.11578,-118.757507,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
+California ground squirrel,6100,34.118332,-118.758636,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
+eastern chipmunk,1419,42.011166,-88.503304,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
+eastern chipmunk,6581,42.545959,-71.354904,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
+eastern chipmunk,10145,42.602543,-83.250992,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
+eastern cottontail,8496,46.328629,-96.061256,Sylvilagus,floridanus,no,Peterson; ADW,Can breed year-round in south
+eastern cottontail,10145,42.602543,-83.250992,Sylvilagus,floridanus,no,Peterson; ADW,Can breed year-round in south
+eastern gray squirrel,6581,42.545959,-71.354904,Sciurus,carolinensis,no,Peterson; ADW,
+eastern gray squirrel,8418,32.363758,-94.873947,Sciurus,carolinensis,no,Peterson; ADW,
+eastern gray squirrel,8496,46.328629,-96.061256,Sciurus,carolinensis,no,Peterson; ADW,
+eastern gray squirrel,10145,42.602543,-83.250992,Sciurus,carolinensis,no,Peterson; ADW,
+elk,2803,39.971001,-105.397003,Cervus,elaphus,no,Peterson; ADW,"Found at higher elevations during summer, and migrating to lower elevations during winter"
+fox squirrel,101,37.169998,-98.029999,Sciurus,niger,no,Peterson; ADW,
+fox squirrel,10145,42.602543,-83.250992,Sciurus,niger,no,Peterson; ADW,
+least chipmunk,2803,39.971001,-105.397003,Tamias,minimus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
+mountain cottontail,2803,39.971001,-105.397003,Sylvilagus,nuttallii,no,Peterson; ADW,
+mule deer,2803,39.971001,-105.397003,Odocoileus,hemionus,no,Peterson; ADW,"Will migrate seasonally (lower elevations in winter, or in response to rainfall in the west)"
+mule deer,8242,31.596231,-110.575493,Odocoileus,hemionus,no,Peterson; ADW,"Will migrate seasonally (lower elevations in winter, or in response to rainfall in the west)"
+mule deer,10717,38.285664,-111.246605,Odocoileus,hemionus,no,Peterson; ADW,"Will migrate seasonally (lower elevations in winter, or in response to rainfall in the west)"
+red squirrel,8496,46.328629,-96.061256,Tamiasciurus,hudsonicus,no,Peterson; ADW,
+red squirrel,10145,42.602543,-83.250992,Tamiasciurus,hudsonicus,no,Peterson; ADW,
+white-tailed deer,6362,43.012966,-73.649918,Odocoileus,virginianus,no,Peterson; ADW,Do not migrate
+white-tailed deer,6581,42.545959,-71.354904,Odocoileus,virginianus,no,Peterson; ADW,Do not migrate
+white-tailed deer,10145,42.602543,-83.250992,Odocoileus,virginianus,no,Peterson; ADW,Do not migrate
+woodchuck,10145,42.602543,-83.250992,Marmota,monax,hibernate,Peterson; ADW,"Hibernate in north, but may be active year-round in south"
+yellow-bellied marmot,10717,38.285664,-111.246605,Marmota,flaviventris,hibernate,Peterson; ADW,
