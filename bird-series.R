@@ -307,6 +307,13 @@ df_birds <- df_birds %>%
     .default = NA
   ))
 
+# Suggestions for including/excluding series in analyses ----------------------#
+
+# If phenophase is a behavior: include
+# If phenophase is related to feeding: include (see emails from Ellen)
+# If phenophase indicates presence: include migratory species that should not be
+  # at that location at the start of the year
+
 phpt <- df_birds %>%
   count(phenophase_description, phenophase_type) %>%
   arrange(phenophase_type) %>%
@@ -314,15 +321,6 @@ phpt <- df_birds %>%
     phenophase_type == "presence" ~ "Include if absent on 1 Jan",
     .default = "Include"
   ))
-
-
-
-# Suggestions for including/excluding series in analyses ----------------------#
-
-# If phenophase is a behavior: include
-# If phenophase is related to feeding: include (see emails from Ellen)
-# If phenophase indicates presence: include migratory species that should not be
-  # at that location at the start of the year
 
 df_birds <- df_birds %>%
   mutate(include = case_when(
