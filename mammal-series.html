@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Erin Zylstra">
-<meta name="dcterms.date" content="2025-03-24">
+<meta name="dcterms.date" content="2025-03-26">
 
 <title>Exploration of mammal data for USGS analysis</title>
 <style>
@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2025</p>
+      <p class="date">March 26, 2025</p>
     </div>
   </div>
   
@@ -290,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">6082</td>
 <td style="text-align: center;">34.03174</td>
 <td style="text-align: center;">-118.81246</td>
-<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">eastern chipmunk</td>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><br>
-If we use the suggested rules outlined in the table above, we would exclude 31 series, leaving 37 series still in consideration.</p>
+If we use the suggested rules outlined in the table above, we would exclude 35 series, leaving 33 series still in consideration.</p>
 </section>
 <section id="removing-data-series-with-redundant-information" class="level2">
 <h2 class="anchored" data-anchor-id="removing-data-series-with-redundant-information">Removing data series with redundant information:</h2>
@@ -465,7 +465,7 @@ If we use the suggested rules outlined in the table above, we would exclude 31 s
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phenophase_description <span class="sc">!=</span> <span class="st">"Feeding"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>There were a total of 5 “Feeding” series for species at sites where they were not active year-round. All of these series had an accompanying “Live individuals” series which probably contains the same, or very similar, information about species phenology.</p>
+<p>There were a total of 4 “Feeding” series for species at sites where they were not active year-round. All of these series had an accompanying “Live individuals” series which probably contains the same, or very similar, information about species phenology.</p>
 </section>
 <section id="summary-of-remaining-data-series" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-remaining-data-series">Summary of remaining data series</h2>
@@ -509,7 +509,7 @@ If we use the suggested rules outlined in the table above, we would exclude 31 s
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>After considering seasonal activity patterns, phenophase type, and potential redundancies, there are fewer data series that provide unique information to assess changes in phenology. If we adopted all the suggested filters described above, we would retain only 32 of the 68 potential series. The remaining series represent 13 species, (8 of which are active year round), 12 sites, and 6 phenophases.</p>
+<p>After considering seasonal activity patterns, phenophase type, and potential redundancies, there are fewer data series that provide unique information to assess changes in phenology. If we adopted all the suggested filters described above, we would retain only 29 of the 68 potential series. The remaining series represent 13 species, (9 of which are active year round), 10 sites, and 6 phenophases.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -535,11 +535,11 @@ If we use the suggested rules outlined in the table above, we would exclude 31 s
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">California ground squirrel</td>
-<td style="text-align: center;">hibernate</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">active</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">eastern chipmunk</td>
@@ -700,9 +700,9 @@ If we use the suggested rules outlined in the table above, we would exclude 31 s
 <tr class="even">
 <td style="text-align: left;">activity</td>
 <td style="text-align: left;">Live individuals</td>
-<td style="text-align: center;">9</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: center;">5</td>
-<td style="text-align: center;">8</td>
 </tr>
 </tbody>
 </table>

@@ -48,6 +48,7 @@ df_mammals %>%
 # MammalBase, and IUCN). Extracting information about seasonal activity from:
   # Mammals of North America - Peterson Field Guide 2006 edition
   # Animal Diversity Web (University of Michigan; animaldiversity.org)
+# Additional input from E. Posthumus
 
 # Write species-site combinations to file:
 mammals_file <- "data/mammal_species.csv"

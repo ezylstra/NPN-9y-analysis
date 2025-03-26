@@ -1,7 +1,7 @@
 common_name,site_id,latitude,longitude,genus,species,seasonally_inactive,source,notes
-California ground squirrel,6082,34.031742,-118.812462,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
-California ground squirrel,6091,34.11578,-118.757507,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
-California ground squirrel,6100,34.118332,-118.758636,Otospermophilus,beecheyi,hibernate,Peterson; ADW,Young may not hibernate
+California ground squirrel,6082,34.031742,-118.812462,Otospermophilus,beecheyi,no,Peterson; ADW; EP,"Individuals, especially young, may not hibernate in south part of range"
+California ground squirrel,6091,34.11578,-118.757507,Otospermophilus,beecheyi,no,Peterson; ADW; EP,"Individuals, especially young, may not hibernate in south part of range"
+California ground squirrel,6100,34.118332,-118.758636,Otospermophilus,beecheyi,no,Peterson; ADW; EP,"Individuals, especially young, may not hibernate in south part of range"
 eastern chipmunk,1419,42.011166,-88.503304,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
 eastern chipmunk,6581,42.545959,-71.354904,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
 eastern chipmunk,10145,42.602543,-83.250992,Tamias,striatus,torpor,Peterson; ADW,"Enter torpor, but do not hibernate. Can occasionally be active on warm winter days"
