@@ -29,7 +29,7 @@ library(cowplot)
 
 ## Overview
 
-This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to "series" of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) is needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different "types" of phenophaes or whether all phenophases could be grouped together.
+This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to "series" of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) might be needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time at which a phenophase is first observed should be evaluated separately for different "types" of phenophaes or whether all phenophases could be grouped together.
 
 Information about series of bird observations with at least nine years of data that could potentially be included in analyses come from an internal file created by Janet Prev`r knitr::asis_output("\U00E9")`y (birds_mammals_phenophases_locations.csv). The first few rows of the file look like the following, where "n" is the number of years in each series:
 
@@ -44,7 +44,7 @@ knitr::kable(head(select(df, -group), align = "r"))
 
 #### Modifications to data file
 
-Before evaluating the series, we needed a little clean up to remove mammal species, remove one amphibian (spring peeper), classify oak titmouse and tufted titmouse as birds, and correct the spelling of gray catbird.
+Before evaluating the series, we needed a little clean up to remove mammal species, remove one amphibian (spring peeper), classify oak titmouse and tufted titmouse as birds and not mammals, and correct the spelling of gray catbird.
 
 ```{r}
 #| code-fold: true
@@ -107,6 +107,7 @@ birds <- birds %>%
   left_join(ebirds, by = c("common_name_l" = "common_name"))
 
 # Download range maps for non-resident NPN bird species
+# (commented out after running the first time to avoid running through all species)
   # for (spp6 in birds$species_code[birds$is_resident == FALSE]) {
   #   ebirdst_download_status(species = spp6,
   #                           path = ebird_path,
@@ -202,7 +203,7 @@ for (i in 1:nrow(birds)) {
 ```
 
 ```{r RTHU-map}
-#| fig-cap: Seasonal range maps for ruby-throated hummingbirds based on observations submitted to eBird. Black dots denote sites where the species was observed (via USA-NPN's Nature's Notebook) for nine or more years.
+#| fig-cap: Seasonal range maps for ruby-throated hummingbirds based on observations submitted to eBird. Black dots denote sites where the species was observed (via USA-NPN Nature's Notebook) for nine or more years.
 #| fig-width: 12
 #| fig-height: 12
 #| echo: false
@@ -210,7 +211,7 @@ for (i in 1:nrow(birds)) {
 maps
 ```
 
-For each species, we determined which season (breeding, nonbreeding, pre-breeding migration, post-breeding migration) overlapped January 1st. Then, by inspecting which sites fall within the range map for that season, we determined whether the species was likely to be present at that site at the beginning of the year ("Present on Jan 1" variable in table excerpt below):
+For each species, we determined which season (breeding, nonbreeding, pre-breeding migration, post-breeding migration) overlapped January 1st. Then, by inspecting whether a site was located within the expected range for that season, we determined whether the species was likely to be present at that site at the beginning of the year ("Present on Jan 1" variable in table excerpt below):
 
 ```{r present-jan1}
 #| code-fold: true
@@ -450,4 +451,4 @@ knitr::kable(php_include,
 ```
 
 \
-Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.
+Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.

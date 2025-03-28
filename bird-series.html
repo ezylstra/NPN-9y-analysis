@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Erin Zylstra">
-<meta name="dcterms.date" content="2025-03-24">
+<meta name="dcterms.date" content="2025-03-28">
 
 <title>Exploration of bird data for USGS analysis</title>
 <style>
@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2025</p>
+      <p class="date">March 28, 2025</p>
     </div>
   </div>
   
@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to “series” of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) is needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time had which a phenophase is first observed should be evaluated separately for different “types” of phenophaes or whether all phenophases could be grouped together.</p>
+<p>This analyses uses the first observations of plant or animal phenophases in a given year to evaluate trends and/or identify the effect of climate on phenology. Data were limited to “series” of observations of the same plant or the same animal species at the same site over nine or more years since 2009. Here, we looked closely at observations of birds and evaluated whether any filtering of series (all combinations of species, sites, and phenophases) might be needed before analyses are conducted. We might exclude a series because we do not expect a seasonal signal in the time at which that phenophase occurs (e.g., the species may be a resident, and thus, observations of live individuals are expected throughout the year) or because the information is redundant with another series in the analysis (e.g., similar or nested phenophase for the same species and site). We also evaluated whether changes in the time at which a phenophase is first observed should be evaluated separately for different “types” of phenophaes or whether all phenophases could be grouped together.</p>
 <p>Information about series of bird observations with at least nine years of data that could potentially be included in analyses come from an internal file created by Janet Prevéy (birds_mammals_phenophases_locations.csv). The first few rows of the file look like the following, where “n” is the number of years in each series:</p>
 <div class="cell">
 <details class="code-fold">
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="modifications-to-data-file" class="level4">
 <h4 class="anchored" data-anchor-id="modifications-to-data-file">Modifications to data file</h4>
-<p>Before evaluating the series, we needed a little clean up to remove mammal species, remove one amphibian (spring peeper), classify oak titmouse and tufted titmouse as birds, and correct the spelling of gray catbird.</p>
+<p>Before evaluating the series, we needed a little clean up to remove mammal species, remove one amphibian (spring peeper), classify oak titmouse and tufted titmouse as birds and not mammals, and correct the spelling of gray catbird.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -233,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="taking-migratory-statusseasonal-ranges-into-account" class="level2">
 <h2 class="anchored" data-anchor-id="taking-migratory-statusseasonal-ranges-into-account">Taking migratory status/seasonal ranges into account:</h2>
-<p>In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, nest building) was observed for a given species at a particular site. If a species is a year-round resident, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. In these instances, the first date a phenophase was observed probably tells us more about when observers visited the site than about species ecology. For migratory species, we used seasonal range maps from <a href="https://science.ebird.org/en/status-and-trends/range-maps">eBird</a> to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here’s an example for ruby-throated hummingbirds::</p>
+<p>In these analyses, observations are summarized over each calendar year. Thus, each series notes the first day of the calendar year that a phenophase (e.g., live individuals, nest building) was observed for a given species at a particular site. If a species is a year-round resident, or if it migrates but spends the first part of the year in a region that encompasses the site of interest, then assessing trends in the date on which live individuals were first observed at that site does not provide phenological insights. In these instances, the first date a phenophase was observed probably tells us more about when observers visited the site than about species ecology. For migratory species, we used seasonal range maps from <a href="https://science.ebird.org/en/status-and-trends/range-maps">eBird</a> to identify whether a species was likely to be present at a site at the beginning of the year. To do this, we downloaded seasonal range maps (at a 9-km resolution) for all species classified as migratory. Here’s an example for ruby-throated hummingbirds:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -260,111 +260,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ebirds, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"common_name_l"</span> <span class="ot">=</span> <span class="st">"common_name"</span>))</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Download range maps for non-resident NPN bird species</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for (spp6 in birds$species_code[birds$is_resident == FALSE]) {</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   ebirdst_download_status(species = spp6,</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           path = ebird_path,</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           download_abundance = FALSE,</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           download_ranges = TRUE,</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           dry_run = FALSE,</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           pattern = "raw_9km",</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           show_progress = TRUE)</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through species and extract range information</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(birds)) {</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  cn <span class="ot">&lt;-</span> birds<span class="sc">$</span>common_name[i]</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  code <span class="ot">&lt;-</span> birds<span class="sc">$</span>species_code[i]</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract locations and convert to SpatVector</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  locs <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span> </span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(common_name <span class="sc">==</span> cn) <span class="sc">%&gt;%</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>group, <span class="sc">-</span>phenophase_description, <span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>()</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If species is migratory, extract information about seasonal ranges</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (birds<span class="sc">$</span>is_resident[i] <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert NPN locations to SpatVector</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    locs<span class="sc">$</span>loc <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">rownames</span>(locs))</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    locs <span class="ot">&lt;-</span> <span class="fu">vect</span>(locs, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>), </span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">crs =</span> <span class="st">"epsg:4326"</span>, <span class="at">keepgeom =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load species range</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    range <span class="ot">&lt;-</span> <span class="fu">load_ranges</span>(<span class="at">species =</span> code, </span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>                         <span class="at">resolution =</span> <span class="st">"9km"</span>, </span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>                         <span class="at">smoothed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>                         <span class="at">path =</span> ebird_path)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    range <span class="ot">&lt;-</span> <span class="fu">vect</span>(range)</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (cn <span class="sc">==</span> <span class="st">"ruby-throated hummingbird"</span>) {</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>      p_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"breeding"</span>)) <span class="sc">+</span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#F8766D"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Breeding"</span>))</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>      p_nb <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"nonbreeding"</span>)) <span class="sc">+</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#abd9e9"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Nonbreeding"</span>))</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>      p_m1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"prebreeding_migration"</span>)) <span class="sc">+</span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#ffffbf"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Pre-breeding migration"</span>))</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      p_m2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"postbreeding_migration"</span>)) <span class="sc">+</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#abdda4"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Post-breeding migration"</span>))</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>      maps <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(p_m1, p_b, p_m2, p_nb, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each location, extract seasons bird is present</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    ext_ranges <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(range, locs)</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    ranges <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="fu">select</span>(ext_ranges, <span class="sc">-</span> common_name), </span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">data.frame</span>(locs),</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>                        <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id.y"</span> <span class="ot">=</span> <span class="st">"loc"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(species_code, common_name, site_id, latitude, longitude) <span class="sc">%&gt;%</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarize</span>(<span class="at">b =</span> <span class="fu">ifelse</span>(<span class="st">"breeding"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>                <span class="at">nb =</span> <span class="fu">ifelse</span>(<span class="st">"nonbreeding"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>                <span class="at">m1 =</span> <span class="fu">ifelse</span>(<span class="st">"prebreeding_migration"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>                <span class="at">m2 =</span> <span class="fu">ifelse</span>(<span class="st">"postbreeding_migration"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>                <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">resident =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>()</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    ranges <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">species_code =</span> code, locs) <span class="sc">%&gt;%</span></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">b =</span> <span class="dv">1</span>,</span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>             <span class="at">nb =</span> <span class="dv">1</span>,</span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>             <span class="at">m1 =</span> <span class="dv">1</span>,</span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>             <span class="at">m2 =</span> <span class="dv">1</span>,</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>             <span class="at">resident =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge info for all species</span></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) {</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    spp_ranges <span class="ot">&lt;-</span> ranges</span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>    spp_ranges <span class="ot">&lt;-</span> <span class="fu">rbind</span>(spp_ranges, ranges)</span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># (commented out after running the first time to avoid running through all species)</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for (spp6 in birds$species_code[birds$is_resident == FALSE]) {</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   ebirdst_download_status(species = spp6,</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           path = ebird_path,</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           download_abundance = FALSE,</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           download_ranges = TRUE,</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           dry_run = FALSE,</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           pattern = "raw_9km",</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                           show_progress = TRUE)</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># }</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through species and extract range information</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(birds)) {</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  cn <span class="ot">&lt;-</span> birds<span class="sc">$</span>common_name[i]</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  code <span class="ot">&lt;-</span> birds<span class="sc">$</span>species_code[i]</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract locations and convert to SpatVector</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  locs <span class="ot">&lt;-</span> df_birds <span class="sc">%&gt;%</span> </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(common_name <span class="sc">==</span> cn) <span class="sc">%&gt;%</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>group, <span class="sc">-</span>phenophase_description, <span class="sc">-</span>n) <span class="sc">%&gt;%</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>()</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If species is migratory, extract information about seasonal ranges</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (birds<span class="sc">$</span>is_resident[i] <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert NPN locations to SpatVector</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    locs<span class="sc">$</span>loc <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">rownames</span>(locs))</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    locs <span class="ot">&lt;-</span> <span class="fu">vect</span>(locs, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>), </span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">crs =</span> <span class="st">"epsg:4326"</span>, <span class="at">keepgeom =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load species range</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    range <span class="ot">&lt;-</span> <span class="fu">load_ranges</span>(<span class="at">species =</span> code, </span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>                         <span class="at">resolution =</span> <span class="st">"9km"</span>, </span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>                         <span class="at">smoothed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>                         <span class="at">path =</span> ebird_path)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    range <span class="ot">&lt;-</span> <span class="fu">vect</span>(range)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (cn <span class="sc">==</span> <span class="st">"ruby-throated hummingbird"</span>) {</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>      p_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"breeding"</span>)) <span class="sc">+</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#F8766D"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Breeding"</span>))</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>      p_nb <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"nonbreeding"</span>)) <span class="sc">+</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#abd9e9"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Nonbreeding"</span>))</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>      p_m1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"prebreeding_migration"</span>)) <span class="sc">+</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#ffffbf"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Pre-breeding migration"</span>))</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      p_m2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(range, range<span class="sc">$</span>season <span class="sc">==</span> <span class="st">"postbreeding_migration"</span>)) <span class="sc">+</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="fu">aes</span>(<span class="at">fill =</span> season), </span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="st">"#abdda4"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_spatvector</span>(<span class="at">data =</span> locs) <span class="sc">+</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="st">"Post-breeding migration"</span>))</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>      maps <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(p_m1, p_b, p_m2, p_nb, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each location, extract seasons bird is present</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    ext_ranges <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(range, locs)</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    ranges <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="fu">select</span>(ext_ranges, <span class="sc">-</span> common_name), </span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">data.frame</span>(locs),</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>                        <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id.y"</span> <span class="ot">=</span> <span class="st">"loc"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(species_code, common_name, site_id, latitude, longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarize</span>(<span class="at">b =</span> <span class="fu">ifelse</span>(<span class="st">"breeding"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>                <span class="at">nb =</span> <span class="fu">ifelse</span>(<span class="st">"nonbreeding"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>                <span class="at">m1 =</span> <span class="fu">ifelse</span>(<span class="st">"prebreeding_migration"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>                <span class="at">m2 =</span> <span class="fu">ifelse</span>(<span class="st">"postbreeding_migration"</span> <span class="sc">%in%</span> season, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>                <span class="at">.groups =</span> <span class="st">"keep"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">resident =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>()</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    ranges <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">species_code =</span> code, locs) <span class="sc">%&gt;%</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">b =</span> <span class="dv">1</span>,</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>             <span class="at">nb =</span> <span class="dv">1</span>,</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>             <span class="at">m1 =</span> <span class="dv">1</span>,</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>             <span class="at">m2 =</span> <span class="dv">1</span>,</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>             <span class="at">resident =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge info for all species</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    spp_ranges <span class="ot">&lt;-</span> ranges</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    spp_ranges <span class="ot">&lt;-</span> <span class="fu">rbind</span>(spp_ranges, ranges)</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<figcaption>Seasonal range maps for ruby-throated hummingbirds based on observations submitted to eBird. Black dots denote sites where the species was observed (via USA-NPN’s Nature’s Notebook) for nine or more years.</figcaption>
+<figcaption>Seasonal range maps for ruby-throated hummingbirds based on observations submitted to eBird. Black dots denote sites where the species was observed (via USA-NPN Nature’s Notebook) for nine or more years.</figcaption>
 <p><img src="bird-series_files/figure-html/RTHU-map-1.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>For each species, we determined which season (breeding, nonbreeding, pre-breeding migration, post-breeding migration) overlapped January 1st. Then, by inspecting which sites fall within the range map for that season, we determined whether the species was likely to be present at that site at the beginning of the year (“Present on Jan 1” variable in table excerpt below):</p>
+<p>For each species, we determined which season (breeding, nonbreeding, pre-breeding migration, post-breeding migration) overlapped January 1st. Then, by inspecting whether a site was located within the expected range for that season, we determined whether the species was likely to be present at that site at the beginning of the year (“Present on Jan 1” variable in table excerpt below):</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1236,7 +1237,7 @@ If we use the suggested rules outlined in the table above, we would exclude 309 
 </div>
 </div>
 <p><br>
-Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors, that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.</p>
+Of the remaining phenophases, there seems to be a distinction between those that indicate when migratory species arrive at a site (presence phenophases) and those that indicate when mating, breeding, or feeding activities commence (behavior, feeding phenophases). Given that the timing of these events may be influenced by different factors that could occur in different regions or at different spatial scales, it might make sense to evaluate trends in presence-related phenophases separately from other phenophases.</p>
 </section>
 
 </main>
