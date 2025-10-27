@@ -1,0 +1,170 @@
+"yeartype","functional_type","common_name","phenophase_id","phenophase_description","state","site_id","latitude","longitude","elevation_in_meters","earliest_yes_DOY","lastest_yes_DOY"
+"water","Bird","American goldfinch",310,"Fruit/seed consumption","TX",8418,32.363758,-94.873947,108,1,365
+"water","Bird","American robin",310,"Fruit/seed consumption","TX",8418,32.363758,-94.873947,108,6,357
+"water","Bird","Anna's hummingbird",457,"Insect consumption","AZ",18529,33.630066,-112.147385,392,275,365
+"water","Bird","black-capped chickadee",310,"Fruit/seed consumption","CO",2803,39.971001,-105.397003,2397,10,358
+"water","Bird","curve-billed thrasher",457,"Insect consumption","AZ",18529,33.630066,-112.147385,392,275,365
+"summer","Bird","dark-eyed junco",310,"Fruit/seed consumption","CO",2803,39.971001,-105.397003,2397,183,291
+"water","Bird","dark-eyed junco",310,"Fruit/seed consumption","MA",8923,42.286381,-72.653831,38,5,344
+"water","Bird","dark-eyed junco",310,"Fruit/seed consumption","MN",8736,44.903229,-93.217445,254,287,357
+"water","Bird","dark-eyed junco",310,"Fruit/seed consumption","TX",8418,32.363758,-94.873947,108,1,358
+"summer","Bird","oak titmouse",457,"Insect consumption","CA",22740,38.525036,-121.970711,39,182,275
+"summer","Bird","ruby-crowned kinglet",457,"Insect consumption","CA",22740,38.525036,-121.970711,39,265,292
+"water","Bird","yellow-rumped warbler",457,"Insect consumption","CA",22740,38.525036,-121.970711,39,28,348
+"water","Cactus","buck-horn cholla",390,"Ripe fruits","AZ",24705,33.600445,-111.811867,533,275,337
+"summer","Cactus","candy barrelcactus",390,"Ripe fruits","AZ",22311,32.33926,-110.981728,765,55,340
+"summer","Deciduous broadleaf","Amur honeysuckle",390,"Ripe fruits","NY",16454,41.667408,-73.895546,39,252,309
+"summer","Deciduous broadleaf","arroyo willow",501,"Open flowers","CA",8835,37.921116,-122.689323,0,2,354
+"summer","Deciduous broadleaf","boxelder",390,"Ripe fruits","MN",8496,46.328629,-96.061256,388,230,283
+"summer","Deciduous broadleaf","California buckeye",390,"Ripe fruits","CA",1380,34.457253,-119.709938,229,191,303
+"summer","Deciduous broadleaf","California buckeye",390,"Ripe fruits","CA",6398,37.988838,-122.129555,39,223,325
+"summer","Deciduous broadleaf","California buckeye",390,"Ripe fruits","CA",6399,37.978359,-122.126457,63,242,343
+"summer","Deciduous broadleaf","California buckeye",390,"Ripe fruits","CA",8770,35.330288,-120.728859,84,301,360
+"summer","Deciduous broadleaf","California wildrose",390,"Ripe fruits","CA",6399,37.978359,-122.126457,63,2,262
+"summer","Deciduous broadleaf","common snowberry",390,"Ripe fruits","CA",6399,37.978359,-122.126457,63,183,257
+"summer","Deciduous broadleaf","common snowberry",390,"Ripe fruits","WA",1274,47.754948,-122.357971,98,267,322
+"summer","Deciduous broadleaf","common winterberry ",504,"Recent fruit or seed drop","ME",2,43.08535,-70.69133,12,261,298
+"summer","Deciduous broadleaf","common winterberry ",504,"Recent fruit or seed drop","NY",16876,41.745537,-74.119392,89,230,309
+"summer","Deciduous broadleaf","common winterberry ",390,"Ripe fruits","NY",16876,41.745537,-74.119392,89,183,262
+"water","Deciduous broadleaf","eastern redbud",501,"Open flowers","NC",19380,35.811588,-78.713982,129,54,316
+"water","Deciduous broadleaf","eastern redbud",501,"Open flowers","NC",22017,35.497227,-82.608856,673,79,136
+"summer","Deciduous broadleaf","eastern redbud",504,"Recent fruit or seed drop","NC",19380,35.811588,-78.713982,129,200,350
+"summer","Deciduous broadleaf","Japanese barberry",390,"Ripe fruits","NY",16454,41.667408,-73.895546,39,209,309
+"summer","Deciduous broadleaf","Kousa dogwood",504,"Recent fruit or seed drop","CA",16902,38.376015,-122.508133,109,244,325
+"summer","Deciduous broadleaf","Kousa dogwood",390,"Ripe fruits","CA",16902,38.376015,-122.508133,109,216,299
+"summer","Deciduous broadleaf","northern red oak",504,"Recent fruit or seed drop","NY",1668,40.866283,-73.875717,21,200,283
+"summer","Deciduous broadleaf","northern red oak",504,"Recent fruit or seed drop","NY",8460,43.09248,-73.591904,73,213,284
+"summer","Deciduous broadleaf","northern red oak",504,"Recent fruit or seed drop","NY",16454,41.667408,-73.895546,39,199,295
+"summer","Deciduous broadleaf","northern red oak",504,"Recent fruit or seed drop","NY",17414,42.936153,-73.433449,146,186,270
+"summer","Deciduous broadleaf","smooth sumac",390,"Ripe fruits","MN",8496,46.328629,-96.061256,388,208,237
+"water","Deciduous broadleaf","sweetgum",390,"Ripe fruits","NC",19380,35.811588,-78.713982,129,13,353
+"summer","Deciduous broadleaf","toringo crab",504,"Recent fruit or seed drop","CA",16902,38.376015,-122.508133,109,14,288
+"summer","Deciduous broadleaf","tuliptree",390,"Ripe fruits","NC",19380,35.811588,-78.713982,129,2,353
+"water","Deciduous broadleaf","tuliptree",504,"Recent fruit or seed drop","NY",1668,40.866283,-73.875717,21,275,341
+"water","Deciduous broadleaf","tuliptree",504,"Recent fruit or seed drop","NY",16257,41.211025,-73.826889,696,276,326
+"summer","Deciduous broadleaf","tuliptree",390,"Ripe fruits","NY",1668,40.866283,-73.875717,21,210,315
+"summer","Deciduous broadleaf","tuliptree",390,"Ripe fruits","NY",2119,40.862221,-73.875191,26,233,339
+"summer","Deciduous broadleaf","tuliptree",390,"Ripe fruits","NY",18536,40.866119,-73.879341,25,261,321
+"summer","Deciduous broadleaf","valley oak",504,"Recent fruit or seed drop","CA",6091,34.11578,-118.757507,229,188,320
+"summer","Deciduous broadleaf","valley oak",504,"Recent fruit or seed drop","CA",6099,34.119007,-118.760071,245,187,334
+"summer","Deciduous broadleaf","valley oak",504,"Recent fruit or seed drop","CA",6214,34.159077,-118.726082,318,208,305
+"summer","Deciduous broadleaf","valley oak",504,"Recent fruit or seed drop","CA",6399,37.978359,-122.126457,63,205,284
+"summer","Deciduous broadleaf","valley oak",504,"Recent fruit or seed drop","CA",8959,34.675453,-120.040688,338,205,300
+"summer","Deciduous broadleaf","valley oak",390,"Ripe fruits","CA",6091,34.11578,-118.757507,229,244,305
+"summer","Deciduous broadleaf","valley oak",390,"Ripe fruits","CA",6099,34.119007,-118.760071,245,182,306
+"summer","Deciduous broadleaf","valley oak",390,"Ripe fruits","CA",8959,34.675453,-120.040688,338,205,300
+"summer","Drought deciduous broadleaf","desert willow",390,"Ripe fruits","AZ",11587,33.462444,-111.944618,391,182,335
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",6092,34.115868,-118.758972,236,182,294
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",6094,34.116138,-118.760071,256,182,328
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",6095,34.116432,-118.759659,261,182,314
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",6149,34.034981,-118.812256,34,182,262
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",6151,34.039394,-118.814392,42,182,264
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",8957,34.681217,-120.037399,357,183,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",8959,34.675453,-120.040688,338,183,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",504,"Recent fruit or seed drop","CA",9241,34.675453,-120.040688,337,183,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6092,34.115868,-118.758972,236,182,294
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6094,34.116138,-118.760071,256,182,319
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6095,34.116432,-118.759659,261,182,314
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6097,34.116222,-118.758591,253,187,243
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6149,34.034981,-118.812256,34,182,262
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",6151,34.039394,-118.814392,42,182,264
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",8957,34.681217,-120.037399,357,182,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",8959,34.675453,-120.040688,338,183,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",9241,34.675453,-120.040688,337,182,293
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",16496,33.633789,-117.553848,350,191,259
+"summer","Drought deciduous broadleaf","Eastern Mojave buckwheat",390,"Ripe fruits","CA",16588,33.627426,-117.549858,375,182,246
+"summer","Drought deciduous broadleaf","orange bush monkeyflower",390,"Ripe fruits","CA",8768,37.929852,-122.735939,74,182,278
+"summer","Drought deciduous broadleaf","orange bush monkeyflower",390,"Ripe fruits","CA",10142,37.79121,-122.142197,332,266,316
+"water","Drought deciduous broadleaf","rubber rabbitbrush",504,"Recent fruit or seed drop","NM",16786,35.096119,-106.685783,1509,51,352
+"water","Drought deciduous broadleaf","rubber rabbitbrush",390,"Ripe fruits","NM",16786,35.096119,-106.685783,1509,51,331
+"water","Drought deciduous broadleaf","screwbean mesquite",504,"Recent fruit or seed drop","NM",16785,35.096249,-106.684891,1508,274,344
+"water","Drought deciduous broadleaf","screwbean mesquite",390,"Ripe fruits","NM",16785,35.096249,-106.684891,1508,274,286
+"summer","Evergreen broadleaf","California laurel",501,"Open flowers","CA",10142,37.79121,-122.142197,332,5,366
+"summer","Evergreen broadleaf","California laurel",501,"Open flowers","CA",21133,37.813675,-122.175865,444,13,365
+"summer","Evergreen broadleaf","California laurel",501,"Open flowers","CA",21134,37.814865,-122.17572,459,1,363
+"summer","Evergreen broadleaf","California laurel",501,"Open flowers","CA",21140,37.809361,-122.152992,188,15,366
+"summer","Evergreen broadleaf","California laurel",504,"Recent fruit or seed drop","CA",10142,37.79121,-122.142197,332,240,304
+"summer","Evergreen broadleaf","California laurel",390,"Ripe fruits","CA",10142,37.79121,-122.142197,332,197,270
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",6081,34.0312,-118.811821,32,2,349
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",6091,34.11578,-118.757507,229,72,152
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",8959,34.675453,-120.040688,338,58,99
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",9241,34.675453,-120.040688,337,60,108
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",10142,37.79121,-122.142197,332,32,365
+"water","Evergreen broadleaf","California live oak",501,"Open flowers","CA",16591,33.628738,-117.555573,277,5,341
+"summer","Evergreen broadleaf","California live oak",504,"Recent fruit or seed drop","CA",6091,34.11578,-118.757507,229,207,309
+"summer","Evergreen broadleaf","California live oak",504,"Recent fruit or seed drop","CA",6214,34.159077,-118.726082,318,19,289
+"summer","Evergreen broadleaf","California live oak",504,"Recent fruit or seed drop","CA",8770,35.330288,-120.728859,84,253,302
+"summer","Evergreen broadleaf","California live oak",504,"Recent fruit or seed drop","CA",10142,37.79121,-122.142197,332,35,335
+"summer","Evergreen broadleaf","California live oak",390,"Ripe fruits","CA",10142,37.79121,-122.142197,332,18,325
+"summer","Evergreen broadleaf","chamise",390,"Ripe fruits","CA",6092,34.115868,-118.758972,236,182,319
+"summer","Evergreen broadleaf","chamise",390,"Ripe fruits","CA",6094,34.116138,-118.760071,256,183,319
+"summer","Evergreen broadleaf","chamise",390,"Ripe fruits","CA",6097,34.116222,-118.758591,253,183,257
+"summer","Evergreen broadleaf","chamise",390,"Ripe fruits","CA",8770,35.330288,-120.728859,84,183,266
+"summer","Evergreen broadleaf","chamise",390,"Ripe fruits","CA",12493,38.568214,-122.688759,330,184,308
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",6086,34.034565,-118.813118,25,183,326
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",6099,34.119007,-118.760071,245,6,352
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",6399,37.978359,-122.126457,63,240,298
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",8769,37.930042,-122.735527,75,240,265
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",8959,34.675453,-120.040688,338,184,304
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",9242,34.675453,-120.040688,338,224,293
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",10142,37.79121,-122.142197,332,222,314
+"summer","Evergreen broadleaf","coyotebrush",501,"Open flowers","CA",23812,39.00066,-123.082359,255,276,327
+"summer","Evergreen broadleaf","coyotebrush",504,"Recent fruit or seed drop","CA",6086,34.034565,-118.813118,25,33,356
+"summer","Evergreen broadleaf","coyotebrush",504,"Recent fruit or seed drop","CA",6399,37.978359,-122.126457,63,6,349
+"summer","Evergreen broadleaf","coyotebrush",504,"Recent fruit or seed drop","CA",8769,37.930042,-122.735527,75,48,339
+"summer","Evergreen broadleaf","coyotebrush",504,"Recent fruit or seed drop","CA",9242,34.675453,-120.040688,338,257,300
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",6086,34.034565,-118.813118,25,183,354
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",6099,34.119007,-118.760071,245,12,363
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",6399,37.978359,-122.126457,63,294,361
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",8769,37.930042,-122.735527,75,270,325
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",9242,34.675453,-120.040688,338,254,293
+"summer","Evergreen broadleaf","coyotebrush",390,"Ripe fruits","CA",23812,39.00066,-123.082359,255,8,362
+"water","Evergreen broadleaf","creosote bush",501,"Open flowers","AZ",11587,33.462444,-111.944618,391,19,338
+"water","Evergreen broadleaf","creosote bush",501,"Open flowers","AZ",12064,32.248463,-110.909584,746,62,316
+"water","Evergreen broadleaf","creosote bush",501,"Open flowers","AZ",22728,32.237293,-110.91423,755,61,349
+"summer","Evergreen broadleaf","creosote bush",390,"Ripe fruits","AZ",11587,33.462444,-111.944618,391,182,322
+"summer","Evergreen broadleaf","creosote bush",390,"Ripe fruits","AZ",12064,32.248463,-110.909584,746,182,274
+"summer","Evergreen broadleaf","eastern teaberry",390,"Ripe fruits","NY",18537,40.86404,-73.878288,28,199,257
+"water","Evergreen broadleaf","fourwing saltbush",504,"Recent fruit or seed drop","NM",16785,35.096249,-106.684891,1508,274,321
+"water","Evergreen broadleaf","fourwing saltbush",504,"Recent fruit or seed drop","NM",17404,35.095665,-106.684616,1508,284,328
+"summer","Evergreen broadleaf","fourwing saltbush",390,"Ripe fruits","NM",16785,35.096249,-106.684891,1508,257,311
+"summer","Evergreen broadleaf","fourwing saltbush",390,"Ripe fruits","NM",17404,35.095665,-106.684616,1508,253,314
+"summer","Evergreen broadleaf","jojoba",501,"Open flowers","AZ",11587,33.462444,-111.944618,391,14,310
+"summer","Evergreen broadleaf","olive",390,"Ripe fruits","CA",16610,37.991367,-122.132027,30,183,329
+"water","Evergreen broadleaf","toyon ",504,"Recent fruit or seed drop","CA",8957,34.681217,-120.037399,357,10,358
+"water","Evergreen broadleaf","toyon ",504,"Recent fruit or seed drop","CA",8959,34.675453,-120.040688,338,274,327
+"summer","Evergreen broadleaf","toyon ",390,"Ripe fruits","CA",8957,34.681217,-120.037399,357,185,330
+"summer","Evergreen broadleaf","toyon ",390,"Ripe fruits","CA",8959,34.675453,-120.040688,338,195,330
+"summer","Evergreen broadleaf","toyon ",390,"Ripe fruits","CA",12493,38.568214,-122.688759,330,29,347
+"summer","Evergreen broadleaf","toyon ",390,"Ripe fruits","CA",23812,39.00066,-123.082359,255,8,334
+"summer","Evergreen conifer","Douglas-fir",491,"Recent cone or seed drop","CA",8768,37.929852,-122.735939,74,183,304
+"water","Evergreen conifer","eastern redcedar",491,"Recent cone or seed drop","NY",16876,41.745537,-74.119392,89,274,311
+"summer","Forb","American pokeweed",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,236,280
+"summer","Forb","American pokeweed",390,"Ripe fruits","OH",10585,41.433689,-81.693153,220,223,252
+"summer","Forb","eastern purple coneflower",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,213,254
+"summer","Forb","eastern purple coneflower",390,"Ripe fruits","OH",10585,41.433689,-81.693153,220,193,245
+"summer","Forb","fall phlox",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,219,287
+"summer","Forb","fall phlox",390,"Ripe fruits","OH",10585,41.433689,-81.693153,220,219,287
+"summer","Forb","foxglove beardtongue",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,195,298
+"water","Forb","New England aster",504,"Recent fruit or seed drop","NY",16876,41.745537,-74.119392,89,284,314
+"water","Forb","New England aster",390,"Ripe fruits","NY",16876,41.745537,-74.119392,89,284,311
+"summer","Forb","New England aster",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,250,296
+"summer","Forb","New England aster",390,"Ripe fruits","OH",10585,41.433689,-81.693153,220,243,296
+"summer","Forb","white wood aster",390,"Ripe fruits","NY",1668,40.866283,-73.875717,21,237,319
+"summer","Forb","white wood aster",390,"Ripe fruits","NY",2119,40.862221,-73.875191,26,252,313
+"summer","Forb","wild bergamot",504,"Recent fruit or seed drop","OH",10585,41.433689,-81.693153,220,205,253
+"summer","Forb","wild bergamot",390,"Ripe fruits","OH",10585,41.433689,-81.693153,220,205,243
+"summer","Insect","bumblebee",327,"Adults","AZ",6102,32.23188,-110.951012,743,39,293
+"summer","Insect","bumblebee",312,"Flower visitation","AZ",6102,32.23188,-110.951012,743,36,293
+"water","Mammal","elk",339,"Male combat (horn/antler)","CO",2803,39.971001,-105.397003,2397,276,331
+"summer","Mammal","elk",338,"Males vocalizing","CO",2803,39.971001,-105.397003,2397,264,306
+"water","Mammal","elk",344,"Young individuals","CO",2803,39.971001,-105.397003,2397,59,318
+"water","Pine","longleaf pine",495,"Open pollen cones (conifers)","GA",57047,31.195782,-84.464561,47,26,276
+"summer","Semi-evergreen broadleaf","alderleaf mountain-mahogany",390,"Ripe fruits","AZ",19711,34.575775,-112.497459,1705,183,258
+"water","Semi-evergreen broadleaf","monkeypod",501,"Open flowers","Lajas",57053,18.021288,-67.076309,16,5,363
+"summer","Semi-evergreen broadleaf","northern bayberry",504,"Recent fruit or seed drop","MA",19651,41.290401,-70.170708,0,234,279
+"summer","Semi-evergreen broadleaf","northern bayberry",504,"Recent fruit or seed drop","MA",19654,41.290379,-70.176582,6,237,294
+"summer","Semi-evergreen broadleaf","northern bayberry",504,"Recent fruit or seed drop","MA",20905,41.290005,-70.17202,4,237,319
+"summer","Semi-evergreen broadleaf","northern bayberry",390,"Ripe fruits","MA",19651,41.290401,-70.170708,0,199,255
+"summer","Semi-evergreen broadleaf","northern bayberry",390,"Ripe fruits","MA",19654,41.290379,-70.176582,6,200,265
+"summer","Semi-evergreen broadleaf","northern bayberry",390,"Ripe fruits","MA",20905,41.290005,-70.17202,4,206,259

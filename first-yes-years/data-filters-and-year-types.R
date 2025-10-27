@@ -819,6 +819,20 @@ alldatas <- alldatas %>%
 # Write final dataset to file:
 # write.csv(alldata, "first-yes-years/final-dataset.csv", row.names = FALSE)
 
+# Summarize info on summer/water year series and save to file:
+# alldata %>%
+#   filter(yeartype != "calendar") %>%
+#   group_by(yeartype, functional_type, common_name, phenophase_id, 
+#            phenophase_description, state, site_id, latitude, longitude,
+#            elevation_in_meters) %>% 
+#   summarize(earliest_yes_DOY = min(first_yes_doy),
+#             lastest_yes_DOY = max(first_yes_doy),
+#             .groups = "keep") %>%
+#   data.frame() %>%
+#   arrange(functional_type, common_name, state, phenophase_description,
+#           .locale = "en") %>%
+#   write.csv("first-yes-years/final-dataset-water-summer-series.csv",
+#             row.names = FALSE)
 
 # Look at a few things with the new dataset.....................................
 
