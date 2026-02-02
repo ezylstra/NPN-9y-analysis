@@ -6,3 +6,8 @@
 # eBird ranges
 ebird-ranges*
 !ebird-ranges/.gitkeep
+
+# original NN data downloads
+data/orig-downloads*
+!data/orig-downloads/.gitkeep
+
