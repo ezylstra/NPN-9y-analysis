@@ -1,0 +1,174 @@
+phenophase_description,phenophase,n
+Live individuals,Adults observed,23935
+Feeding (or foraging),Feeding,8444
+Fruit/seed consumption,Feeding,6940
+Feeding,Feeding,6389
+Singing individuals (birds),Calls or songs,5941
+Individuals at a feeding station,Adults observed,5926
+Adults,Adults observed,3768
+Insect consumption,Feeding,3263
+Territorial individuals (birds),Territorial behavior,2725
+Nest building (birds),Nesting behavior,1844
+Occupied nest,Nesting behavior,1213
+Individuals on land (rock/log),Adults observed,945
+Nut gathering,Feeding,930
+Adults on land,Adults observed,645
+Adults feeding (proboscis),Feeding,504
+Adults in water,Adults observed,425
+Male adults,Adults observed,302
+Individuals in water (rock/log),Adults observed,223
+Migrating adults (in uniform direction),Migration,191
+Adults feeding,Adults observed,186
+Nest provisioning (pollen),Nesting behavior,79
+Nest building (bees),Nesting behavior,65
+Adults in freshwater,Adults observed,55
+Individuals in a net,Adults observed,36
+Individuals in a trap,Adults observed,34
+Individuals in water,Adults observed,33
+Individuals at a light,Adults observed,29
+Individuals on a hook,Adults observed,28
+Nesting (aquatic or marine turtles),Nesting behavior,28
+Individuals on land,Adults observed,27
+Migrating adults (insect swarm),Migration,17
+Nest building (wood-nesting insect),Nesting behavior,16
+Adults migrating upstream,Migration,12
+Crawlers,Adults observed,12
+Nest building (ground-nesting insect),Nesting behavior,11
+Summer coat,Adults observed,8
+Adults in saltwater,Adults observed,7
+Winged adults,Adults observed,5
+Adults migrating downstream,Migration,4
+Winter coat,Adults observed,4
+Nest provisioning (insects and seeds),Adults observed,3
+Recently emerged adults (insects),Adults observed,3
+Adults vocalizing,Adults observed,2
+Juveniles moving upstream (eels),Adults observed,1
+Calls or song (birds),Calls or songs,13831
+Vocalizing,Calls or songs,1163
+Colored leaves,Colored leaves,63999
+&gt;=50% of leaves colored (deciduous),Colored leaves,1627
+All leaves colored (deciduous),Colored leaves,1058
+Colored needles,Colored leaves,567
+All leaves withered (herbaceous and grasses),Colored leaves,290
+All needles colored (larch),Colored leaves,17
+&gt;=50% of needles colored (larch),Colored leaves,16
+Dead individuals,Dead individuals,824
+Dead adults,Dead individuals,432
+Dead caterpillars,Dead individuals,111
+Dead nestlings or young (birds),Dead individuals,79
+Dead adults (no roads),Dead individuals,16
+Dead or dying adults,Dead individuals,14
+Dead nymphs,Dead individuals,8
+Dead larvae,Dead individuals,1
+Eggs (on plant),Eggs observed,101
+Fresh eggs (amphibian),Eggs observed,92
+Egg laying (on plant),Eggs observed,82
+Eggs,Eggs observed,36
+Egg laying (on water surface or aquatic plants),Eggs observed,16
+Eggs (nesting insects),Eggs observed,10
+Egg laying,Eggs observed,1
+Falling leaves,Falling leaves,58101
+&gt;=50% of leaves fallen (deciduous),Falling leaves,1645
+All leaves fallen (deciduous),Falling leaves,1122
+Falling needles,Falling leaves,481
+&gt;=50% of needles fallen (larch),Falling leaves,16
+All needles fallen (larch),Falling leaves,16
+Flower visitation,Feeding,3153
+End of flowering (lilac/honeysuckle),Flower senesence,3032
+End bloom (historic lilac/eastern honeysuckle),Flower senesence,592
+End bloom (historic western honeysuckle),Flower senesence,35
+Flowers or flower buds,Flowers or flower buds,65230
+Pollen cones (conifers),Flowers or flower buds,3767
+Flower buds (1 location),Flowers or flower buds,14
+Fruits,Fruits,50751
+Unripe seed cones,Fruits,3118
+Breaking leaf buds,Leaf budburst,67730
+Initial growth (forbs),Leaf budburst,15493
+Initial growth (grasses/sedges),Leaf budburst,6526
+Breaking leaf buds (lilac/honeysuckle),Leaf budburst,4749
+Breaking needle buds (conifers),Leaf budburst,2449
+Breaking needle buds (deciduous),Leaf budburst,562
+Emerging leaves (1 location),Leaf budburst,66
+Initial growth (rushes),Leaf budburst,9
+Leaves,Leaves,89031
+Increasing leaf size,Leaves,58277
+Leaves (forbs),Leaves,22232
+Young leaves (tree/shrub),Leaves,21219
+Leaves (grasses),Leaves,7848
+All leaf buds broken (lilac/honeysuckle),Leaves,4668
+Young needles (conifers),Leaves,2667
+Young needles (pines),Leaves,2541
+Emerging needles (pines),Leaves,2359
+&gt;=75% of full leaf size (deciduous),Leaves,1795
+Leaves (sedges),Leaves,822
+Needles (deciduous),Leaves,758
+Full leaf (historic lilac/honeysuckle),Leaves,684
+Young leaves (forbs),Leaves,511
+"Young unfolded leaves (evergreen, 1 location)",Leaves,68
+Leaves (rushes),Leaves,17
+Courtship ,Mating activity,1341
+Mating (male on top),Mating activity,744
+Mating (lepidoptera),Mating activity,183
+Mating (amphibians),Mating activity,78
+Male combat (horn/antler),Mating activity,52
+Mating (odonates),Mating activity,40
+Courtship calling,Mating activity,32
+Mating,Mating activity,21
+Males vocalizing,Mating activity,18
+Mating (one on top),Mating activity,9
+Open flowers,Open flowers,63678
+Open flowers (grasses/sedges),Open flowers,3654
+Open pollen cones (conifers),Open flowers,3650
+Open flowers (lilac),Open flowers,3639
+Full flowering (lilac),Open flowers,3038
+Flower heads (grasses/sedges),Open flowers,1521
+First leaf (historic lilac/honeysuckle),Open flowers,733
+Full bloom (historic lilac/western honeysuckle),Open flowers,566
+Open flowers (1 location),Open flowers,539
+First bloom (historic eastern lilac),Open flowers,513
+Open flowers (honeysuckle),Open flowers,134
+First bloom (historic honeysuckle),Open flowers,132
+First bloom (historic western lilac),Open flowers,78
+Pollen release (flowers),Peak flowering,8988
+Pollen release (conifers),Peak flowering,1949
+Full flowering (50%),Peak flowering,1485
+Full flowering (honeysuckle),Peak flowering,126
+Full bloom (historic eastern honeysuckle),Peak flowering,96
+Full pollen release (angiosperms),Peak flowering,85
+Full pollen release (conifers),Peak flowering,42
+Ripe fruits,Ripe fruits,37945
+Recent fruit or seed drop,Ripe fruits,32253
+Ripe seed cones,Ripe fruits,2962
+Recent cone or seed drop,Ripe fruits,2393
+Ripe fruits (1 location),Ripe fruits,303
+Ripe seeds (grasses),Ripe fruits,87
+First red berry (historic western honeysuckle),Ripe fruits,19
+Full shriveled berries (historic western honeysuckle),Ripe fruits,19
+First shriveled berry (historic western honeysuckle),Ripe fruits,18
+Full red berries (historic western honeysuckle),Ripe fruits,17
+Young individuals,Young observed,1160
+Fledged young (altricial birds),Young observed,939
+Caterpillars,Young observed,552
+Nestlings (altricial birds),Young observed,534
+Caterpillars feeding,Young observed,399
+Young individuals (hatched from eggs),Young observed,373
+Fledged young (precocial birds),Young observed,199
+Downy young (precocial birds),Young observed,171
+Partially-fledged young (precocial birds),Young observed,153
+Pupae,Young observed,95
+Caterpillars in tent,Young observed,68
+Subadults,Young observed,53
+Dormant nymphs,Young observed,36
+Post-dormant nymphs,Young observed,29
+Nymphs,Young observed,21
+Larvae,Young observed,16
+Cast-off skins (nymph),Young observed,13
+Nymphs feeding,Young observed,8
+Larvae feeding,Young observed,2
+New side branches (rockweed),#N/A,11
+Dotted inflated receptacles,#N/A,10
+Drone cells,#N/A,8
+Receptacles,#N/A,8
+Torn receptacles,#N/A,8
+Smooth inflated receptacles,#N/A,7
+Flat receptacles,#N/A,4

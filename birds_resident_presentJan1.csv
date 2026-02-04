@@ -1,0 +1,523 @@
+"group","common_name","phenophase_description","site_id","latitude","longitude","n","resident","jan1","present_jan1"
+"Bird","American crow","Calls or song (birds)",17707,37.360123,-122.128151,9,FALSE,"nb",1
+"Bird","American crow","Live individuals",17707,37.360123,-122.128151,9,FALSE,"nb",1
+"Bird","American goldfinch","Calls or song (birds)",5428,48.033489,-122.598724,9,FALSE,"nb",1
+"Bird","American goldfinch","Calls or song (birds)",8736,44.903229,-93.217445,9,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",1897,40.64323,-75.315399,9,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",6481,42.456135,-72.344215,9,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",1897,40.64323,-75.315399,9,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",1897,40.64323,-75.315399,9,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",9652,44.768246,-94.155746,9,FALSE,"nb",1
+"Bird","American goldfinch","Singing individuals (birds)",10145,42.602543,-83.250992,9,FALSE,"nb",1
+"Bird","American kestrel","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","American redstart","Calls or song (birds)",10145,42.602543,-83.250992,9,FALSE,"nb",0
+"Bird","American robin","Calls or song (birds)",5262,42.442348,-72.346504,9,FALSE,"nb",1
+"Bird","American robin","Fruit/seed consumption",2803,39.971001,-105.397003,9,FALSE,"nb",1
+"Bird","American robin","Fruit/seed consumption",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","American robin","Fruit/seed consumption",10145,42.602543,-83.250992,9,FALSE,"nb",1
+"Bird","American robin","Individuals at a feeding station",1419,42.011166,-88.503304,9,FALSE,"nb",1
+"Bird","American robin","Insect consumption",10717,38.285664,-111.246605,9,FALSE,"nb",1
+"Bird","American robin","Live individuals",5582,45.195858,-70.45369,9,FALSE,"nb",0
+"Bird","American robin","Live individuals",6481,42.456135,-72.344215,9,FALSE,"nb",1
+"Bird","American woodcock","Calls or song (birds)",5261,42.448402,-72.345314,9,FALSE,"nb",0
+"Bird","Anna's hummingbird","Calls or song (birds)",5428,48.033489,-122.598724,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Calls or song (birds)",12725,37.360928,-122.130836,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Calls or song (birds)",22858,38.09404,-122.37149,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Flower visitation",6102,32.23188,-110.951012,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Flower visitation",20765,33.632149,-117.55545,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",6102,32.23188,-110.951012,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",12725,37.360928,-122.130836,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",22858,38.09404,-122.37149,9,FALSE,"m1",1
+"Bird","Anna's hummingbird","Singing individuals (birds)",20765,33.632149,-117.55545,9,FALSE,"m1",1
+"Bird","Baltimore oriole","Calls or song (birds)",1447,42.176537,-85.892448,9,FALSE,"nb",0
+"Bird","Baltimore oriole","Live individuals",10145,42.602543,-83.250992,9,FALSE,"nb",0
+"Bird","California scrub-jay","Calls or song (birds)",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","California scrub-jay","Live individuals",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","Carolina chickadee","Calls or song (birds)",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina chickadee","Calls or song (birds)",9341,35.639874,-83.687721,9,TRUE,NA,1
+"Bird","Carolina chickadee","Calls or song (birds)",9344,35.640373,-83.692863,9,TRUE,NA,1
+"Bird","Carolina chickadee","Fruit/seed consumption",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina chickadee","Individuals at a feeding station",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina chickadee","Live individuals",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina wren","Calls or song (birds)",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina wren","Fruit/seed consumption",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina wren","Fruit/seed consumption",8923,42.286381,-72.653831,9,TRUE,NA,1
+"Bird","Carolina wren","Individuals at a feeding station",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina wren","Individuals at a feeding station",8923,42.286381,-72.653831,9,TRUE,NA,1
+"Bird","Carolina wren","Individuals at a feeding station",10145,42.602543,-83.250992,9,TRUE,NA,1
+"Bird","Carolina wren","Live individuals",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","Carolina wren","Live individuals",10145,42.602543,-83.250992,9,TRUE,NA,1
+"Bird","European starling","Calls or song (birds)",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","European starling","Individuals at a feeding station",10145,42.602543,-83.250992,9,FALSE,"nb",1
+"Bird","European starling","Live individuals",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","European starling","Live individuals",8496,46.328629,-96.061256,9,FALSE,"nb",1
+"Bird","Say's phoebe","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","acorn woodpecker","Calls or song (birds)",6100,34.118332,-118.758636,9,TRUE,NA,1
+"Bird","acorn woodpecker","Calls or song (birds)",20765,33.632149,-117.55545,9,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",20765,33.632149,-117.55545,9,TRUE,NA,1
+"Bird","black phoebe","Insect consumption",6091,34.11578,-118.757507,9,FALSE,"nb",1
+"Bird","black phoebe","Insect consumption",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","black-capped chickadee","Individuals at a feeding station",1447,42.176537,-85.892448,9,TRUE,NA,1
+"Bird","black-chinned hummingbird","Live individuals",6102,32.23188,-110.951012,9,FALSE,"nb",0
+"Bird","black-throated green warbler","Live individuals",9342,35.644516,-83.68988,9,FALSE,"nb",0
+"Bird","black-throated green warbler","Singing individuals (birds)",9341,35.639874,-83.687721,9,FALSE,"nb",0
+"Bird","blue jay","Calls or song (birds)",8923,42.286381,-72.653831,9,FALSE,"nb",1
+"Bird","blue jay","Calls or song (birds)",16295,27.929228,-82.725639,9,FALSE,"nb",1
+"Bird","blue jay","Live individuals",16295,27.929228,-82.725639,9,FALSE,"nb",1
+"Bird","broad-winged hawk","Live individuals",10145,42.602543,-83.250992,9,FALSE,"nb",0
+"Bird","bushtit","Live individuals",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","cedar waxwing","Calls or song (birds)",10145,42.602543,-83.250992,9,FALSE,"nb",1
+"Bird","cedar waxwing","Live individuals",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","cliff swallow","Nest building (birds)",19944,33.66478,-117.843063,9,FALSE,"nb",0
+"Bird","cliff swallow","Singing individuals (birds)",19944,33.66478,-117.843063,9,FALSE,"nb",0
+"Bird","common yellowthroat","Live individuals",17414,42.936153,-73.433449,9,FALSE,"nb",0
+"Bird","curve-billed thrasher","Calls or song (birds)",6102,32.23188,-110.951012,9,TRUE,NA,1
+"Bird","curve-billed thrasher","Individuals at a feeding station",8242,31.596231,-110.575493,9,TRUE,NA,1
+"Bird","curve-billed thrasher","Live individuals",6102,32.23188,-110.951012,9,TRUE,NA,1
+"Bird","curve-billed thrasher","Singing individuals (birds)",6102,32.23188,-110.951012,9,TRUE,NA,1
+"Bird","dark-eyed junco","Calls or song (birds)",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",1447,42.176537,-85.892448,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",1447,42.176537,-85.892448,9,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","downy woodpecker","Calls or song (birds)",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","eastern bluebird","Calls or song (birds)",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","eastern bluebird","Insect consumption",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","eastern bluebird","Singing individuals (birds)",8923,42.286381,-72.653831,9,FALSE,"nb",1
+"Bird","eastern phoebe","Live individuals",8496,46.328629,-96.061256,9,FALSE,"nb",0
+"Bird","hooded warbler","Calls or song (birds)",9340,35.642353,-83.687431,9,FALSE,"nb",0
+"Bird","hooded warbler","Live individuals",9342,35.644516,-83.68988,9,FALSE,"nb",0
+"Bird","house wren","Calls or song (birds)",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","house wren","Live individuals",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","house wren","Singing individuals (birds)",8496,46.328629,-96.061256,9,FALSE,"nb",0
+"Bird","house wren","Singing individuals (birds)",10145,42.602543,-83.250992,9,FALSE,"nb",0
+"Bird","house wren","Singing individuals (birds)",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","lark sparrow","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","lesser goldfinch","Calls or song (birds)",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","lesser goldfinch","Individuals at a feeding station",8242,31.596231,-110.575493,9,FALSE,"nb",1
+"Bird","lesser goldfinch","Live individuals",20765,33.632149,-117.55545,9,FALSE,"nb",1
+"Bird","mallard","Calls or song (birds)",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","mallard","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","mourning dove","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","mourning dove","Individuals at a feeding station",8242,31.596231,-110.575493,9,FALSE,"nb",1
+"Bird","mourning dove","Individuals at a feeding station",8496,46.328629,-96.061256,9,FALSE,"nb",0
+"Bird","mourning dove","Live individuals",6102,32.23188,-110.951012,9,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","northern cardinal","Fruit/seed consumption",9652,44.768246,-94.155746,9,TRUE,NA,1
+"Bird","northern cardinal","Insect consumption",8418,32.363758,-94.873947,9,TRUE,NA,1
+"Bird","northern cardinal","Singing individuals (birds)",8736,44.903229,-93.217445,9,TRUE,NA,1
+"Bird","northern cardinal","Singing individuals (birds)",11313,44.201355,-92.646301,9,TRUE,NA,1
+"Bird","northern mockingbird","Fruit/seed consumption",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","northern mockingbird","Live individuals",8923,42.286381,-72.653831,9,FALSE,"nb",1
+"Bird","northern mockingbird","Live individuals",16295,27.929228,-82.725639,9,FALSE,"nb",1
+"Bird","northern mockingbird","Singing individuals (birds)",16295,27.929228,-82.725639,9,FALSE,"nb",1
+"Bird","osprey","Nest building (birds)",19944,33.66478,-117.843063,9,FALSE,"nb",1
+"Bird","red-eyed vireo","Calls or song (birds)",9344,35.640373,-83.692863,9,FALSE,"nb",0
+"Bird","red-eyed vireo","Live individuals",9341,35.639874,-83.687721,9,FALSE,"nb",0
+"Bird","red-eyed vireo","Singing individuals (birds)",9341,35.639874,-83.687721,9,FALSE,"nb",0
+"Bird","red-tailed hawk","Live individuals",6081,34.0312,-118.811821,9,FALSE,"nb",1
+"Bird","red-tailed hawk","Live individuals",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","red-tailed hawk","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Calls or song (birds)",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Calls or song (birds)",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Fruit/seed consumption",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Individuals at a feeding station",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Live individuals",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","red-winged blackbird","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Calls or song (birds)",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Fruit/seed consumption",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Individuals at a feeding station",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Insect consumption",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Live individuals",8418,32.363758,-94.873947,9,FALSE,"nb",1
+"Bird","ruby-crowned kinglet","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",17414,42.936153,-73.433449,9,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",17414,42.936153,-73.433449,9,FALSE,"nb",0
+"Bird","rufous hummingbird","Flower visitation",5428,48.033489,-122.598724,9,FALSE,"nb",0
+"Bird","sandhill crane","Calls or song (birds)",1447,42.176537,-85.892448,9,FALSE,"nb",1
+"Bird","sandhill crane","Live individuals",10145,42.602543,-83.250992,9,FALSE,"nb",0
+"Bird","song sparrow","Calls or song (birds)",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","song sparrow","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","song sparrow","Singing individuals (birds)",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","spotted sandpiper","Calls or song (birds)",19944,33.66478,-117.843063,9,FALSE,"nb",1
+"Bird","spotted towhee","Live individuals",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","tree swallow","Calls or song (birds)",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","tree swallow","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","tree swallow","Nest building (birds)",8496,46.328629,-96.061256,9,FALSE,"nb",0
+"Bird","tree swallow","Nest building (birds)",17414,42.936153,-73.433449,9,FALSE,"nb",0
+"Bird","verdin","Calls or song (birds)",6102,32.23188,-110.951012,9,TRUE,NA,1
+"Bird","western bluebird","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","western bluebird","Insect consumption",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","western bluebird","Live individuals",22858,38.09404,-122.37149,9,FALSE,"nb",1
+"Bird","western bluebird","Singing individuals (birds)",2803,39.971001,-105.397003,9,FALSE,"nb",0
+"Bird","white-winged dove","Individuals at a feeding station",18529,33.630066,-112.147385,9,FALSE,"nb",1
+"Bird","white-winged dove","Live individuals",18529,33.630066,-112.147385,9,FALSE,"nb",1
+"Bird","wrentit","Live individuals",20956,33.632149,-117.55545,9,TRUE,NA,1
+"Bird","yellow-rumped warbler","Calls or song (birds)",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","yellow-rumped warbler","Insect consumption",22740,38.525036,-121.970711,9,FALSE,"nb",1
+"Bird","American goldfinch","Calls or song (birds)",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",1447,42.176537,-85.892448,10,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",1447,42.176537,-85.892448,10,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",1447,42.176537,-85.892448,10,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",6481,42.456135,-72.344215,10,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","American kestrel","Live individuals",8242,31.596231,-110.575493,10,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",5582,45.195858,-70.45369,10,FALSE,"nb",0
+"Bird","American robin","Calls or song (birds)",8496,46.328629,-96.061256,10,FALSE,"nb",1
+"Bird","American robin","Individuals at a feeding station",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","American robin","Live individuals",8715,43.522804,-70.802277,10,FALSE,"nb",1
+"Bird","American robin","Live individuals",10717,38.285664,-111.246605,10,FALSE,"nb",1
+"Bird","American robin","Nest building (birds)",9652,44.768246,-94.155746,10,FALSE,"nb",0
+"Bird","Anna's hummingbird","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Calls or song (birds)",20765,33.632149,-117.55545,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Calls or song (birds)",20956,33.632149,-117.55545,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Flower visitation",5428,48.033489,-122.598724,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Flower visitation",18529,33.630066,-112.147385,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Flower visitation",19944,33.66478,-117.843063,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Individuals at a feeding station",18529,33.630066,-112.147385,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Insect consumption",18529,33.630066,-112.147385,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Insect consumption",19944,33.66478,-117.843063,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",18529,33.630066,-112.147385,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",19944,33.66478,-117.843063,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",20765,33.632149,-117.55545,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",20956,33.632149,-117.55545,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",22740,38.525036,-121.970711,10,FALSE,"m1",1
+"Bird","Anna's hummingbird","Singing individuals (birds)",19944,33.66478,-117.843063,10,FALSE,"m1",1
+"Bird","California thrasher","Calls or song (birds)",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","California thrasher","Singing individuals (birds)",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","California towhee","Calls or song (birds)",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","California towhee","Live individuals",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","Carolina wren","Calls or song (birds)",8923,42.286381,-72.653831,10,TRUE,NA,1
+"Bird","Carolina wren","Calls or song (birds)",9344,35.640373,-83.692863,10,TRUE,NA,1
+"Bird","acorn woodpecker","Calls or song (birds)",17707,37.360123,-122.128151,10,TRUE,NA,1
+"Bird","acorn woodpecker","Calls or song (birds)",22740,38.525036,-121.970711,10,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",6100,34.118332,-118.758636,10,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",17707,37.360123,-122.128151,10,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",22740,38.525036,-121.970711,10,TRUE,NA,1
+"Bird","barn swallow","Live individuals",8242,31.596231,-110.575493,10,FALSE,"nb",0
+"Bird","black phoebe","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","black phoebe","Calls or song (birds)",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","black phoebe","Insect consumption",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","black phoebe","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","black phoebe","Live individuals",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","black phoebe","Singing individuals (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","black-capped chickadee","Calls or song (birds)",8736,44.903229,-93.217445,10,TRUE,NA,1
+"Bird","black-capped chickadee","Calls or song (birds)",10145,42.602543,-83.250992,10,TRUE,NA,1
+"Bird","black-capped chickadee","Fruit/seed consumption",1447,42.176537,-85.892448,10,TRUE,NA,1
+"Bird","black-capped chickadee","Singing individuals (birds)",8736,44.903229,-93.217445,10,TRUE,NA,1
+"Bird","black-chinned hummingbird","Flower visitation",8242,31.596231,-110.575493,10,FALSE,"nb",0
+"Bird","black-chinned hummingbird","Individuals at a feeding station",8242,31.596231,-110.575493,10,FALSE,"nb",0
+"Bird","black-chinned hummingbird","Live individuals",8242,31.596231,-110.575493,10,FALSE,"nb",0
+"Bird","blue jay","Calls or song (birds)",9652,44.768246,-94.155746,10,FALSE,"nb",1
+"Bird","blue jay","Fruit/seed consumption",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","blue jay","Individuals at a feeding station",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","blue jay","Individuals at a feeding station",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","blue jay","Individuals at a feeding station",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","blue jay","Live individuals",9652,44.768246,-94.155746,10,FALSE,"nb",1
+"Bird","brown-headed cowbird","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","chimney swift","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","cliff swallow","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",0
+"Bird","cliff swallow","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",0
+"Bird","common yellowthroat","Calls or song (birds)",17414,42.936153,-73.433449,10,FALSE,"nb",0
+"Bird","common yellowthroat","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","common yellowthroat","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","common yellowthroat","Singing individuals (birds)",17414,42.936153,-73.433449,10,FALSE,"nb",0
+"Bird","common yellowthroat","Singing individuals (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","curve-billed thrasher","Calls or song (birds)",18529,33.630066,-112.147385,10,TRUE,NA,1
+"Bird","curve-billed thrasher","Fruit/seed consumption",8242,31.596231,-110.575493,10,TRUE,NA,1
+"Bird","curve-billed thrasher","Individuals at a feeding station",18529,33.630066,-112.147385,10,TRUE,NA,1
+"Bird","curve-billed thrasher","Insect consumption",18529,33.630066,-112.147385,10,TRUE,NA,1
+"Bird","curve-billed thrasher","Live individuals",8242,31.596231,-110.575493,10,TRUE,NA,1
+"Bird","curve-billed thrasher","Live individuals",18529,33.630066,-112.147385,10,TRUE,NA,1
+"Bird","dark-eyed junco","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Calls or song (birds)",17707,37.360123,-122.128151,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",17707,37.360123,-122.128151,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Singing individuals (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","dark-eyed junco","Singing individuals (birds)",17707,37.360123,-122.128151,10,FALSE,"nb",1
+"Bird","downy woodpecker","Fruit/seed consumption",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","downy woodpecker","Individuals at a feeding station",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","downy woodpecker","Live individuals",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","eastern bluebird","Calls or song (birds)",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","eastern bluebird","Insect consumption",8923,42.286381,-72.653831,10,FALSE,"nb",1
+"Bird","eastern bluebird","Live individuals",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","eastern phoebe","Live individuals",1419,42.011166,-88.503304,10,FALSE,"nb",0
+"Bird","great blue heron","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","great blue heron","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","gray catbird","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","hooded warbler","Calls or song (birds)",9342,35.644516,-83.68988,10,FALSE,"nb",0
+"Bird","house sparrow","Calls or song (birds)",6102,32.23188,-110.951012,10,TRUE,NA,1
+"Bird","house sparrow","Calls or song (birds)",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","house sparrow","Fruit/seed consumption",6102,32.23188,-110.951012,10,TRUE,NA,1
+"Bird","house sparrow","Fruit/seed consumption",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","house sparrow","Individuals at a feeding station",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","house sparrow","Live individuals",6102,32.23188,-110.951012,10,TRUE,NA,1
+"Bird","house sparrow","Live individuals",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","house sparrow","Singing individuals (birds)",6102,32.23188,-110.951012,10,TRUE,NA,1
+"Bird","house wren","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","house wren","Nest building (birds)",8496,46.328629,-96.061256,10,FALSE,"nb",0
+"Bird","killdeer","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","killdeer","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","lesser goldfinch","Fruit/seed consumption",8242,31.596231,-110.575493,10,FALSE,"nb",1
+"Bird","lesser goldfinch","Live individuals",8242,31.596231,-110.575493,10,FALSE,"nb",1
+"Bird","mallard","Live individuals",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","mourning dove","Calls or song (birds)",8496,46.328629,-96.061256,10,FALSE,"nb",0
+"Bird","mourning dove","Individuals at a feeding station",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",1447,42.176537,-85.892448,10,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",6091,34.11578,-118.757507,10,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",8242,31.596231,-110.575493,10,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",9652,44.768246,-94.155746,10,FALSE,"nb",1
+"Bird","mourning dove","Singing individuals (birds)",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","mourning dove","Singing individuals (birds)",9652,44.768246,-94.155746,10,FALSE,"nb",1
+"Bird","northern cardinal","Calls or song (birds)",8736,44.903229,-93.217445,10,TRUE,NA,1
+"Bird","northern cardinal","Calls or song (birds)",9342,35.644516,-83.68988,10,TRUE,NA,1
+"Bird","northern cardinal","Calls or song (birds)",9652,44.768246,-94.155746,10,TRUE,NA,1
+"Bird","northern cardinal","Individuals at a feeding station",9652,44.768246,-94.155746,10,TRUE,NA,1
+"Bird","northern cardinal","Singing individuals (birds)",8418,32.363758,-94.873947,10,TRUE,NA,1
+"Bird","northern cardinal","Singing individuals (birds)",9652,44.768246,-94.155746,10,TRUE,NA,1
+"Bird","northern mockingbird","Individuals at a feeding station",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","northern mockingbird","Insect consumption",8418,32.363758,-94.873947,10,FALSE,"nb",1
+"Bird","northern parula","Calls or song (birds)",8806,35.640625,-83.689034,10,FALSE,"nb",0
+"Bird","osprey","Calls or song (birds)",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","osprey","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","red-tailed hawk","Live individuals",6091,34.11578,-118.757507,10,FALSE,"nb",1
+"Bird","red-winged blackbird","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Calls or song (birds)",8418,32.363758,-94.873947,10,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",8736,44.903229,-93.217445,10,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",10145,42.602543,-83.250992,10,FALSE,"nb",0
+"Bird","rufous hummingbird","Individuals at a feeding station",5428,48.033489,-122.598724,10,FALSE,"nb",0
+"Bird","rufous hummingbird","Live individuals",5428,48.033489,-122.598724,10,FALSE,"nb",0
+"Bird","song sparrow","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","song sparrow","Calls or song (birds)",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","song sparrow","Live individuals",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","song sparrow","Live individuals",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","song sparrow","Singing individuals (birds)",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","spotted sandpiper","Live individuals",19944,33.66478,-117.843063,10,FALSE,"nb",1
+"Bird","verdin","Live individuals",6102,32.23188,-110.951012,10,TRUE,NA,1
+"Bird","western bluebird","Live individuals",22740,38.525036,-121.970711,10,FALSE,"nb",1
+"Bird","white-throated sparrow","Calls or song (birds)",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","white-throated sparrow","Live individuals",10145,42.602543,-83.250992,10,FALSE,"nb",1
+"Bird","wrentit","Calls or song (birds)",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","wrentit","Singing individuals (birds)",20956,33.632149,-117.55545,10,TRUE,NA,1
+"Bird","yellow-rumped warbler","Calls or song (birds)",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","yellow-rumped warbler","Live individuals",20765,33.632149,-117.55545,10,FALSE,"nb",1
+"Bird","yellow-rumped warbler","Live individuals",22740,38.525036,-121.970711,10,FALSE,"nb",1
+"Bird","American crow","Live individuals",10145,42.602543,-83.250992,11,FALSE,"nb",1
+"Bird","American goldfinch","Calls or song (birds)",10145,42.602543,-83.250992,11,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",8496,46.328629,-96.061256,11,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",1447,42.176537,-85.892448,11,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",5674,44.910587,-70.266861,11,FALSE,"nb",0
+"Bird","American robin","Calls or song (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","American robin","Fruit/seed consumption",5674,44.910587,-70.266861,11,FALSE,"nb",0
+"Bird","American robin","Insect consumption",1419,42.011166,-88.503304,11,FALSE,"nb",1
+"Bird","American robin","Insect consumption",5674,44.910587,-70.266861,11,FALSE,"nb",0
+"Bird","American robin","Insect consumption",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","American robin","Live individuals",681,41.296783,-105.5746,11,FALSE,"nb",1
+"Bird","American robin","Live individuals",1447,42.176537,-85.892448,11,FALSE,"nb",1
+"Bird","American robin","Live individuals",6581,42.545959,-71.354904,11,FALSE,"nb",1
+"Bird","American robin","Live individuals",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","American robin","Live individuals",11313,44.201355,-92.646301,11,FALSE,"nb",0
+"Bird","American robin","Singing individuals (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","Anna's hummingbird","Individuals at a feeding station",5428,48.033489,-122.598724,11,FALSE,"m1",1
+"Bird","Anna's hummingbird","Live individuals",5428,48.033489,-122.598724,11,FALSE,"m1",1
+"Bird","Canada goose","Live individuals",10145,42.602543,-83.250992,11,FALSE,"nb",1
+"Bird","Carolina wren","Live individuals",8923,42.286381,-72.653831,11,TRUE,NA,1
+"Bird","Carolina wren","Live individuals",9341,35.639874,-83.687721,11,TRUE,NA,1
+"Bird","Cooper's hawk","Live individuals",10145,42.602543,-83.250992,11,FALSE,"nb",1
+"Bird","acorn woodpecker","Calls or song (birds)",6091,34.11578,-118.757507,11,TRUE,NA,1
+"Bird","acorn woodpecker","Calls or song (birds)",6099,34.119007,-118.760071,11,TRUE,NA,1
+"Bird","acorn woodpecker","Insect consumption",6099,34.119007,-118.760071,11,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",6091,34.11578,-118.757507,11,TRUE,NA,1
+"Bird","acorn woodpecker","Live individuals",6099,34.119007,-118.760071,11,TRUE,NA,1
+"Bird","black phoebe","Live individuals",6091,34.11578,-118.757507,11,FALSE,"nb",1
+"Bird","black-capped chickadee","Calls or song (birds)",5428,48.033489,-122.598724,11,TRUE,NA,1
+"Bird","black-capped chickadee","Calls or song (birds)",8496,46.328629,-96.061256,11,TRUE,NA,1
+"Bird","black-capped chickadee","Calls or song (birds)",11313,44.201355,-92.646301,11,TRUE,NA,1
+"Bird","black-capped chickadee","Fruit/seed consumption",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",5428,48.033489,-122.598724,11,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",1447,42.176537,-85.892448,11,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","black-throated green warbler","Calls or song (birds)",9342,35.644516,-83.68988,11,FALSE,"nb",0
+"Bird","blue jay","Calls or song (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","blue jay","Calls or song (birds)",8496,46.328629,-96.061256,11,FALSE,"nb",1
+"Bird","blue jay","Calls or song (birds)",10145,42.602543,-83.250992,11,FALSE,"nb",1
+"Bird","blue jay","Fruit/seed consumption",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","blue jay","Live individuals",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","blue jay","Live individuals",8923,42.286381,-72.653831,11,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",8496,46.328629,-96.061256,11,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",8736,44.903229,-93.217445,11,FALSE,"nb",1
+"Bird","dark-eyed junco","Singing individuals (birds)",2803,39.971001,-105.397003,11,FALSE,"nb",1
+"Bird","eastern bluebird","Live individuals",8923,42.286381,-72.653831,11,FALSE,"nb",1
+"Bird","killdeer","Calls or song (birds)",1419,42.011166,-88.503304,11,FALSE,"nb",0
+"Bird","killdeer","Live individuals",10145,42.602543,-83.250992,11,FALSE,"nb",0
+"Bird","mourning dove","Calls or song (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","mourning dove","Calls or song (birds)",9652,44.768246,-94.155746,11,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",6026,32.25066,-110.946358,11,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","northern cardinal","Calls or song (birds)",8418,32.363758,-94.873947,11,TRUE,NA,1
+"Bird","northern cardinal","Fruit/seed consumption",8418,32.363758,-94.873947,11,TRUE,NA,1
+"Bird","northern cardinal","Fruit/seed consumption",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","northern cardinal","Individuals at a feeding station",8418,32.363758,-94.873947,11,TRUE,NA,1
+"Bird","northern cardinal","Individuals at a feeding station",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",6581,42.545959,-71.354904,11,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",8418,32.363758,-94.873947,11,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",8736,44.903229,-93.217445,11,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",9652,44.768246,-94.155746,11,TRUE,NA,1
+"Bird","northern mockingbird","Calls or song (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","northern mockingbird","Live individuals",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","northern mockingbird","Singing individuals (birds)",8418,32.363758,-94.873947,11,FALSE,"nb",1
+"Bird","red-eyed vireo","Calls or song (birds)",9342,35.644516,-83.68988,11,FALSE,"nb",0
+"Bird","red-winged blackbird","Singing individuals (birds)",10145,42.602543,-83.250992,11,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Flower visitation",8418,32.363758,-94.873947,11,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Flower visitation",8496,46.328629,-96.061256,11,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",8418,32.363758,-94.873947,11,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",8418,32.363758,-94.873947,11,FALSE,"nb",0
+"Bird","tree swallow","Live individuals",17414,42.936153,-73.433449,11,FALSE,"nb",0
+"Bird","yellow-rumped warbler","Live individuals",6091,34.11578,-118.757507,11,FALSE,"nb",1
+"Bird","American goldfinch","Fruit/seed consumption",8496,46.328629,-96.061256,12,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",1419,42.011166,-88.503304,12,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",8496,46.328629,-96.061256,12,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","American robin","Calls or song (birds)",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",11313,44.201355,-92.646301,12,FALSE,"nb",0
+"Bird","American robin","Fruit/seed consumption",8496,46.328629,-96.061256,12,FALSE,"nb",1
+"Bird","American robin","Fruit/seed consumption",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","American robin","Insect consumption",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","American robin","Live individuals",5674,44.910587,-70.266861,12,FALSE,"nb",0
+"Bird","American robin","Live individuals",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","American robin","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","American robin","Singing individuals (birds)",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","European starling","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","barn swallow","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","barn swallow","Nest building (birds)",8496,46.328629,-96.061256,12,FALSE,"nb",0
+"Bird","black-capped chickadee","Fruit/seed consumption",1419,42.011166,-88.503304,12,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",8496,46.328629,-96.061256,12,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","black-capped chickadee","Singing individuals (birds)",2803,39.971001,-105.397003,12,TRUE,NA,1
+"Bird","blue jay","Individuals at a feeding station",8496,46.328629,-96.061256,12,FALSE,"nb",1
+"Bird","blue jay","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","brown-headed cowbird","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","cedar waxwing","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","chimney swift","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","common loon","Calls or song (birds)",5582,45.195858,-70.45369,12,FALSE,"nb",0
+"Bird","common loon","Calls or song (birds)",5583,45.196041,-70.459015,12,FALSE,"nb",0
+"Bird","common loon","Calls or song (birds)",11598,43.073357,-71.150681,12,FALSE,"nb",0
+"Bird","common loon","Live individuals",5583,45.196041,-70.459015,12,FALSE,"nb",0
+"Bird","common loon","Live individuals",11598,43.073357,-71.150681,12,FALSE,"nb",0
+"Bird","common nighthawk","Calls or song (birds)",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","common nighthawk","Live individuals",9652,44.768246,-94.155746,12,FALSE,"nb",0
+"Bird","dark-eyed junco","Individuals at a feeding station",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",6091,34.11578,-118.757507,12,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","downy woodpecker","Individuals at a feeding station",8496,46.328629,-96.061256,12,TRUE,NA,1
+"Bird","downy woodpecker","Individuals at a feeding station",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","downy woodpecker","Live individuals",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","great blue heron","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","gray catbird","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","house sparrow","Individuals at a feeding station",8496,46.328629,-96.061256,12,TRUE,NA,1
+"Bird","house sparrow","Individuals at a feeding station",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","house sparrow","Live individuals",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","house wren","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","mourning dove","Individuals at a feeding station",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","mourning dove","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","northern cardinal","Calls or song (birds)",8806,35.640625,-83.689034,12,TRUE,NA,1
+"Bird","northern cardinal","Calls or song (birds)",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","northern cardinal","Calls or song (birds)",11313,44.201355,-92.646301,12,TRUE,NA,1
+"Bird","northern cardinal","Individuals at a feeding station",8496,46.328629,-96.061256,12,TRUE,NA,1
+"Bird","northern cardinal","Individuals at a feeding station",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",10145,42.602543,-83.250992,12,TRUE,NA,1
+"Bird","red-tailed hawk","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",1
+"Bird","red-winged blackbird","Live individuals",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Flower visitation",5674,44.910587,-70.266861,12,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",8496,46.328629,-96.061256,12,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",10145,42.602543,-83.250992,12,FALSE,"nb",0
+"Bird","western bluebird","Insect consumption",2803,39.971001,-105.397003,12,FALSE,"nb",0
+"Bird","American goldfinch","Fruit/seed consumption",5428,48.033489,-122.598724,13,FALSE,"nb",1
+"Bird","American goldfinch","Individuals at a feeding station",5428,48.033489,-122.598724,13,FALSE,"nb",1
+"Bird","American goldfinch","Live individuals",5428,48.033489,-122.598724,13,FALSE,"nb",1
+"Bird","American robin","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",1
+"Bird","American robin","Singing individuals (birds)",2803,39.971001,-105.397003,13,FALSE,"nb",1
+"Bird","Carolina wren","Calls or song (birds)",9341,35.639874,-83.687721,13,TRUE,NA,1
+"Bird","barn swallow","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","black-capped chickadee","Fruit/seed consumption",5428,48.033489,-122.598724,13,TRUE,NA,1
+"Bird","black-capped chickadee","Fruit/seed consumption",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",1419,42.011166,-88.503304,13,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",5428,48.033489,-122.598724,13,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","black-capped chickadee","Singing individuals (birds)",1419,42.011166,-88.503304,13,TRUE,NA,1
+"Bird","black-throated green warbler","Calls or song (birds)",8806,35.640625,-83.689034,13,FALSE,"nb",0
+"Bird","black-throated green warbler","Calls or song (birds)",9341,35.639874,-83.687721,13,FALSE,"nb",0
+"Bird","blue jay","Fruit/seed consumption",8496,46.328629,-96.061256,13,FALSE,"nb",1
+"Bird","blue jay","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",5428,48.033489,-122.598724,13,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",8496,46.328629,-96.061256,13,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",5428,48.033489,-122.598724,13,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",1
+"Bird","downy woodpecker","Fruit/seed consumption",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","downy woodpecker","Live individuals",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","great blue heron","Live individuals",6091,34.11578,-118.757507,13,FALSE,"nb",1
+"Bird","house sparrow","Fruit/seed consumption",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","house sparrow","Live individuals",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","house wren","Calls or song (birds)",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","house wren","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","mourning dove","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","northern cardinal","Calls or song (birds)",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","northern cardinal","Fruit/seed consumption",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","northern cardinal","Live individuals",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","northern cardinal","Singing individuals (birds)",8496,46.328629,-96.061256,13,TRUE,NA,1
+"Bird","red-eyed vireo","Calls or song (birds)",8806,35.640625,-83.689034,13,FALSE,"nb",0
+"Bird","red-eyed vireo","Calls or song (birds)",9341,35.639874,-83.687721,13,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",5674,44.910587,-70.266861,13,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Individuals at a feeding station",8715,43.522804,-70.802277,13,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",5674,44.910587,-70.266861,13,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","ruby-throated hummingbird","Live individuals",8715,43.522804,-70.802277,13,FALSE,"nb",0
+"Bird","tree swallow","Live individuals",8496,46.328629,-96.061256,13,FALSE,"nb",0
+"Bird","western bluebird","Calls or song (birds)",2803,39.971001,-105.397003,13,FALSE,"nb",0
+"Bird","western bluebird","Live individuals",2803,39.971001,-105.397003,13,FALSE,"nb",0
+"Bird","American robin","Calls or song (birds)",1419,42.011166,-88.503304,14,FALSE,"nb",1
+"Bird","American robin","Calls or song (birds)",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","American robin","Insect consumption",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","American robin","Live individuals",1419,42.011166,-88.503304,14,FALSE,"nb",1
+"Bird","American robin","Live individuals",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","American robin","Singing individuals (birds)",1419,42.011166,-88.503304,14,FALSE,"nb",1
+"Bird","black-capped chickadee","Calls or song (birds)",1419,42.011166,-88.503304,14,TRUE,NA,1
+"Bird","black-capped chickadee","Calls or song (birds)",2803,39.971001,-105.397003,14,TRUE,NA,1
+"Bird","black-capped chickadee","Fruit/seed consumption",2803,39.971001,-105.397003,14,TRUE,NA,1
+"Bird","black-capped chickadee","Individuals at a feeding station",2803,39.971001,-105.397003,14,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",1419,42.011166,-88.503304,14,TRUE,NA,1
+"Bird","black-capped chickadee","Live individuals",2803,39.971001,-105.397003,14,TRUE,NA,1
+"Bird","broad-tailed hummingbird","Calls or song (birds)",2803,39.971001,-105.397003,14,FALSE,"nb",0
+"Bird","broad-tailed hummingbird","Flower visitation",2803,39.971001,-105.397003,14,FALSE,"nb",0
+"Bird","broad-tailed hummingbird","Individuals at a feeding station",2803,39.971001,-105.397003,14,FALSE,"nb",0
+"Bird","broad-tailed hummingbird","Insect consumption",2803,39.971001,-105.397003,14,FALSE,"nb",0
+"Bird","broad-tailed hummingbird","Live individuals",2803,39.971001,-105.397003,14,FALSE,"nb",0
+"Bird","dark-eyed junco","Calls or song (birds)",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","dark-eyed junco","Fruit/seed consumption",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","dark-eyed junco","Individuals at a feeding station",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",2803,39.971001,-105.397003,14,FALSE,"nb",1
+"Bird","dark-eyed junco","Live individuals",5428,48.033489,-122.598724,14,FALSE,"nb",1
+"Bird","oak titmouse","Calls or song (birds)",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","oak titmouse","Insect consumption",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","oak titmouse","Live individuals",22740,38.525036,-121.970711,9,TRUE,NA,1
+"Bird","tufted titmouse","Live individuals",10145,42.602543,-83.250992,9,TRUE,NA,1
+"Bird","tufted titmouse","Calls or song (birds)",10145,42.602543,-83.250992,10,TRUE,NA,1
+"Bird","tufted titmouse","Individuals at a feeding station",10145,42.602543,-83.250992,10,TRUE,NA,1
