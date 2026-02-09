@@ -7,8 +7,6 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
-library(tidyr)
-library(terra)
 
 # Download/Load individual phenometric data -----------------------------------#
 
