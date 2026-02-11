@@ -1,5 +1,5 @@
 # Download, process bird data
-# 3 Feb 2026
+# 10 Feb 2026
 
 library(rnpn)
 library(ggplot2)
@@ -23,10 +23,10 @@ library(terra)
 #           "data/orig-downloads/bird-data-download.csv",
 #           row.names = FALSE)
 
-dat <- read.csv("data/orig-downloads/bird-data-download.csv")
+dat_orig <- read.csv("data/orig-downloads/bird-data-download.csv")
 
 # Alter one common name that's spelled wrong in NPN database
-dat <- dat %>%
+dat_orig <- dat_orig %>%
   mutate(common_name = case_when(
     common_name == "grey catbird" ~ "gray catbird",
     .default = common_name
@@ -34,14 +34,16 @@ dat <- dat %>%
 
 # Data processing steps -------------------------------------------------------#
 
-# 1. Add broad phenophase groups/categories
-# 2. Remove any dead animal series
-# 3. Figure out whether any species-state-phenophases should be evaluated on 
+# 1. Remove unnecessary columns to reduce size of dataset
+# 2. Add broad phenophase groups/categories
+# 3. Remove any dead animal series
+# 4. Filter data to exclude sites outside of continental US (48 states)
+# 5. Figure out whether any species-state-phenophases should be evaluated on 
 #    something other than calendar year
-# 4. Remove series with fewer than 9 years of data
-# 5. Remove presence-related phenophase series when the species is expected 
+# 6. Remove series with fewer than 9 years of data
+# 7. Remove presence-related phenophase series when the species is expected 
 #    to be present at the beginning of each calendar year
-# 6. Remove redundant series 
+# 8. Remove redundant series 
 
 # Then, create three datasets (prior no within 7 days, 14 days, or no limits)
 # For each:
@@ -49,7 +51,14 @@ dat <- dat %>%
   # Filter data so we just keep the first yes in each year
   # Limit series to those that have first yeses in at least 9 years
 
-# 1. Add broad phenophase categories ------------------------------------------#
+# 1. Simplify dataset ---------------------------------------------------------#
+
+dat <- dat_orig %>%
+  select(-c(elevation_in_meters, 
+            last_yes_year, last_yes_month, last_yes_day, last_yes_doy, 
+            last_yes_julian_date, numdays_until_next_no))
+
+# 2. Add broad phenophase categories ------------------------------------------#
 
 # Create new individualID-phenophase column
 dat$ind_phen <- paste0(dat$individual_id, "_", dat$phenophase_description)
@@ -84,19 +93,65 @@ dat <- dat %>%
 # Check:
 # count(dat, phenophase, phenophase_description)
 
-# 2. Remove dead animal series ------------------------------------------------#
+# 3. Remove dead animal series ------------------------------------------------#
 
 # Remove series for observations of dead animals
 dat <- dat %>%
   filter(phenophase != "Dead individuals")
 
-# 3. Use anything other than calendar year for birds? -------------------------#
+# 4. Filter data by location --------------------------------------------------#
 
-# Looked at what we classified as summer year previously and I'm not sure this
+# Can only keep sites in the continental US (lower 48 states) due to climate
+# data availability. Not all sites have the state listed, so we'll first need to
+# add state and then filter. 
+
+# Postal codes for lower 48 states
+states48 <- state.abb[! state.abb %in% c("AK", "HI")]
+
+# Load shapefile with US state boundaries
+states <- vect("states/cb_2017_us_state_500k.shp")
+# Reproject to WGS84, which is datum that NPN uses
+states <- terra::project(states, "epsg:4326")
+# Subset
+states <- terra::subset(states, states$STUSPS %in% states48)
+
+# Get state codes for sites with missing entries
+dat <- dat %>%
+  filter(is.na(state) | state %in% states48)
+state_fill <- dat %>%
+  select(site_id, longitude, latitude, state) %>%
+  distinct()
+state_fillv <- vect(state_fill, 
+                    geom = c("longitude", "latitude"), 
+                    crs = "epsg:4326")
+state_new <- terra::extract(states, state_fillv)
+state_fill <- cbind(state_fill, state_new = state_new$STUSPS)
+# Attach to data
+dat <- dat %>%
+  left_join(select(state_fill, site_id, state_new), by = "site_id")
+  # Look at differences
+  # dat %>%
+  #   mutate(same = ifelse(state == state_new, 1, 0)) %>%
+  #   count(same, state, state_new)
+  # A few odd ones, but mostly all fine
+  # Select which state code to use and remove any sites outside lower 48
+dat <- dat %>%
+  mutate(state_new = case_when(
+    !is.na(state_new) ~ state_new,
+    !is.na(state) ~ state,
+    .default = NA
+  )) %>%
+  select(-state) %>%
+  rename(state = state_new) %>%
+  filter(!is.na(state))
+
+# 5. Use anything other than calendar year for birds? -------------------------#
+
+# Looked at what we classified as summer year previously and it's not clear this
 # is necessary, especially if we filter out series where the species is
 # present during winter or year round....
 
-# 4. Remove series with <9 years of data --------------------------------------#
+# 6. Remove series with <9 years of data --------------------------------------#
 
 dat <- dat %>%
   group_by(ind_phen) %>%
@@ -106,7 +161,7 @@ dat <- dat %>%
   data.frame()
 # Series years includes all yeses, regardless of prior nos
 
-# 5. Use eBird data to identify series where species is present on Jan 1 ------#
+# 7. Use eBird data to identify series where species is present on Jan 1 ------#
 
 # See this report for more information about investigation of bird data series:
 # https://erinzylstra.quarto.pub/exploration-of-bird-data-for-usgs-analysis/
@@ -348,7 +403,7 @@ datnp <- dat %>%
          present_jan1 = NA)
 dat <- rbind(datp, datnp)
 
-# 6. Remove redundant series --------------------------------------------------#
+# 8. Remove redundant series --------------------------------------------------#
 # For some species, there may be instances where a positive observation of one 
 # phenophase is usually or always associated with a positive observation of 
 # another phenophase. For instance, if an observer reported that there were 
@@ -410,6 +465,16 @@ dat <- dat %>%
 # Clean up dataframe
 dat <- dat %>%
   select(-c(remove_stationr, remove_callsr))
+# Create some columns to match up with datasets for other functional groups
+# that use summer or water year. Create day-of-period (DOP) variable that for
+# birds will be the same as first_yes_doy for calendar year. Create year
+# variable that for birds will be the same as first_yes_year.
+dat <- dat %>%
+  mutate(first_yes_date = parse_date_time(x = paste(first_yes_year, first_yes_doy),
+                                                    orders = "yj")) %>%
+  mutate(yeartype = "calendar",
+         dop = first_yes_doy,
+         year = first_yes_year)
 
 # Create dataset with no restrictions on prior nos ----------------------------#
 
