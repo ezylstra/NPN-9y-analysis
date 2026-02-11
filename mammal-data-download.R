@@ -1,5 +1,5 @@
 # Download, process mammal data
-# 6 Feb 2026
+# 11 Feb 2026
 
 library(rnpn)
 library(ggplot2)
@@ -7,6 +7,7 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
+library(terra)
 
 # Download/Load individual phenometric data -----------------------------------#
 
@@ -21,18 +22,20 @@ library(stringr)
 #           "data/orig-downloads/mammal-data-download.csv",
 #           row.names = FALSE)
 
-dat <- read.csv("data/orig-downloads/mammal-data-download.csv")
+dat_orig <- read.csv("data/orig-downloads/mammal-data-download.csv")
 
 # Data processing steps -------------------------------------------------------#
 
-# 1. Add broad phenophase groups/categories
-# 2. Remove any dead animal series
-# 3. Identify species-state-phenophases that should be evaluated on 
+# 1. Remove unnecessary columns to reduce size of dataset
+# 2. Add broad phenophase groups/categories
+# 3. Filter by phenophase (remove dead animal series)
+# 4. Filter data to exclude sites outside of continental US (48 states)
+# 5. Identify species-state-phenophases that should be evaluated on 
 #    something other than a calendar year
-# 4. Remove series with fewer than 9 years of data
-# 5. Remove presence-related phenophase series when the species is expected 
+# 6. Remove series with fewer than 9 years of data
+# 7. Remove presence-related phenophase series when the species is expected 
 #    to be active at the beginning of each calendar year
-# 6. Remove redundant series
+# 8. Remove redundant series
 
 # Then, create three datasets (prior no within 7 days, 14 days, or no limits)
 # For each:
@@ -40,7 +43,14 @@ dat <- read.csv("data/orig-downloads/mammal-data-download.csv")
   # Filter data so we just keep the first yes in each year
   # Limit series to those that have first yeses in at least 9 years
 
-# 1. Add broad phenophase categories ------------------------------------------#
+# 1. Simplify dataset ---------------------------------------------------------#
+
+dat <- dat_orig %>%
+  select(-c(elevation_in_meters, 
+            last_yes_year, last_yes_month, last_yes_day, last_yes_doy, 
+            last_yes_julian_date, numdays_until_next_no))
+
+# 2. Add broad phenophase categories ------------------------------------------#
 
 # Create new individualID-phenophase column
 dat$ind_phen <- paste0(dat$individual_id, "_", dat$phenophase_description)
@@ -60,39 +70,78 @@ dat <- dat %>%
 # Check:
 # count(dat, phenophase, phenophase_description)
 
-# 2. Remove dead animal series ------------------------------------------------#
+# 3. Filter by phenophase -----------------------------------------------------#
 
 # Remove series for observations of dead animals 
 dat <- dat %>%
   filter(phenophase != "Dead individuals")
 
-# 3. Evaluating whether we need something other than calendar year ------------#
+# 4. Filter data by location --------------------------------------------------#
+
+# Can only keep sites in the continental US (lower 48 states) due to climate
+# data availability. Not all sites have the state listed, so we'll first need to
+# add state and then filter. 
+
+# Postal codes for lower 48 states
+states48 <- state.abb[! state.abb %in% c("AK", "HI")]
+
+# Load shapefile with US state boundaries
+states <- vect("states/cb_2017_us_state_500k.shp")
+# Reproject to WGS84, which is datum that NPN uses
+states <- terra::project(states, "epsg:4326")
+# Subset
+states <- terra::subset(states, states$STUSPS %in% states48)
+
+# Get state codes for sites with missing entries
+dat <- dat %>%
+  filter(is.na(state) | state %in% states48)
+state_fill <- dat %>%
+  select(site_id, longitude, latitude, state) %>%
+  distinct()
+state_fillv <- vect(state_fill, 
+                    geom = c("longitude", "latitude"), 
+                    crs = "epsg:4326")
+state_new <- terra::extract(states, state_fillv)
+state_fill <- cbind(state_fill, state_new = state_new$STUSPS)
+# Attach to data
+dat <- dat %>%
+  left_join(select(state_fill, site_id, state_new), by = "site_id")
+  # Look at differences:
+  # dat %>%
+  #   mutate(same = ifelse(state == state_new, 1, 0)) %>%
+  #   count(same, state, state_new)
+# Select which state code to use and remove any sites outside lower 48
+dat <- dat %>%
+  mutate(state_new = case_when(
+    # Select new state code when present
+    !is.na(state_new) ~ state_new,
+    # Select old state code if present but new state code wasn't (likely
+    # because location falls just outside state boundary in shapefile)
+    !is.na(state) ~ state,
+    # Otherwise, leave as NA (and will remove from dataset)
+    .default = NA
+  )) %>%
+  select(-state) %>%
+  rename(state = state_new) %>%
+  filter(!is.na(state))
+
+# 5. Evaluate whether we need something other than calendar year --------------#
 
 # Calendar year seems appropriate in almost all cases. The exception that was
-# identified previously was for mating-related phenophases for elk in CO. Elk 
+# identified previously was mating-related phenophases for elk in CO. Elk 
 # mating season in CO is in Sept-Oct, but can be observed after the new
 # year. Using summer year (Jul-Jun) is more appropriate than water year.
 
-# See distribution of first yeses
-dat %>%
-  filter(common_name == "elk") %>%
-  filter(state == "CO") %>% 
-  filter(phenophase == "Mating activity") %>%
-  ggplot() +
-  geom_point(aes(x = first_yes_year, y = first_yes_doy)) +
-  facet_grid(~ind_phen)
+# # See distribution of first yeses for elk mating phenophases
+# dat %>%
+#   filter(common_name == "elk") %>%
+#   filter(state == "CO") %>%
+#   filter(phenophase == "Mating activity") %>%
+#   ggplot() +
+#   geom_point(aes(x = first_yes_year, y = first_yes_doy)) +
+#   facet_grid(~ind_phen)
 
-# Create summer year variable 
-# (= first_yes_year for Jan-Jun observations and first_yes_year + 1 for Jul-Dec)
-dat <- dat %>%
-  mutate(summer_year = case_when(
-    first_yes_month %in% 7:12 ~ first_yes_year + 1,
-    .default = first_yes_year
-  ))
-# Check:
-# count(dat, first_yes_month, first_yes_year == summer_year)
-
-# Create function to calculate day summeryr
+# Create function to calculate day of summeryr
 summeryr_calc = function(x, start.month = 7){
   x = as.Date(x)
   start.yr = year(x) - 1*(month(x) < start.month)
@@ -100,27 +149,42 @@ summeryr_calc = function(x, start.month = 7){
   as.integer(x - start.date + 1)
 }
 
-# Create day-of-summer-year (DOSY) variable
+# Add a first_yes_date column to dataframe, along with summer year and dosy to
+# make everything easier
+  # Summer year = first_yes_year for Jan-Jun observations and first_yes_year + 1 for Jul-Dec
 dat <- dat %>%
   mutate(first_yes_date = parse_date_time(x = paste(first_yes_year, first_yes_doy),
                                           orders = "yj")) %>%
+  mutate(summer_year = case_when(
+    first_yes_month %in% 7:12 ~ first_yes_year + 1,
+    .default = first_yes_year
+  )) %>%
   mutate(dosy = summeryr_calc(first_yes_date))
 
-# Create day-of-period (DOP) variable that selects first_yes_doy for calendar
-# year series and dosy for summer year series. Create year variable that 
-# selects first_yes_year for calendar year series and summer_year for summer
-# year series
+# Attach yeartype classification to data 
 dat <- dat %>%
-  mutate(dop = case_when(
-    common_name == "elk" & state == "CO" & phenophase == "Mating activity" ~ dosy,
-    .default = first_yes_doy
-  )) %>%
-  mutate(year = case_when(
-    common_name == "elk" & state == "CO" & phenophase == "Mating activity" ~ summer_year,
-    .default = first_yes_year
+  mutate(yeartype = case_when(
+    common_name == "elk" & state == "CO" & phenophase == "Mating activity" ~ "summer",
+    .default = "calendar"
   ))
 
-# 4. Remove series with <9 years of data --------------------------------------#
+# Create day-of-period (DOP) variable that is equal to first_yes_doy for
+# calendar year series and dosy for summer year series. Create year variable 
+# that is equal to first_yes_year for calendar year series and summer_year for 
+# summer year series.
+dat <- dat %>%
+  mutate(dop = case_when(
+    yeartype == "calendar" ~ first_yes_doy,
+    yeartype == "summer" ~ dosy,
+    .default = NA
+  )) %>%
+  mutate(year = case_when(
+    yeartype == "calendar" ~ first_yes_year,
+    yeartype == "summer" ~ summer_year,
+    .default = NA
+  ))
+
+# 6. Remove series with <9 years of data --------------------------------------#
 
 dat <- dat %>%
   group_by(ind_phen) %>%
@@ -130,7 +194,7 @@ dat <- dat %>%
   data.frame()
 # Series years includes all yeses, regardless of prior nos
 
-# 5. Identify series where species is active on Jan 1 -------------------------#
+# 7. Identify series where species is active on Jan 1 -------------------------#
 
 # See this report for more information about investigation of mammal data series:
 # https://erinzylstra.quarto.pub/exploration-of-mammal-data-for-usgs-analysis/
@@ -183,7 +247,7 @@ datnp <- dat %>%
          active_jan1 = NA)
 dat <- rbind(datp, datnp)
 
-# 6. Remove redundant series --------------------------------------------------#
+# 8. Remove redundant series --------------------------------------------------#
 # For some species, there may be instances where a positive observation of one 
 # phenophase is usually or always associated with a positive observation of 
 # another phenophase. In particular, every time an observer reported seeing an 
