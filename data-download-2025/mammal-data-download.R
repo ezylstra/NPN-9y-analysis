@@ -19,10 +19,10 @@ library(terra)
 # 
 # # Write to file
 # write.csv(dl_orig,
-#           "data/orig-downloads/mammal-data-download.csv",
+#           "data-download-2025/data-original/mammal-data-download.csv",
 #           row.names = FALSE)
 
-dat_orig <- read.csv("data/orig-downloads/mammal-data-download.csv")
+dat_orig <- read.csv("data-download-2025/data-original/mammal-data-download.csv")
 
 # Data processing steps -------------------------------------------------------#
 
@@ -56,7 +56,7 @@ dat <- dat_orig %>%
 dat$ind_phen <- paste0(dat$individual_id, "_", dat$phenophase_description)
 
 # Load csv with broader phenophase categories
-lookup_table <- read.csv("NPN_synthesis_phenophase_key_new.csv")
+lookup_table <- read.csv("data-download-2025/NPN_synthesis_phenophase_key_new.csv")
 
 # Strip any leading/trailing whitespaces (which might cause phenophases to
 # go unmatched)
@@ -86,7 +86,7 @@ dat <- dat %>%
 states48 <- state.abb[! state.abb %in% c("AK", "HI")]
 
 # Load shapefile with US state boundaries
-states <- vect("states/cb_2017_us_state_500k.shp")
+states <- vect("data-download-2025/states/cb_2017_us_state_500k.shp")
 # Reproject to WGS84, which is datum that NPN uses
 states <- terra::project(states, "epsg:4326")
 # Subset
@@ -229,7 +229,7 @@ datp <- dat %>%
   filter(phenophase_description %in% c("Live individuals", "Feeding"))
 
 # Load file with information about species' seasonal activity
-mammal_traits <- read.csv("mammal_species_traits.csv")
+mammal_traits <- read.csv("data-download-2025/mammal_species_traits.csv")
 
 # Append information about seasonal activity to original dataframe with
 # presence-related phenophases and exclude series when the species is expected
@@ -306,7 +306,7 @@ dat_all <- dat_all %>%
 
 # Write to file (keep commented out so we don't accidentally overwrite)
 # write.csv(dat_all,
-#           "data/out/mammal-series-allyeses-thru2025.csv",
+#           "data-download-2025/data-out/mammal-series-allyeses-thru2025.csv",
 #           row.names = FALSE)
 
 # Create dataset with yeses preceded by a no within 14 days -------------------#
@@ -335,7 +335,7 @@ dat_14 <- dat_14 %>%
 
 # Write to file (keep commented out so we don't accidentally overwrite)
 # write.csv(dat_14,
-#           "data/out/mammal-series-prior14-thru2025.csv",
+#           "data-download-2025/data-out/mammal-series-prior14-thru2025.csv",
 #           row.names = FALSE)
 
 # Create dataset with yeses preceded by a no within 7 days --------------------#
@@ -364,5 +364,5 @@ dat_7 <- dat_7 %>%
 
 # Write to file (keep commented out so we don't accidentally overwrite)
 # write.csv(dat_7,
-#           "data/out/mammal-series-prior7-thru2025.csv",
+#           "data-download-2025/data-out/mammal-series-prior7-thru2025.csv",
 #           row.names = FALSE)
