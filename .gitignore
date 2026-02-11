@@ -10,4 +10,6 @@ ebird-ranges*
 # original NN data downloads
 data/orig-downloads*
 !data/orig-downloads/.gitkeep
+data-download-2025/data-original*
+!data-download-2025/data-original/.gitkeep
 
