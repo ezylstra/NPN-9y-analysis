@@ -1,5 +1,5 @@
 # Download, process bird data
-# 10 Feb 2026
+# 11 Feb 2026
 
 library(rnpn)
 library(ggplot2)
@@ -36,7 +36,7 @@ dat_orig <- dat_orig %>%
 
 # 1. Remove unnecessary columns to reduce size of dataset
 # 2. Add broad phenophase groups/categories
-# 3. Remove any dead animal series
+# 3. Filter by phenophase (remove dead animal series)
 # 4. Filter data to exclude sites outside of continental US (48 states)
 # 5. Figure out whether any species-state-phenophases should be evaluated on 
 #    something other than calendar year
@@ -93,7 +93,7 @@ dat <- dat %>%
 # Check:
 # count(dat, phenophase, phenophase_description)
 
-# 3. Remove dead animal series ------------------------------------------------#
+# 3. Filter by phenophase -----------------------------------------------------#
 
 # Remove series for observations of dead animals
 dat <- dat %>%
@@ -129,29 +129,26 @@ state_fill <- cbind(state_fill, state_new = state_new$STUSPS)
 # Attach to data
 dat <- dat %>%
   left_join(select(state_fill, site_id, state_new), by = "site_id")
-  # Look at differences
+  # Look at differences:
   # dat %>%
   #   mutate(same = ifelse(state == state_new, 1, 0)) %>%
   #   count(same, state, state_new)
-  # A few odd ones, but mostly all fine
-  # Select which state code to use and remove any sites outside lower 48
+# Select which state code to use and remove any sites outside lower 48
 dat <- dat %>%
   mutate(state_new = case_when(
+    # Select new state code when present
     !is.na(state_new) ~ state_new,
+    # Select old state code if present but new state code wasn't (likely
+    # because location falls just outside state boundary in shapefile)
     !is.na(state) ~ state,
+    # Otherwise, leave as NA (and will remove from dataset)
     .default = NA
   )) %>%
   select(-state) %>%
   rename(state = state_new) %>%
   filter(!is.na(state))
 
-# 5. Use anything other than calendar year for birds? -------------------------#
-
-# Looked at what we classified as summer year previously and it's not clear this
-# is necessary, especially if we filter out series where the species is
-# present during winter or year round....
-
-# 6. Remove series with <9 years of data --------------------------------------#
+# 5. Remove series with <9 years of data --------------------------------------#
 
 dat <- dat %>%
   group_by(ind_phen) %>%
@@ -160,6 +157,23 @@ dat <- dat %>%
   ungroup() %>%
   data.frame()
 # Series years includes all yeses, regardless of prior nos
+
+# 6. Use anything other than calendar year for birds? -------------------------#
+
+# Looked at what we classified as summer year previously and it's not clear this
+# is necessary, especially if we filter out series where the species is
+# present during winter or year round. Will use calendar year for all.
+
+# Create columns to match up with datasets for other functional groups
+# that use summer or water year. Create day-of-period (DOP) variable that here,
+# will be the same as first_yes_doy. Create year variable that here, will be the 
+# same as first_yes_year.
+dat <- dat %>%
+  mutate(first_yes_date = parse_date_time(x = paste(first_yes_year, first_yes_doy),
+                                          orders = "yj")) %>%
+  mutate(yeartype = "calendar",
+         dop = first_yes_doy,
+         year = first_yes_year)
 
 # 7. Use eBird data to identify series where species is present on Jan 1 ------#
 
@@ -465,32 +479,21 @@ dat <- dat %>%
 # Clean up dataframe
 dat <- dat %>%
   select(-c(remove_stationr, remove_callsr))
-# Create some columns to match up with datasets for other functional groups
-# that use summer or water year. Create day-of-period (DOP) variable that for
-# birds will be the same as first_yes_doy for calendar year. Create year
-# variable that for birds will be the same as first_yes_year.
-dat <- dat %>%
-  mutate(first_yes_date = parse_date_time(x = paste(first_yes_year, first_yes_doy),
-                                                    orders = "yj")) %>%
-  mutate(yeartype = "calendar",
-         dop = first_yes_doy,
-         year = first_yes_year)
 
 # Create dataset with no restrictions on prior nos ----------------------------#
 
 # Create new dataset with ID-phenophase-year column
 dat_all <- dat %>%
-  mutate(ind_phen_year = paste0(ind_phen, "_", first_yes_year))
-  
+  mutate(ind_phen_year = paste0(ind_phen, "_", year))
+
 # Filter data to keep just the first yes in each year
 dat_all <- dat_all %>% 
   group_by(ind_phen_year) %>%
-  filter(first_yes_doy == min(first_yes_doy))
+  filter(dop == min(dop))
 
-# Re-calculate the number of years for each series, and remove any with fewer
-# than 9 years
+# Calculate the number of years for each series, and remove any with fewer than
+# 9 years
 dat_all <- dat_all %>%
-  select(-series_yrs) %>%
   group_by(ind_phen) %>%
   mutate(series_yrs = n()) %>%
   filter(series_yrs > 8) %>% 
@@ -506,7 +509,7 @@ dat_all <- dat_all %>%
 
 # Create new dataset with ID-phenophase-year column
 dat_14 <- dat %>%
-  mutate(ind_phen_year = paste0(ind_phen, "_", first_yes_year))
+  mutate(ind_phen_year = paste0(ind_phen, "_", year))
 
 # Remove observations that did not have a prior "no" within 14 days
 dat_14 <- dat_14 %>%
@@ -515,12 +518,11 @@ dat_14 <- dat_14 %>%
 # Filter data to keep just the first yes in each year
 dat_14 <- dat_14 %>% 
   group_by(ind_phen_year) %>%
-  filter(first_yes_doy == min(first_yes_doy))
+  filter(dop == min(dop))
 
-# Re-calculate the number of years for each series, and remove any with fewer
-# than 9 years
+# Calculate the number of years for each series, and remove any with fewer than
+# 9 years
 dat_14 <- dat_14 %>%
-  select(-series_yrs) %>%
   group_by(ind_phen) %>%
   mutate(series_yrs = n()) %>%
   filter(series_yrs > 8) %>% 
@@ -536,7 +538,7 @@ dat_14 <- dat_14 %>%
 
 # Create new dataset with ID-phenophase-year column
 dat_7 <- dat %>%
-  mutate(ind_phen_year = paste0(ind_phen, "_", first_yes_year))
+  mutate(ind_phen_year = paste0(ind_phen, "_", year))
 
 # Remove observations that did not have a prior "no" within 7 days
 dat_7 <- dat_7 %>%
@@ -545,12 +547,11 @@ dat_7 <- dat_7 %>%
 # Filter data to keep just the first yes in each year
 dat_7 <- dat_7 %>% 
   group_by(ind_phen_year) %>%
-  filter(first_yes_doy == min(first_yes_doy))
+  filter(dop == min(dop))
 
-# Re-calculate the number of years for each series, and remove any with fewer
-# than 9 years
+# Calculate the number of years for each series, and remove any with fewer than
+# 9 years
 dat_7 <- dat_7 %>%
-  select(-series_yrs) %>%
   group_by(ind_phen) %>%
   mutate(series_yrs = n()) %>%
   filter(series_yrs > 8) %>% 
