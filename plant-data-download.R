@@ -1,5 +1,5 @@
 # Download, process plant data
-# 10 Feb 2026
+# 11 Feb 2026
 
 library(rnpn)
 library(ggplot2)
@@ -33,10 +33,11 @@ dat_orig <- read.csv("data/orig-downloads/plant-data-download.csv")
 
 # 1. Remove unnecessary columns to reduce size of dataset
 # 2. Add broad phenophase groups/categories
-# 3. Limit leaf budburst/senescence data to first/second half of year
+# 3. Filter by phenophase
 # 4. Filter data to exclude sites outside of continental US (48 states)
-# 5. Filter by phenophase
-# 6. Remove series with fewer than 9 years of data
+# 5. Limit leaf budburst/senescence data to first/second half of year
+# 6. Remove series with fewer than 9 years of data (so evaluations of yeartype
+#    are less onerous)
 # 7. Identify species-state-phenophases that should be evaluated on 
 #    something other than a calendar year
 
@@ -49,7 +50,7 @@ dat_orig <- read.csv("data/orig-downloads/plant-data-download.csv")
 # 1. Simplify dataset ---------------------------------------------------------#
 
 dat <- dat_orig %>%
-  select(-c(elevation_in_meters, kingdom, class_id, class_name,
+  select(-c(elevation_in_meters, class_id, class_name,
             class_common_name, last_yes_year, last_yes_month, last_yes_day, 
             last_yes_doy, last_yes_julian_date, numdays_until_next_no))
 
@@ -73,16 +74,15 @@ dat <- dat %>%
 # Check:
 # count(dat, phenophase, phenophase_description)
 
-# 3. Filter leaf data ---------------------------------------------------------#
+# 3. Filter by phenophase -----------------------------------------------------#
 
-# Remove leaf budburst first yeses that occurred after DOY 200
+# We're only using 5 phenophases for analyses. Removing all others.
 dat <- dat %>%
-  filter(!(phenophase == "Leaf budburst" & first_yes_doy > 200))
-
-# Remove colored or falling leaf first yeses that occurred before DOY 201
-dat <- dat %>%
-  filter(!(phenophase == "Colored leaves" & first_yes_doy < 201)) %>%
-  filter(!(phenophase == "Falling leaves" & first_yes_doy < 201))
+  filter(phenophase %in% c("Leaf budburst",
+                           "Open flowers", 
+                           "Ripe fruits",
+                           "Colored leaves",
+                           "Falling leaves"))
 
 # 4. Filter data by location and species --------------------------------------#
 
@@ -114,16 +114,19 @@ state_fill <- cbind(state_fill, state_new = state_new$STUSPS)
 # Attach to data
 dat <- dat %>%
   left_join(select(state_fill, site_id, state_new), by = "site_id")
-  # Look at differences
-    # dat %>%
-    #   mutate(same = ifelse(state == state_new, 1, 0)) %>%
-    #   count(same, state, state_new)
-  # A few odd ones, but mostly all fine
+  # Look at differences:
+  # dat %>%
+  #   mutate(same = ifelse(state == state_new, 1, 0)) %>%
+  #   count(same, state, state_new)
 # Select which state code to use and remove any sites outside lower 48
 dat <- dat %>%
   mutate(state_new = case_when(
+    # Select new state code when present
     !is.na(state_new) ~ state_new,
+    # Select old state code if present but new state code wasn't (likely
+    # because location falls just outside state boundary in shapefile)
     !is.na(state) ~ state,
+    # Otherwise, leave as NA (and will remove from dataset)
     .default = NA
   )) %>%
   select(-state) %>%
@@ -134,15 +137,16 @@ dat <- dat %>%
 dat <- dat %>%
   filter(common_name != "citrus")
 
-# 5. Filter by phenophase -----------------------------------------------------#
+# 5. Filter leaf data by first yes date ---------------------------------------#
 
-# We're only using 5 phenophases for analyses. Removing all others
+# Remove leaf budburst first yeses that occurred after DOY 200
 dat <- dat %>%
-  filter(phenophase %in% c("Leaf budburst",
-                           "Open flowers", 
-                           "Ripe fruits",
-                           "Colored leaves",
-                           "Falling leaves"))
+  filter(!(phenophase == "Leaf budburst" & first_yes_doy > 200))
+
+# Remove colored or falling leaf first yeses that occurred before DOY 201
+dat <- dat %>%
+  filter(!(phenophase == "Colored leaves" & first_yes_doy < 201)) %>%
+  filter(!(phenophase == "Falling leaves" & first_yes_doy < 201))
 
 # 6. Remove series with fewer than 9 years ------------------------------------#
 # Doing this now to reduce the number of series we need to evalaute and make
@@ -156,7 +160,7 @@ dat <- dat %>%
   data.frame()
 # Series years includes all yeses, regardless of prior nos
 
-# 6. Evaluating whether we need something other than calendar year ------------#
+# 6. Evaluate whether we need something other than calendar year --------------#
 
 # Create functions to calculate day of wateryr and summeryr
 wateryr_calc = function(x, start.month = 10){
@@ -172,8 +176,8 @@ summeryr_calc = function(x, start.month = 7){
   as.integer(x - start.date + 1)
 }
 
-# First, add a first_yes_date column to dataframe, along with summer/water years
-# and dosy/dowy to make everything easier
+# Add a first_yes_date column to dataframe, along with summer/water years and
+# dosy/dowy to make everything easier
   # Summer year = first_yes_year for Jan-Jun observations and first_yes_year + 1 for Jul-Dec
   # Water year = first_yes_year for Jan-Sep observations and first_yes_year + 1 for Oct-Dec
 dat <- dat %>%
@@ -195,10 +199,10 @@ dat <- dat %>%
 # leaf-related phenophases by date, so only need to evaluate this for open 
 # flowers and ripe fruit phenophases
 
-# Code below that's commented out was used to identify what 
+# Used the code below that's commented out to identify what 
 # species-phenophase-state combinations should be changed from calendar year. 
-# Used that to create a separate csv file  (flower-fruit-yeartype.csv) that 
-# summarized findings.
+# Created a separate csv file  (flower-fruit-yeartype.csv) that summarized 
+# findings and is loaded below.
 
 # # Open flowers
 #   # Identify earliest first yes in calendar year for each series
@@ -296,17 +300,17 @@ dat <- dat %>%
 # Load csv with yeartype for subset of flowering, fruiting phenophase series
 yt <- read.csv("flower-fruit-yeartype.csv")
 
-# Attach yeartype classification to data (and assuming calendar year for all
-# series not included in the csv file)
+# Attach yeartype classification to data (assuming calendar year for all series
+# not included in the csv file)
 dat <- dat %>%
   left_join(select(yt, phenophase, state, common_name, yeartype),
             by = c("phenophase", "state", "common_name")) %>%
   mutate(yeartype = ifelse(is.na(yeartype), "calendar", yeartype))
   
-# Create day-of-period (DOP) variable that selects first_yes_doy for calendar
-# year series, dosy for summer year series, and dowy for water year series. 
-# Create year variable that selects first_yes_year for calendar year series 
-# and summer_year/water_year for summer or water year series, respectively.
+# Create day-of-period (DOP) variable that is equal to first_yes_doy for
+# calendar year series, dosy for summer year series, and dowy for water year 
+# series. Create year variable that is equal to first_yes_year for calendar year 
+# series and summer_year/water_year for summer/water year series.
 dat <- dat %>%
   mutate(dop = case_when(
     yeartype == "calendar" ~ first_yes_doy,
