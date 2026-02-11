@@ -1,0 +1,155 @@
+phenophase,state,common_name,nseries,n_decjan,n_months6,n_gap180,yeartype
+Open flowers,CA,American plum,2,0,0,1,calendar
+Open flowers,ME,American witchhazel,3,0,0,1,summer
+Open flowers,NY,American witchhazel,10,1,2,9,summer
+Open flowers,CA,arroyo willow,3,0,0,1,water
+Open flowers,CA,black elderberry,23,0,3,1,calendar
+Open flowers,AZ,blue paloverde,2,0,0,2,summer
+Open flowers,AZ,buck-horn cholla,1,0,1,1,summer
+Open flowers,CA,California laurel,8,1,0,3,summer
+Open flowers,CA,California live oak,17,2,1,6,water
+Open flowers,CA,California sycamore,9,0,0,1,calendar
+Open flowers,AZ,candy barrelcactus,4,0,1,1,calendar
+Open flowers,CA,chamise,11,0,1,1,calendar
+Open flowers,CA,coastal sagebrush,11,10,7,11,summer
+Open flowers,CA,coyotebrush,18,3,2,16,summer
+Open flowers,AZ,creosote bush,11,2,0,6,summer
+Open flowers,CA,Douglas-fir,3,0,0,1,calendar
+Open flowers,CA,Eastern Mojave buckwheat,34,0,6,10,summer
+Open flowers,NC,eastern redbud,3,0,0,1,calendar
+Open flowers,NY,eastern redcedar,1,0,0,1,calendar
+Open flowers,TN,flowering dogwood,1,0,0,1,calendar
+Open flowers,AZ,fragrant sumac,2,0,0,1,calendar
+Open flowers,CA,hummingbird sage,2,0,1,0,water
+Open flowers,CA,hummingbird trumpet,2,0,1,1,calendar
+Open flowers,AZ,jojoba,12,0,1,9,summer
+Open flowers,GA,longleaf pine,4,0,0,1,calendar
+Open flowers,NY,New York ironweed,1,0,0,1,calendar
+Open flowers,NY,northern red oak,6,0,0,2,calendar
+Open flowers,AZ,ocotillo,1,0,0,1,summer
+Open flowers,MO,Red Rothomagensis lilac,17,0,0,2,calendar
+Open flowers,AZ,saguaro,5,0,1,1,calendar
+Open flowers,CA,toyon,10,0,2,1,calendar
+Open flowers,TX,tuliptree,1,0,0,1,calendar
+Open flowers,NY,white heath aster,1,0,1,0,calendar
+Ripe fruits,AZ,alderleaf mountain-mahogany,6,0,1,6,calendar
+Ripe fruits,AZ,alligator juniper,6,0,0,3,calendar
+Ripe fruits,MA,American basswood,10,0,0,3,calendar
+Ripe fruits,NY,American beech,7,0,1,0,calendar
+Ripe fruits,NY,American hornbeam,1,0,1,0,calendar
+Ripe fruits,TN,American hornbeam,2,0,1,2,calendar
+Ripe fruits,OH,American pokeweed,2,0,0,2,summer
+Ripe fruits,NY,American witchhazel,5,0,1,5,calendar
+Ripe fruits,NY,Amur honeysuckle,4,0,0,4,summer
+Ripe fruits,NY,apple,2,0,0,2,calendar
+Ripe fruits,LA,bald cypress,1,0,1,1,calendar
+Ripe fruits,CA,black elderberry,41,2,10,22,calendar
+Ripe fruits,ID,black locust,2,0,0,2,calendar
+Ripe fruits,MN,black spruce,3,0,2,3,calendar
+Ripe fruits,PA,black walnut,3,0,0,3,summer
+Ripe fruits,CA,blue elderberry,9,0,0,3,calendar
+Ripe fruits,CA,blueblossom,1,0,0,1,calendar
+Ripe fruits,MN,boxelder,1,0,0,1,summer
+Ripe fruits,OH,bride's feathers,2,0,0,1,calendar
+Ripe fruits,AZ,buck-horn cholla,4,2,0,3,calendar
+Ripe fruits,CA,California buckeye,14,2,2,8,summer
+Ripe fruits,CA,California laurel,3,1,0,3,summer
+Ripe fruits,CA,California live oak,18,2,4,17,summer
+Ripe fruits,CA,California wildrose,4,0,0,3,summer
+Ripe fruits,AZ,candy barrelcactus,7,2,0,7,summer
+Ripe fruits,CA,chamise,23,0,6,22,calendar
+Ripe fruits,LA,common buttonbush,1,1,1,1,calendar
+Ripe fruits,NY,common milkweed,3,0,0,3,summer
+Ripe fruits,CA,common pear,3,0,1,2,calendar
+Ripe fruits,CA,common snowberry,6,1,0,4,summer
+Ripe fruits,WA,common snowberry,2,0,0,2,summer
+Ripe fruits,ME,common winterberry,2,0,0,2,summer
+Ripe fruits,NY,common winterberry,6,0,0,6,summer
+Ripe fruits,CA,coyotebrush,18,10,1,18,summer
+Ripe fruits,AZ,creosote bush,14,1,4,9,calendar
+Ripe fruits,CA,creosote bush,39,0,15,27,calendar
+Ripe fruits,AZ,desert willow,7,0,1,7,calendar
+Ripe fruits,CA,Douglas-fir,2,0,0,2,calendar
+Ripe fruits,CO,Douglas-fir,4,0,1,4,calendar
+Ripe fruits,CA,Eastern Mojave buckwheat,52,0,9,52,summer
+Ripe fruits,OH,eastern purple coneflower,2,0,0,2,summer
+Ripe fruits,NC,eastern redbud,3,1,1,2,calendar
+Ripe fruits,NY,eastern redbud,3,0,0,3,calendar
+Ripe fruits,TN,eastern redbud,2,0,1,1,calendar
+Ripe fruits,TX,eastern redbud,1,0,0,1,calendar
+Ripe fruits,NY,eastern redcedar,4,0,1,4,calendar
+Ripe fruits,NY,eastern teaberry,1,0,0,1,summer
+Ripe fruits,MA,eastern white pine,2,0,1,2,calendar
+Ripe fruits,CA,eltrot,2,0,0,2,calendar
+Ripe fruits,OH,fall phlox,2,0,0,2,summer
+Ripe fruits,MI,flowering dogwood,4,0,0,1,calendar
+Ripe fruits,NY,flowering dogwood,8,0,1,1,calendar
+Ripe fruits,NM,fourwing saltbush,4,0,0,4,summer
+Ripe fruits,OH,foxglove beardtongue,2,0,0,2,calendar
+Ripe fruits,NY,hardy orange,2,0,0,2,summer
+Ripe fruits,CA,honey mesquite,6,0,0,1,calendar
+Ripe fruits,NY,Japanese barberry,7,2,3,7,summer
+Ripe fruits,AZ,jojoba,8,1,4,8,summer
+Ripe fruits,CO,kinnikinnick,6,0,4,6,summer
+Ripe fruits,CA,Kousa dogwood,6,0,0,4,summer
+Ripe fruits,VA,loblolly pine,2,0,0,2,calendar
+Ripe fruits,NY,multiflora rose,2,0,0,1,summer
+Ripe fruits,NY,New England aster,2,0,0,2,summer
+Ripe fruits,OH,New England aster,2,0,0,2,summer
+Ripe fruits,NY,New York ironweed,2,0,0,2,summer
+Ripe fruits,MA,northern bayberry,18,0,0,18,summer
+Ripe fruits,MA,northern red oak,2,0,0,1,summer
+Ripe fruits,NY,northern red oak,15,0,0,3,summer
+Ripe fruits,TN,northern red oak,1,0,0,1,summer
+Ripe fruits,AZ,ocotillo,1,0,1,1,summer
+Ripe fruits,CA,olive,6,0,0,6,summer
+Ripe fruits,NM,oneseed juniper,4,0,2,4,summer
+Ripe fruits,CA,orange bush monkeyflower,6,2,1,6,summer
+Ripe fruits,ME,paper birch,2,0,2,2,calendar
+Ripe fruits,NY,pignut hickory,5,0,1,2,calendar
+Ripe fruits,AZ,pointleaf manzanita,4,0,0,1,calendar
+Ripe fruits,LA,possumhaw,1,0,0,1,summer
+Ripe fruits,CA,quince,6,0,3,6,calendar
+Ripe fruits,CA,red alder,3,0,0,1,calendar
+Ripe fruits,MI,red maple,4,0,0,1,calendar
+Ripe fruits,MS,redbay,1,0,0,1,calendar
+Ripe fruits,CO,Rocky Mountain juniper,2,0,1,2,calendar
+Ripe fruits,NM,rubber rabbitbrush,4,0,0,2,summer
+Ripe fruits,NY,rugosa rose,1,0,0,1,calendar
+Ripe fruits,AZ,saguaro,5,0,0,2,calendar
+Ripe fruits,NM,screwbean mesquite,2,0,0,2,summer
+Ripe fruits,MA,shagbark hickory,10,0,3,1,calendar
+Ripe fruits,NY,shingle oak,2,0,0,1,calendar
+Ripe fruits,MN,smooth sumac,1,0,0,1,summer
+Ripe fruits,NY,sourwood,2,0,1,2,summer
+Ripe fruits,NM,stretchberry,2,0,0,2,summer
+Ripe fruits,NY,striped maple,1,0,1,0,calendar
+Ripe fruits,NY,sugar maple,9,0,6,7,calendar
+Ripe fruits,NY,sweet birch,3,0,2,2,calendar
+Ripe fruits,NC,sweetgum,1,1,0,1,summer
+Ripe fruits,NY,sweetgum,14,1,11,14,calendar
+Ripe fruits,TN,sweetgum,2,0,2,2,summer
+Ripe fruits,TX,sweetgum,2,1,0,2,summer
+Ripe fruits,MN,tamarack,5,0,4,4,calendar
+Ripe fruits,CA,toringo crab,6,0,0,6,summer
+Ripe fruits,CA,toyon,13,6,0,13,summer
+Ripe fruits,NM,tree cholla,2,0,0,2,summer
+Ripe fruits,NC,tuliptree,1,1,0,1,summer
+Ripe fruits,NY,tuliptree,15,1,6,13,summer
+Ripe fruits,TN,tuliptree,2,0,0,2,summer
+Ripe fruits,AZ,twoneedle pinyon,1,0,0,1,calendar
+Ripe fruits,CA,valley oak,20,0,4,11,calendar
+Ripe fruits,AZ,velvet mesquite,12,0,2,3,calendar
+Ripe fruits,LA,wax myrtle,1,0,0,1,summer
+Ripe fruits,NY,white heath aster,1,0,0,1,summer
+Ripe fruits,TX,white oak,2,1,1,2,calendar
+Ripe fruits,CA,white sage,7,0,1,4,calendar
+Ripe fruits,NY,white wood aster,4,0,1,3,summer
+Ripe fruits,NY,wild bergamot,2,0,0,2,calendar
+Ripe fruits,OH,wild bergamot,2,0,0,2,calendar
+Ripe fruits,CA,wine grape,6,0,0,2,calendar
+Ripe fruits,AZ,Wright's silktassel,1,0,0,1,summer
+Ripe fruits,MA,yellow birch,4,0,1,0,calendar
+Ripe fruits,MN,yellow birch,1,0,1,1,calendar
+Ripe fruits,MA,yellow buckeye,4,0,1,0,calendar
+Ripe fruits,AZ,yellow paloverde,2,1,0,2,calendar
