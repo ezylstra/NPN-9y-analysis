@@ -1,0 +1,47 @@
+"kingdom","lifeform_phenophase","phenophase_description","n_series"
+"Animalia","Bird","Calls or song (birds)",4
+"Animalia","Bird","Feeding (or foraging)",29
+"Animalia","Bird","Fledged young (altricial birds)",1
+"Animalia","Bird","Fledged young (precocial birds)",1
+"Animalia","Bird","Flower visitation",8
+"Animalia","Bird","Fruit/seed consumption",32
+"Animalia","Bird","Insect consumption",24
+"Animalia","Bird","Live individuals",28
+"Animalia","Bird","Nest building (birds)",6
+"Animalia","Bird","Occupied nest",1
+"Animalia","Bird","Singing individuals (birds)",38
+"Animalia","Bird","Territorial individuals (birds)",7
+"Animalia","Herpetofauna","Adults on land",1
+"Animalia","Herpetofauna","Individuals in water (rock/log)",2
+"Animalia","Herpetofauna","Individuals on land (rock/log)",4
+"Animalia","Herpetofauna","Vocalizing",12
+"Animalia","Insect","Adults",35
+"Animalia","Insect","Caterpillars",1
+"Animalia","Insect","Flower visitation",10
+"Animalia","Mammal","Fruit/seed consumption",4
+"Animalia","Mammal","Live individuals",5
+"Animalia","Mammal","Male combat (horn/antler)",1
+"Animalia","Mammal","Males vocalizing",1
+"Animalia","Mammal","Nut gathering",4
+"Animalia","Mammal","Young individuals",9
+"Plantae","Colored leaves","Colored leaves",642
+"Plantae","Colored leaves","Colored needles",3
+"Plantae","Falling leaves","Falling leaves",625
+"Plantae","Falling leaves","Falling needles",4
+"Plantae","Leaf budburst","Breaking leaf buds",923
+"Plantae","Leaf budburst","Breaking leaf buds (lilac/honeysuckle)",62
+"Plantae","Leaf budburst","Breaking needle buds (conifers)",12
+"Plantae","Leaf budburst","Breaking needle buds (deciduous)",4
+"Plantae","Leaf budburst","Initial growth (forbs)",95
+"Plantae","Leaf budburst","Initial growth (grasses/sedges)",4
+"Plantae","Open flowers","Flower heads (grasses/sedges)",11
+"Plantae","Open flowers","Full flowering (lilac)",72
+"Plantae","Open flowers","Open flowers",712
+"Plantae","Open flowers","Open flowers (grasses/sedges)",11
+"Plantae","Open flowers","Open flowers (honeysuckle)",6
+"Plantae","Open flowers","Open flowers (lilac)",72
+"Plantae","Open flowers","Open pollen cones (conifers)",24
+"Plantae","Ripe fruits","Recent cone or seed drop",9
+"Plantae","Ripe fruits","Recent fruit or seed drop",239
+"Plantae","Ripe fruits","Ripe fruits",347
+"Plantae","Ripe fruits","Ripe seed cones",11
